@@ -8,6 +8,7 @@ namespace WitchCRM
         public Form1()
         {
             InitializeComponent();
+            txtName.Focus();
             _context = new AppDbContext();
             _context.Database.EnsureCreated();
         }
@@ -21,13 +22,46 @@ namespace WitchCRM
         {
             InputData();
         }
+
+        //¬€¡–¿“‹ »Õ—“¿√–¿Ã
+        private void rbInstagram_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbInstagram.Checked)
+            {
+                txtInstagram.Visible = true;
+                txtTelegram.Visible = false;
+                txtWhatsApp.Visible = false;
+            }
+        }
+
+        //¬€¡–¿“‹ “≈À≈√–¿Ã
+        private void rbTelegram_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbTelegram.Checked)
+            {
+                txtTelegram.Visible = true;
+                txtWhatsApp.Visible = false;
+                txtInstagram.Visible = false;
+            }
+        }
+
+        //¬€¡–¿“‹ WHATSAPP
+        private void rbWhatsApp_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbWhatsApp.Checked)
+            {
+                txtWhatsApp.Visible = true;
+                txtTelegram.Visible = false;
+                txtInstagram.Visible = false;
+            }
+        }
         //-------------------------------------------------------------------------------------------------------
 
         ////
         //ÃÂÚÓ‰˚
         ////
 
-        
+
         //ÃÂÚÓ‰ ‚‚Ó‰‡ ‰‡ÌÌ˚ı
         private void InputData()
         {
@@ -38,49 +72,52 @@ namespace WitchCRM
                               MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            //if (rbInstagram.Checked)
-            //{
-            //    txtInstagram.Visible = true;
-            //    if (txtInstagram.Text!=String.Empty)
-            //    {
-            //        source = $"Instagram ({txtInstagram.Text})";
-            //    }
-            //    else
-            //    {
-            //        source = $"Instagram ( - )";
-            //    }
-            //}
-            //if (rbTelegram.Checked)
-            //{
-            //    txtTelegram.Visible = true;
-            //    if (txtTelegram.Text != String.Empty)
-            //    {
-            //        source = $"Telegram ({txtTelegram.Text})";
-            //    }
-            //    else
-            //    {
-            //        source = $"Telegram ( - )";
-            //    }
-            //}
-            //if (rbWhatsApp.Checked)
-            //{
-            //    txtWhatsApp.Visible = true;
-            //    if (txtWhatsApp.Text != String.Empty)
-            //    {
-            //        source = $"WhatsApp ({txtWhatsApp.Text})";
-            //    }
-            //    else
-            //    {
-            //        source = $"WhatsApp ( - )";
-            //    }
-            //}
+            if (!rbInstagram.Checked && !rbTelegram.Checked && !rbWhatsApp.Checked)
+            {
+                MessageBox.Show("ÕÂ ‚˚·‡Ì '»ÒÚÓ˜ÌËÍ'", "Œ¯Ë·Í‡",
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (txtInstagram.Visible == true)
+            {
+                if (txtInstagram.Text != String.Empty)
+                {
+                    source = $"Instagram ({txtInstagram.Text})";
+                }
+                else
+                {
+                    source = $"Instagram ( - )";
+                }
+            }
+            if (txtTelegram.Visible == true)
+            {
+                if (txtTelegram.Text != String.Empty)
+                {
+                    source = $"Telegram ({txtTelegram.Text})";
+                }
+                else
+                {
+                    source = $"Telegram ( - )";
+                }
+            }
+            if (txtWhatsApp.Visible == true)
+            {
+                if (txtWhatsApp.Text != String.Empty)
+                {
+                    source = $"WhatsApp ({txtWhatsApp.Text})";
+                }
+                else
+                {
+                    source = $"WhatsApp ( - )";
+                }
+            }
             try
             {
                 var client = new Client
                 {
                     Name = txtName.Text,
-                    Date = dateTimePicker.Value
-                    //Source = source
+                    Date = dateTimePicker.Value.Date,
+                    Source = source.ToString()
                 };
 
                 _context.Clients.Add(client);
@@ -102,7 +139,7 @@ namespace WitchCRM
         private void ClearInputtedData()
         {
             txtName.Clear();
-            
+
             txtInstagram.Clear();
             txtTelegram.Clear();
             txtWhatsApp.Clear();
@@ -117,6 +154,14 @@ namespace WitchCRM
 
             txtName.Focus();
         }
+
+
+
+
+
+
+
+
 
 
         //-------------------------------------------------------------------------------------------------------
