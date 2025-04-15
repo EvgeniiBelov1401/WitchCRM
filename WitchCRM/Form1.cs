@@ -2,10 +2,10 @@ using WitchCRM.Modules;
 
 namespace WitchCRM
 {
-    public partial class Form1 : Form
+    public partial class FormMain : Form
     {
         private AppDbContext _context;
-        public Form1()
+        public FormMain()
         {
             InitializeComponent();
             txtName.Focus();
@@ -111,22 +111,45 @@ namespace WitchCRM
                     source = $"WhatsApp ( - )";
                 }
             }
+            txtPrise.Focus();
+            if (String.IsNullOrWhiteSpace(txtPrise.Text))
+            {
+                MessageBox.Show("Поле 'К оплате' не может быть пустым!", "Ошибка",
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             try
             {
-                var client = new Client
+                if (decimal.TryParse(txtPrise.Text,out decimal prise))
                 {
-                    Name = txtName.Text,
-                    Date = dateTimePicker.Value.Date,
-                    Source = source.ToString()
-                };
+                    var client = new Client
+                    {
+                        Name = txtName.Text,
+                        Date = dateTimePicker.Value.Date,
+                        Source = source,
+                        Prise = prise,
+                        Description = txtDescription.Text
+                    };
 
-                _context.Clients.Add(client);
-                _context.SaveChanges();
+                    _context.Clients.Add(client);
+                    _context.SaveChanges();
 
-                MessageBox.Show("Клиент успешно сохранен!", "Успех",
-                               MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Клиент успешно сохранен!", "Успех",
+                                   MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                ClearInputtedData();
+                    ClearInputtedData();
+                }
+                else
+                {
+                    throw new FormatException();
+                }                
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("В поле 'К оплате' необходимо ввести корректные данные!", "Ошибка",
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtPrise.Clear();
+                return;
             }
             catch (Exception ex)
             {
@@ -143,6 +166,8 @@ namespace WitchCRM
             txtInstagram.Clear();
             txtTelegram.Clear();
             txtWhatsApp.Clear();
+            txtPrise.Clear();
+            txtDescription.Clear();
 
             rbInstagram.Checked = false;
             rbTelegram.Checked = false;
@@ -154,6 +179,8 @@ namespace WitchCRM
 
             txtName.Focus();
         }
+
+
 
 
 
