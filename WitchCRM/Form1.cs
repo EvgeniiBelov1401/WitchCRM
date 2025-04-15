@@ -5,6 +5,7 @@ namespace WitchCRM
     public partial class FormMain : Form
     {
         private AppDbContext _context;
+        private string? _clientStatus;
         public FormMain()
         {
             InitializeComponent();
@@ -53,6 +54,24 @@ namespace WitchCRM
                 txtWhatsApp.Visible = true;
                 txtTelegram.Visible = false;
                 txtInstagram.Visible = false;
+            }
+        }
+
+        //¬€¡–¿“‹ —“¿“”— "ÕŒ¬€…"
+        private void rbNewClient_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbNewClient.Checked)
+            {
+                _clientStatus = "ÕÓ‚˚È";
+            }
+        }
+
+        //¬€¡–¿“‹ —“¿“”— "œŒ¬“Œ–Õ€…"
+        private void rbRepeatClient_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbRepeatClient.Checked)
+            {
+                _clientStatus = "œÓ‚ÚÓÌ˚È";
             }
         }
         //-------------------------------------------------------------------------------------------------------
@@ -118,9 +137,16 @@ namespace WitchCRM
                               MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (!rbNewClient.Checked && !rbRepeatClient.Checked)
+            {
+
+                MessageBox.Show("ÕÂ ‚˚·‡Ì '—Ú‡ÚÛÒ' ÍÎËÂÌÚ‡!", "Œ¯Ë·Í‡",
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             try
             {
-                if (decimal.TryParse(txtPrise.Text,out decimal prise))
+                if (decimal.TryParse(txtPrise.Text, out decimal prise))
                 {
                     var client = new Client
                     {
@@ -128,7 +154,8 @@ namespace WitchCRM
                         Date = dateTimePicker.Value.Date,
                         Source = source,
                         Prise = prise,
-                        Description = txtDescription.Text
+                        Description = txtDescription.Text,
+                        Status=_clientStatus
                     };
 
                     _context.Clients.Add(client);
@@ -140,9 +167,9 @@ namespace WitchCRM
                     ClearInputtedData();
                 }
                 else
-                {
+                {                    
                     throw new FormatException();
-                }                
+                }
             }
             catch (FormatException)
             {
@@ -172,6 +199,8 @@ namespace WitchCRM
             rbInstagram.Checked = false;
             rbTelegram.Checked = false;
             rbWhatsApp.Checked = false;
+            rbNewClient.Checked = false;
+            rbRepeatClient.Checked = false;
 
             txtInstagram.Visible = false;
             txtTelegram.Visible = false;
@@ -180,12 +209,7 @@ namespace WitchCRM
             txtName.Focus();
         }
 
-
-
-
-
-
-
+        
 
 
 

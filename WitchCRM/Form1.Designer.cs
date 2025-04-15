@@ -33,6 +33,9 @@
             dateTimePicker = new DateTimePicker();
             btnSave = new Button();
             grNewClient = new GroupBox();
+            grStatus = new GroupBox();
+            rbRepeatClient = new RadioButton();
+            rbNewClient = new RadioButton();
             grDesсription = new GroupBox();
             txtDescription = new TextBox();
             grPrise = new GroupBox();
@@ -48,6 +51,7 @@
             grDate = new GroupBox();
             grName = new GroupBox();
             grNewClient.SuspendLayout();
+            grStatus.SuspendLayout();
             grDesсription.SuspendLayout();
             grPrise.SuspendLayout();
             grSource.SuspendLayout();
@@ -85,6 +89,7 @@
             // 
             // grNewClient
             // 
+            grNewClient.Controls.Add(grStatus);
             grNewClient.Controls.Add(grDesсription);
             grNewClient.Controls.Add(btnSave);
             grNewClient.Controls.Add(grPrise);
@@ -100,6 +105,42 @@
             grNewClient.TabIndex = 3;
             grNewClient.TabStop = false;
             grNewClient.Text = "Новый клиент";
+            // 
+            // grStatus
+            // 
+            grStatus.Controls.Add(rbRepeatClient);
+            grStatus.Controls.Add(rbNewClient);
+            grStatus.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            grStatus.Location = new Point(19, 168);
+            grStatus.Name = "grStatus";
+            grStatus.Size = new Size(613, 104);
+            grStatus.TabIndex = 4;
+            grStatus.TabStop = false;
+            grStatus.Text = "Статус";
+            // 
+            // rbRepeatClient
+            // 
+            rbRepeatClient.AutoSize = true;
+            rbRepeatClient.Location = new Point(368, 48);
+            rbRepeatClient.Name = "rbRepeatClient";
+            rbRepeatClient.Size = new Size(153, 29);
+            rbRepeatClient.TabIndex = 1;
+            rbRepeatClient.TabStop = true;
+            rbRepeatClient.Text = "Повторный";
+            rbRepeatClient.UseVisualStyleBackColor = true;
+            rbRepeatClient.CheckedChanged += rbRepeatClient_CheckedChanged;
+            // 
+            // rbNewClient
+            // 
+            rbNewClient.AutoSize = true;
+            rbNewClient.Location = new Point(72, 48);
+            rbNewClient.Name = "rbNewClient";
+            rbNewClient.Size = new Size(105, 29);
+            rbNewClient.TabIndex = 0;
+            rbNewClient.TabStop = true;
+            rbNewClient.Text = "Новый";
+            rbNewClient.UseVisualStyleBackColor = true;
+            rbNewClient.CheckedChanged += rbNewClient_CheckedChanged;
             // 
             // grDesсription
             // 
@@ -280,6 +321,8 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Бухгалтерия ведьмы";
             grNewClient.ResumeLayout(false);
+            grStatus.ResumeLayout(false);
+            grStatus.PerformLayout();
             grDesсription.ResumeLayout(false);
             grDesсription.PerformLayout();
             grPrise.ResumeLayout(false);
@@ -312,5 +355,8 @@
         private Label lbPrise;
         private GroupBox grDesсription;
         private TextBox txtDescription;
+        private GroupBox grStatus;
+        private RadioButton rbRepeatClient;
+        private RadioButton rbNewClient;
     }
 }

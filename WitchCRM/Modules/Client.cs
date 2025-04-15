@@ -14,5 +14,6 @@ namespace WitchCRM.Modules
         public string? Source { get; set; }
         public decimal? Prise { get; set; }
         public string? Description { get; set; }
+        public string? Status { get; set; }
     }
 }
