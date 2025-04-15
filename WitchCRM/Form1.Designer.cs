@@ -33,16 +33,19 @@
             dateTimePicker = new DateTimePicker();
             btnSave = new Button();
             grNewClient = new GroupBox();
+            grSource = new GroupBox();
+            txtWhatsApp = new TextBox();
+            txtTelegram = new TextBox();
+            txtInstagram = new TextBox();
+            rbInstagram = new RadioButton();
+            rbTelegram = new RadioButton();
+            rbWhatsApp = new RadioButton();
             grDate = new GroupBox();
             grName = new GroupBox();
-            grSource = new GroupBox();
-            rbWhatsApp = new RadioButton();
-            rbTelegram = new RadioButton();
-            rbInstagram = new RadioButton();
             grNewClient.SuspendLayout();
+            grSource.SuspendLayout();
             grDate.SuspendLayout();
             grName.SuspendLayout();
-            grSource.SuspendLayout();
             SuspendLayout();
             // 
             // txtName
@@ -72,6 +75,7 @@
             // 
             // grNewClient
             // 
+            grNewClient.Controls.Add(grSource);
             grNewClient.Controls.Add(grDate);
             grNewClient.Controls.Add(btnSave);
             grNewClient.Controls.Add(grName);
@@ -82,6 +86,88 @@
             grNewClient.TabIndex = 3;
             grNewClient.TabStop = false;
             grNewClient.Text = "Новый клиент";
+            // 
+            // grSource
+            // 
+            grSource.Controls.Add(txtWhatsApp);
+            grSource.Controls.Add(txtTelegram);
+            grSource.Controls.Add(txtInstagram);
+            grSource.Controls.Add(rbInstagram);
+            grSource.Controls.Add(rbTelegram);
+            grSource.Controls.Add(rbWhatsApp);
+            grSource.FlatStyle = FlatStyle.Flat;
+            grSource.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            grSource.Location = new Point(462, 43);
+            grSource.Name = "grSource";
+            grSource.Size = new Size(311, 205);
+            grSource.TabIndex = 4;
+            grSource.TabStop = false;
+            grSource.Text = "Источник";
+            // 
+            // txtWhatsApp
+            // 
+            txtWhatsApp.Location = new Point(101, 150);
+            txtWhatsApp.Name = "txtWhatsApp";
+            txtWhatsApp.Size = new Size(193, 33);
+            txtWhatsApp.TabIndex = 6;
+            txtWhatsApp.Visible = false;
+            // 
+            // txtTelegram
+            // 
+            txtTelegram.Location = new Point(101, 96);
+            txtTelegram.Name = "txtTelegram";
+            txtTelegram.Size = new Size(193, 33);
+            txtTelegram.TabIndex = 5;
+            txtTelegram.Visible = false;
+            // 
+            // txtInstagram
+            // 
+            txtInstagram.Location = new Point(101, 42);
+            txtInstagram.Name = "txtInstagram";
+            txtInstagram.Size = new Size(193, 33);
+            txtInstagram.TabIndex = 3;
+            txtInstagram.Visible = false;
+            // 
+            // rbInstagram
+            // 
+            rbInstagram.AutoSize = true;
+            rbInstagram.Image = (Image)resources.GetObject("rbInstagram.Image");
+            rbInstagram.ImageAlign = ContentAlignment.MiddleRight;
+            rbInstagram.Location = new Point(15, 33);
+            rbInstagram.Name = "rbInstagram";
+            rbInstagram.Size = new Size(80, 48);
+            rbInstagram.TabIndex = 2;
+            rbInstagram.TabStop = true;
+            rbInstagram.Text = "          ";
+            rbInstagram.UseVisualStyleBackColor = true;
+            // 
+            // rbTelegram
+            // 
+            rbTelegram.AutoSize = true;
+            rbTelegram.Image = (Image)resources.GetObject("rbTelegram.Image");
+            rbTelegram.ImageAlign = ContentAlignment.MiddleRight;
+            rbTelegram.Location = new Point(15, 87);
+            rbTelegram.Name = "rbTelegram";
+            rbTelegram.Size = new Size(80, 48);
+            rbTelegram.TabIndex = 1;
+            rbTelegram.TabStop = true;
+            rbTelegram.Text = "          ";
+            rbTelegram.UseVisualStyleBackColor = true;
+            // 
+            // rbWhatsApp
+            // 
+            rbWhatsApp.AutoSize = true;
+            rbWhatsApp.Image = (Image)resources.GetObject("rbWhatsApp.Image");
+            rbWhatsApp.ImageAlign = ContentAlignment.MiddleRight;
+            rbWhatsApp.Location = new Point(15, 141);
+            rbWhatsApp.Name = "rbWhatsApp";
+            rbWhatsApp.RightToLeft = RightToLeft.No;
+            rbWhatsApp.Size = new Size(80, 48);
+            rbWhatsApp.TabIndex = 0;
+            rbWhatsApp.TabStop = true;
+            rbWhatsApp.Text = "          ";
+            rbWhatsApp.TextAlign = ContentAlignment.MiddleCenter;
+            rbWhatsApp.UseVisualStyleBackColor = true;
             // 
             // grDate
             // 
@@ -105,68 +191,21 @@
             grName.TabStop = false;
             grName.Text = "Имя";
             // 
-            // grSource
-            // 
-            grSource.Controls.Add(rbInstagram);
-            grSource.Controls.Add(rbTelegram);
-            grSource.Controls.Add(rbWhatsApp);
-            grSource.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            grSource.Location = new Point(472, 313);
-            grSource.Name = "grSource";
-            grSource.Size = new Size(311, 205);
-            grSource.TabIndex = 4;
-            grSource.TabStop = false;
-            grSource.Text = "Источник";
-            // 
-            // rbWhatsApp
-            // 
-            rbWhatsApp.AutoSize = true;
-            rbWhatsApp.Image = (Image)resources.GetObject("rbWhatsApp.Image");
-            rbWhatsApp.Location = new Point(15, 141);
-            rbWhatsApp.Name = "rbWhatsApp";
-            rbWhatsApp.RightToLeft = RightToLeft.No;
-            rbWhatsApp.Size = new Size(62, 48);
-            rbWhatsApp.TabIndex = 0;
-            rbWhatsApp.TabStop = true;
-            rbWhatsApp.UseVisualStyleBackColor = true;
-            // 
-            // rbTelegram
-            // 
-            rbTelegram.AutoSize = true;
-            rbTelegram.Image = (Image)resources.GetObject("rbTelegram.Image");
-            rbTelegram.Location = new Point(15, 87);
-            rbTelegram.Name = "rbTelegram";
-            rbTelegram.Size = new Size(62, 48);
-            rbTelegram.TabIndex = 1;
-            rbTelegram.TabStop = true;
-            rbTelegram.UseVisualStyleBackColor = true;
-            // 
-            // rbInstagram
-            // 
-            rbInstagram.AutoSize = true;
-            rbInstagram.Image = (Image)resources.GetObject("rbInstagram.Image");
-            rbInstagram.Location = new Point(15, 33);
-            rbInstagram.Name = "rbInstagram";
-            rbInstagram.Size = new Size(62, 48);
-            rbInstagram.TabIndex = 2;
-            rbInstagram.TabStop = true;
-            rbInstagram.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1305, 617);
-            Controls.Add(grSource);
             Controls.Add(grNewClient);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
-            Text = "Form1";
+            Text = "Бухгалтерия ведьмы";
             grNewClient.ResumeLayout(false);
+            grSource.ResumeLayout(false);
+            grSource.PerformLayout();
             grDate.ResumeLayout(false);
             grName.ResumeLayout(false);
             grName.PerformLayout();
-            grSource.ResumeLayout(false);
-            grSource.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -182,5 +221,8 @@
         private RadioButton rbWhatsApp;
         private RadioButton rbInstagram;
         private RadioButton rbTelegram;
+        private TextBox txtWhatsApp;
+        private TextBox txtTelegram;
+        private TextBox txtInstagram;
     }
 }
