@@ -6,6 +6,8 @@ namespace WitchCRM
     {
         private AppDbContext _context;
         private string? _clientStatus;
+        private string _sourceName = String.Empty;
+        private string _sourceData = String.Empty;
         public FormMain()
         {
             InitializeComponent();
@@ -30,6 +32,7 @@ namespace WitchCRM
             if (rbInstagram.Checked)
             {
                 txtInstagram.Visible = true;
+                _sourceName = "Instagram";
                 txtTelegram.Visible = false;
                 txtWhatsApp.Visible = false;
             }
@@ -41,6 +44,7 @@ namespace WitchCRM
             if (rbTelegram.Checked)
             {
                 txtTelegram.Visible = true;
+                _sourceName = "Telegram";
                 txtWhatsApp.Visible = false;
                 txtInstagram.Visible = false;
             }
@@ -52,6 +56,7 @@ namespace WitchCRM
             if (rbWhatsApp.Checked)
             {
                 txtWhatsApp.Visible = true;
+                _sourceName = "WhatsApp";
                 txtTelegram.Visible = false;
                 txtInstagram.Visible = false;
             }
@@ -83,8 +88,7 @@ namespace WitchCRM
 
         //Метод ввода данных
         private void InputData()
-        {
-            var source = String.Empty;
+        {            
             if (string.IsNullOrWhiteSpace(txtName.Text))
             {
                 MessageBox.Show("Поле 'Имя' не может быть пустым!", "Ошибка",
@@ -99,38 +103,22 @@ namespace WitchCRM
             }
             if (txtInstagram.Visible == true)
             {
-                if (txtInstagram.Text != String.Empty)
-                {
-                    source = $"Instagram ({txtInstagram.Text})";
-                }
-                else
-                {
-                    source = $"Instagram ( - )";
-                }
+                _sourceData = txtInstagram.Text;
             }
             if (txtTelegram.Visible == true)
             {
-                if (txtTelegram.Text != String.Empty)
-                {
-                    source = $"Telegram ({txtTelegram.Text})";
-                }
-                else
-                {
-                    source = $"Telegram ( - )";
-                }
+                _sourceData = txtTelegram.Text;
             }
             if (txtWhatsApp.Visible == true)
             {
-                if (txtWhatsApp.Text != String.Empty)
-                {
-                    source = $"WhatsApp ({txtWhatsApp.Text})";
-                }
-                else
-                {
-                    source = $"WhatsApp ( - )";
-                }
+                _sourceData = txtWhatsApp.Text;
             }
-            txtPrise.Focus();
+            if (_sourceData==String.Empty)
+            {
+                MessageBox.Show("В текстовом поле у 'Источник' не заполнены данные!", "Ошибка",
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             if (String.IsNullOrWhiteSpace(txtPrise.Text))
             {
                 MessageBox.Show("Поле 'К оплате' не может быть пустым!", "Ошибка",
@@ -152,7 +140,8 @@ namespace WitchCRM
                     {
                         Name = txtName.Text,
                         Date = dateTimePicker.Value.Date,
-                        Source = source,
+                        SourceName = _sourceName,
+                        SourceData=_sourceData,
                         Prise = prise,
                         Description = txtDescription.Text,
                         Status=_clientStatus
