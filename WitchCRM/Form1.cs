@@ -14,6 +14,10 @@ namespace WitchCRM
             txtName.Focus();
             _context = new AppDbContext();
             _context.Database.EnsureCreated();
+
+            
+            txtTelegram.Mask = "+7(999)000-00-00";
+            txtWhatsApp.Mask = "+7(999)000-00-00";
         }
 
         ////
@@ -33,6 +37,7 @@ namespace WitchCRM
             {
                 txtInstagram.Visible = true;
                 _sourceName = "Instagram";
+                txtInstagram.Focus();
                 txtTelegram.Visible = false;
                 txtWhatsApp.Visible = false;
             }
@@ -45,6 +50,7 @@ namespace WitchCRM
             {
                 txtTelegram.Visible = true;
                 _sourceName = "Telegram";
+                txtTelegram.Focus();
                 txtWhatsApp.Visible = false;
                 txtInstagram.Visible = false;
             }
@@ -57,6 +63,7 @@ namespace WitchCRM
             {
                 txtWhatsApp.Visible = true;
                 _sourceName = "WhatsApp";
+                txtWhatsApp.Focus();
                 txtTelegram.Visible = false;
                 txtInstagram.Visible = false;
             }
