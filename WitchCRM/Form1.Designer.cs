@@ -42,9 +42,9 @@
             lbPrise = new Label();
             txtPrise = new TextBox();
             grSource = new GroupBox();
-            txtWhatsApp = new TextBox();
-            txtTelegram = new TextBox();
-            txtInstagram = new TextBox();
+            txtWhatsApp = new MaskedTextBox();
+            txtTelegram = new MaskedTextBox();
+            txtInstagram = new MaskedTextBox();
             rbInstagram = new RadioButton();
             rbTelegram = new RadioButton();
             rbWhatsApp = new RadioButton();
@@ -214,26 +214,26 @@
             // 
             // txtWhatsApp
             // 
-            txtWhatsApp.Location = new Point(77, 123);
+            txtWhatsApp.Location = new Point(80, 124);
             txtWhatsApp.Name = "txtWhatsApp";
             txtWhatsApp.Size = new Size(218, 29);
-            txtWhatsApp.TabIndex = 6;
+            txtWhatsApp.TabIndex = 4;
             txtWhatsApp.Visible = false;
             // 
             // txtTelegram
             // 
-            txtTelegram.Location = new Point(77, 75);
+            txtTelegram.Location = new Point(80, 78);
             txtTelegram.Name = "txtTelegram";
             txtTelegram.Size = new Size(218, 29);
-            txtTelegram.TabIndex = 5;
+            txtTelegram.TabIndex = 4;
             txtTelegram.Visible = false;
             // 
             // txtInstagram
             // 
-            txtInstagram.Location = new Point(77, 27);
+            txtInstagram.Location = new Point(80, 33);
             txtInstagram.Name = "txtInstagram";
             txtInstagram.Size = new Size(218, 29);
-            txtInstagram.TabIndex = 3;
+            txtInstagram.TabIndex = 4;
             txtInstagram.Visible = false;
             // 
             // rbInstagram
@@ -243,10 +243,10 @@
             rbInstagram.ImageAlign = ContentAlignment.MiddleRight;
             rbInstagram.Location = new Point(14, 24);
             rbInstagram.Name = "rbInstagram";
-            rbInstagram.Size = new Size(62, 48);
+            rbInstagram.Size = new Size(68, 48);
             rbInstagram.TabIndex = 2;
             rbInstagram.TabStop = true;
-            rbInstagram.Text = "      ";
+            rbInstagram.Text = "        ";
             rbInstagram.UseVisualStyleBackColor = true;
             rbInstagram.CheckedChanged += rbInstagram_CheckedChanged;
             // 
@@ -257,10 +257,10 @@
             rbTelegram.ImageAlign = ContentAlignment.MiddleRight;
             rbTelegram.Location = new Point(14, 69);
             rbTelegram.Name = "rbTelegram";
-            rbTelegram.Size = new Size(62, 48);
+            rbTelegram.Size = new Size(68, 48);
             rbTelegram.TabIndex = 1;
             rbTelegram.TabStop = true;
-            rbTelegram.Text = "      ";
+            rbTelegram.Text = "        ";
             rbTelegram.UseVisualStyleBackColor = true;
             rbTelegram.CheckedChanged += rbTelegram_CheckedChanged;
             // 
@@ -272,10 +272,10 @@
             rbWhatsApp.Location = new Point(14, 117);
             rbWhatsApp.Name = "rbWhatsApp";
             rbWhatsApp.RightToLeft = RightToLeft.No;
-            rbWhatsApp.Size = new Size(62, 48);
+            rbWhatsApp.Size = new Size(68, 48);
             rbWhatsApp.TabIndex = 0;
             rbWhatsApp.TabStop = true;
-            rbWhatsApp.Text = "      ";
+            rbWhatsApp.Text = "        ";
             rbWhatsApp.TextAlign = ContentAlignment.MiddleCenter;
             rbWhatsApp.UseVisualStyleBackColor = true;
             rbWhatsApp.CheckedChanged += rbWhatsApp_CheckedChanged;
@@ -339,9 +339,6 @@
         private RadioButton rbWhatsApp;
         private RadioButton rbInstagram;
         private RadioButton rbTelegram;
-        private TextBox txtWhatsApp;
-        private TextBox txtTelegram;
-        private TextBox txtInstagram;
         private GroupBox grPrise;
         private TextBox txtPrise;
         private Label lbPrise;
@@ -350,5 +347,8 @@
         private GroupBox grStatus;
         private RadioButton rbRepeatClient;
         private RadioButton rbNewClient;
+        private MaskedTextBox txtInstagram;
+        private MaskedTextBox txtWhatsApp;
+        private MaskedTextBox txtTelegram;
     }
 }
