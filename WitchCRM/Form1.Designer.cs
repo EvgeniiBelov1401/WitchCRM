@@ -214,7 +214,7 @@
             // 
             // txtWhatsApp
             // 
-            txtWhatsApp.Location = new Point(80, 124);
+            txtWhatsApp.Location = new Point(81, 124);
             txtWhatsApp.Name = "txtWhatsApp";
             txtWhatsApp.Size = new Size(218, 29);
             txtWhatsApp.TabIndex = 4;
@@ -222,7 +222,7 @@
             // 
             // txtTelegram
             // 
-            txtTelegram.Location = new Point(80, 78);
+            txtTelegram.Location = new Point(81, 78);
             txtTelegram.Name = "txtTelegram";
             txtTelegram.Size = new Size(218, 29);
             txtTelegram.TabIndex = 4;
@@ -230,7 +230,7 @@
             // 
             // txtInstagram
             // 
-            txtInstagram.Location = new Point(80, 33);
+            txtInstagram.Location = new Point(81, 33);
             txtInstagram.Name = "txtInstagram";
             txtInstagram.Size = new Size(218, 29);
             txtInstagram.TabIndex = 4;
