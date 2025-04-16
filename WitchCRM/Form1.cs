@@ -101,24 +101,10 @@ namespace WitchCRM
                               MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (txtInstagram.Visible == true)
-            {
-                _sourceData = txtInstagram.Text;
-            }
-            if (txtTelegram.Visible == true)
-            {
-                _sourceData = txtTelegram.Text;
-            }
-            if (txtWhatsApp.Visible == true)
-            {
-                _sourceData = txtWhatsApp.Text;
-            }
-            if (_sourceData==String.Empty)
-            {
-                MessageBox.Show("В текстовом поле у 'Источник' не заполнены данные!", "Ошибка",
-                              MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+
+            InputSourceData();
+
+            
             if (String.IsNullOrWhiteSpace(txtPrise.Text))
             {
                 MessageBox.Show("Поле 'К оплате' не может быть пустым!", "Ошибка",
@@ -174,7 +160,30 @@ namespace WitchCRM
             }
         }
 
-        //Метод очистки органнов ввода
+        //Метод ввода данных для источника
+        private void InputSourceData()
+        {
+            if (txtInstagram.Visible == true)
+            {
+                _sourceData = txtInstagram.Text;
+            }
+            if (txtTelegram.Visible == true)
+            {
+                _sourceData = txtTelegram.Text;
+            }
+            if (txtWhatsApp.Visible == true)
+            {
+                _sourceData = txtWhatsApp.Text;
+            }
+            if (_sourceData == String.Empty)
+            {
+                MessageBox.Show("В текстовом поле у 'Источник' не заполнены данные!", "Ошибка",
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        //Метод очистки органов ввода
         private void ClearInputtedData()
         {
             txtName.Clear();
