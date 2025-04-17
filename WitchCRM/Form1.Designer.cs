@@ -34,8 +34,7 @@
             btnSave = new Button();
             grNewClient = new GroupBox();
             grStatus = new GroupBox();
-            rbRepeatClient = new RadioButton();
-            rbNewClient = new RadioButton();
+            cbRepeatClient = new CheckBox();
             grDesсription = new GroupBox();
             txtDescription = new TextBox();
             grPrise = new GroupBox();
@@ -51,8 +50,9 @@
             grDate = new GroupBox();
             grName = new GroupBox();
             plannerDate = new DateTimePicker();
-            btnPlannerUpdate = new Button();
+            grPlanner = new GroupBox();
             plannerTable = new DataGridView();
+            lblPlannerClientCount = new Label();
             grNewClient.SuspendLayout();
             grStatus.SuspendLayout();
             grDesсription.SuspendLayout();
@@ -60,6 +60,7 @@
             grSource.SuspendLayout();
             grDate.SuspendLayout();
             grName.SuspendLayout();
+            grPlanner.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)plannerTable).BeginInit();
             SuspendLayout();
             // 
@@ -93,6 +94,7 @@
             // 
             // grNewClient
             // 
+            grNewClient.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             grNewClient.Controls.Add(grStatus);
             grNewClient.Controls.Add(grDesсription);
             grNewClient.Controls.Add(btnSave);
@@ -110,8 +112,7 @@
             // 
             // grStatus
             // 
-            grStatus.Controls.Add(rbRepeatClient);
-            grStatus.Controls.Add(rbNewClient);
+            grStatus.Controls.Add(cbRepeatClient);
             grStatus.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
             grStatus.Location = new Point(17, 126);
             grStatus.Margin = new Padding(3, 2, 3, 2);
@@ -122,32 +123,21 @@
             grStatus.TabStop = false;
             grStatus.Text = "Статус";
             // 
-            // rbRepeatClient
+            // cbRepeatClient
             // 
-            rbRepeatClient.AutoSize = true;
-            rbRepeatClient.Location = new Point(322, 36);
-            rbRepeatClient.Margin = new Padding(3, 2, 3, 2);
-            rbRepeatClient.Name = "rbRepeatClient";
-            rbRepeatClient.Size = new Size(128, 26);
-            rbRepeatClient.TabIndex = 1;
-            rbRepeatClient.Text = "Повторный";
-            rbRepeatClient.UseVisualStyleBackColor = true;
-            rbRepeatClient.CheckedChanged += rbRepeatClient_CheckedChanged;
-            // 
-            // rbNewClient
-            // 
-            rbNewClient.AutoSize = true;
-            rbNewClient.Location = new Point(63, 36);
-            rbNewClient.Margin = new Padding(3, 2, 3, 2);
-            rbNewClient.Name = "rbNewClient";
-            rbNewClient.Size = new Size(88, 26);
-            rbNewClient.TabIndex = 0;
-            rbNewClient.Text = "Новый";
-            rbNewClient.UseVisualStyleBackColor = true;
-            rbNewClient.CheckedChanged += rbNewClient_CheckedChanged;
+            cbRepeatClient.AutoSize = true;
+            cbRepeatClient.Font = new Font("Times New Roman", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            cbRepeatClient.Location = new Point(104, 33);
+            cbRepeatClient.Name = "cbRepeatClient";
+            cbRepeatClient.Size = new Size(334, 28);
+            cbRepeatClient.TabIndex = 0;
+            cbRepeatClient.Text = "Повторный/Постоянный клиент";
+            cbRepeatClient.UseVisualStyleBackColor = true;
+            cbRepeatClient.CheckedChanged += cbRepeatClient_CheckedChanged;
             // 
             // grDesсription
             // 
+            grDesсription.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             grDesсription.Controls.Add(txtDescription);
             grDesсription.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
             grDesсription.Location = new Point(1085, 42);
@@ -161,6 +151,7 @@
             // 
             // txtDescription
             // 
+            txtDescription.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             txtDescription.Location = new Point(14, 30);
             txtDescription.Margin = new Padding(3, 2, 3, 2);
             txtDescription.Multiline = true;
@@ -310,38 +301,50 @@
             // plannerDate
             // 
             plannerDate.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            plannerDate.Location = new Point(35, 268);
+            plannerDate.Location = new Point(17, 33);
             plannerDate.Name = "plannerDate";
             plannerDate.Size = new Size(218, 29);
             plannerDate.TabIndex = 4;
             // 
-            // btnPlannerUpdate
+            // grPlanner
             // 
-            btnPlannerUpdate.Image = (Image)resources.GetObject("btnPlannerUpdate.Image");
-            btnPlannerUpdate.Location = new Point(259, 266);
-            btnPlannerUpdate.Name = "btnPlannerUpdate";
-            btnPlannerUpdate.Size = new Size(38, 38);
-            btnPlannerUpdate.TabIndex = 5;
-            btnPlannerUpdate.UseVisualStyleBackColor = true;
+            grPlanner.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grPlanner.Controls.Add(plannerTable);
+            grPlanner.Controls.Add(lblPlannerClientCount);
+            grPlanner.Controls.Add(plannerDate);
+            grPlanner.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            grPlanner.Location = new Point(12, 240);
+            grPlanner.Name = "grPlanner";
+            grPlanner.Size = new Size(1402, 405);
+            grPlanner.TabIndex = 7;
+            grPlanner.TabStop = false;
+            grPlanner.Text = "Планировщик";
             // 
             // plannerTable
             // 
-            plannerTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            plannerTable.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             plannerTable.BackgroundColor = SystemColors.Window;
             plannerTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            plannerTable.Location = new Point(31, 311);
+            plannerTable.Location = new Point(17, 68);
             plannerTable.Name = "plannerTable";
-            plannerTable.Size = new Size(1360, 310);
-            plannerTable.TabIndex = 6;
+            plannerTable.Size = new Size(1374, 321);
+            plannerTable.TabIndex = 8;
+            // 
+            // lblPlannerClientCount
+            // 
+            lblPlannerClientCount.AutoSize = true;
+            lblPlannerClientCount.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            lblPlannerClientCount.Location = new Point(241, 40);
+            lblPlannerClientCount.Name = "lblPlannerClientCount";
+            lblPlannerClientCount.Size = new Size(0, 22);
+            lblPlannerClientCount.TabIndex = 7;
             // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1436, 668);
-            Controls.Add(plannerTable);
-            Controls.Add(btnPlannerUpdate);
-            Controls.Add(plannerDate);
+            Controls.Add(grPlanner);
             Controls.Add(grNewClient);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormMain";
@@ -359,6 +362,8 @@
             grDate.ResumeLayout(false);
             grName.ResumeLayout(false);
             grName.PerformLayout();
+            grPlanner.ResumeLayout(false);
+            grPlanner.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)plannerTable).EndInit();
             ResumeLayout(false);
         }
@@ -381,13 +386,14 @@
         private GroupBox grDesсription;
         private TextBox txtDescription;
         private GroupBox grStatus;
-        private RadioButton rbRepeatClient;
-        private RadioButton rbNewClient;
         private MaskedTextBox txtInstagram;
         private MaskedTextBox txtWhatsApp;
         private MaskedTextBox txtTelegram;
         private DateTimePicker plannerDate;
-        private Button btnPlannerUpdate;
+        private GroupBox grPlanner;
+        private CheckBox cbRepeatClient;
+        private Label lblPlannerClientCount;
         private DataGridView plannerTable;
+
     }
 }

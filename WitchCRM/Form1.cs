@@ -4,8 +4,8 @@ namespace WitchCRM
 {
     public partial class FormMain : Form
     {
-        private AppDbContext _context;
-        private string? _clientStatus;
+        private AppDbContext? _context;
+        private string? _clientStatus = "Новый";
         private string _sourceName = String.Empty;
         private string _sourceData = String.Empty;
 
@@ -13,26 +13,10 @@ namespace WitchCRM
         public FormMain()
         {
             InitializeComponent();
-            txtName.Focus();
-            _context = new AppDbContext();
-            _context.Database.EnsureCreated();
-
-
-            txtTelegram.Mask = "+79990000000";
-            txtWhatsApp.Mask = "+79990000000";
-
-
-            plannerDate.Format = DateTimePickerFormat.Long;
-            plannerDate.Value = DateTime.Today;
-            plannerDate.ValueChanged += (s, e) => LoadClientsByDate();
-
-            plannerTable.AutoSizeColumnsMode = (DataGridViewAutoSizeColumnsMode)DataGridViewAutoSizeColumnMode.Fill;
-            plannerTable.AllowUserToAddRows = false;
-
+            LoadOptions();
             LoadClientsByDate();
-
         }
-        
+
 
         ////
         //Органы управления
@@ -84,33 +68,44 @@ namespace WitchCRM
             }
         }
 
-        //ВЫБРАТЬ СТАТУС "НОВЫЙ"
-        private void rbNewClient_CheckedChanged(object sender, EventArgs e)
+        //УСТАНОВИТЬ СТАТУС ПОВТОРНЫЙ КЛИЕНТ
+        private void cbRepeatClient_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbNewClient.Checked)
-            {
-                _clientStatus = "Новый";
-            }
-        }
-
-        //ВЫБРАТЬ СТАТУС "ПОВТОРНЫЙ"
-        private void rbRepeatClient_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbRepeatClient.Checked)
+            if (cbRepeatClient.Checked)
             {
                 _clientStatus = "Повторный";
-            }
+            }           
         }
+
         //-------------------------------------------------------------------------------------------------------
 
         ////
         //Методы
         ////
 
+        //Метод первоначальных настроек элементов при загрузке формы
+        private void LoadOptions()
+        {
+            txtName.Focus();
+            _context = new AppDbContext();
+            _context.Database.EnsureCreated();
+
+
+            txtTelegram.Mask = "+79990000000";
+            txtWhatsApp.Mask = "+79990000000";
+
+
+            plannerDate.Format = DateTimePickerFormat.Long;
+            plannerDate.Value = DateTime.Today;
+            plannerDate.ValueChanged += (s, e) => LoadClientsByDate();
+
+            plannerTable.AutoSizeColumnsMode = (DataGridViewAutoSizeColumnsMode)DataGridViewAutoSizeColumnMode.Fill;
+            plannerTable.AllowUserToAddRows = false;
+        }
 
         //Метод ввода данных
         private void InputData()
-        {            
+        {
             if (string.IsNullOrWhiteSpace(txtName.Text))
             {
                 MessageBox.Show("Поле 'Имя' не может быть пустым!", "Ошибка",
@@ -126,20 +121,13 @@ namespace WitchCRM
 
             InputSourceData();
 
-            
+
             if (String.IsNullOrWhiteSpace(txtPrise.Text))
             {
                 MessageBox.Show("Поле 'К оплате' не может быть пустым!", "Ошибка",
                               MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            }
-            if (!rbNewClient.Checked && !rbRepeatClient.Checked)
-            {
-
-                MessageBox.Show("Не выбран 'Статус' клиента!", "Ошибка",
-                              MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            }           
             try
             {
                 if (decimal.TryParse(txtPrise.Text, out decimal prise))
@@ -149,14 +137,18 @@ namespace WitchCRM
                         Name = txtName.Text,
                         Date = dateTimePicker.Value.Date,
                         SourceName = _sourceName,
-                        SourceData=_sourceData,
+                        SourceData = _sourceData,
                         Prise = prise,
                         Description = txtDescription.Text,
-                        Status=_clientStatus
+                        Status = _clientStatus
                     };
 
-                    _context.Clients.Add(client);
-                    _context.SaveChanges();
+                    if (_context?.Clients != null)
+                    {
+                        _context.Clients.Add(client!);
+                        _context.SaveChanges();
+                    }
+
 
                     MessageBox.Show("Клиент успешно сохранен!", "Успех",
                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -164,7 +156,7 @@ namespace WitchCRM
                     ClearInputtedData();
                 }
                 else
-                {                    
+                {
                     throw new FormatException();
                 }
             }
@@ -188,6 +180,10 @@ namespace WitchCRM
             if (txtInstagram.Visible == true)
             {
                 _sourceData = txtInstagram.Text;
+                if (String.IsNullOrWhiteSpace(txtInstagram.Text))
+                {
+                    _sourceData = "@";
+                }
             }
             if (txtTelegram.Visible == true)
             {
@@ -196,12 +192,6 @@ namespace WitchCRM
             if (txtWhatsApp.Visible == true)
             {
                 _sourceData = txtWhatsApp.Text;
-            }
-            if (_sourceData == String.Empty)
-            {
-                MessageBox.Show("В текстовом поле у 'Источник' не заполнены данные!", "Ошибка",
-                              MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
             }
         }
 
@@ -219,12 +209,13 @@ namespace WitchCRM
             rbInstagram.Checked = false;
             rbTelegram.Checked = false;
             rbWhatsApp.Checked = false;
-            rbNewClient.Checked = false;
-            rbRepeatClient.Checked = false;
+
+            cbRepeatClient.Checked = false;
 
             txtInstagram.Visible = false;
             txtTelegram.Visible = false;
             txtWhatsApp.Visible = false;
+            _clientStatus = "Новый";
 
             txtName.Focus();
         }
@@ -239,21 +230,29 @@ namespace WitchCRM
                     var clients = db.Clients
                         .Where(c => c.Date.Date == plannerDate.Value.Date)
                         .ToList();
-
+                    if (clients.Count != 0)
+                    {
+                        lblPlannerClientCount.Text = $"Клиентов: {clients.Count}";
+                        plannerTable.Visible = true;
+                    }
+                    else
+                    {
+                        lblPlannerClientCount.Text = $"Нет записи";
+                        plannerTable.Visible = false;
+                    }
                     var displayData = clients
                         .Select((c, index) => new
                         {
-                            n = index + 1,                     
-                            Дата = c.Date.ToShortDateString(),  
+                            n = index + 1,
+                            Дата = c.Date.ToShortDateString(),
                             Имя = c.Name,
-                            Статус=c.Status,
-                            Источник=c.SourceName,
-                            Контакты=c.SourceData,
+                            Статус = c.Status,
+                            Источник = c.SourceName,
+                            Контакты = c.SourceData,
                             Оплачено = c.Prise,
-                            Дополнительно=c.Description
+                            Дополнительно = c.Description
                         })
                         .ToList();
-
                     plannerTable.DataSource = displayData;
                 }
             }
@@ -263,6 +262,8 @@ namespace WitchCRM
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        
 
 
 
