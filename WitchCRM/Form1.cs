@@ -8,6 +8,8 @@ namespace WitchCRM
         private string? _clientStatus;
         private string _sourceName = String.Empty;
         private string _sourceData = String.Empty;
+
+
         public FormMain()
         {
             InitializeComponent();
@@ -18,7 +20,19 @@ namespace WitchCRM
 
             txtTelegram.Mask = "+79990000000";
             txtWhatsApp.Mask = "+79990000000";
+
+
+            plannerDate.Format = DateTimePickerFormat.Long;
+            plannerDate.Value = DateTime.Today;
+            plannerDate.ValueChanged += (s, e) => LoadClientsByDate();
+
+            plannerTable.AutoSizeColumnsMode = (DataGridViewAutoSizeColumnsMode)DataGridViewAutoSizeColumnMode.Fill;
+            plannerTable.AllowUserToAddRows = false;
+
+            LoadClientsByDate();
+
         }
+        
 
         ////
         //Органы управления
@@ -28,6 +42,7 @@ namespace WitchCRM
         private void btnSave_Click(object sender, EventArgs e)
         {
             InputData();
+            LoadClientsByDate();
         }
 
         //ВЫБРАТЬ ИНСТАГРАМ
@@ -214,7 +229,40 @@ namespace WitchCRM
             txtName.Focus();
         }
 
-        
+        //Метод загрузки плана на выбранную дату
+        private void LoadClientsByDate()
+        {
+            try
+            {
+                using (var db = new AppDbContext())
+                {
+                    var clients = db.Clients
+                        .Where(c => c.Date.Date == plannerDate.Value.Date)
+                        .ToList();
+
+                    var displayData = clients
+                        .Select((c, index) => new
+                        {
+                            n = index + 1,                     
+                            Дата = c.Date.ToShortDateString(),  
+                            Имя = c.Name,
+                            Статус=c.Status,
+                            Источник=c.SourceName,
+                            Контакты=c.SourceData,
+                            Оплачено = c.Prise,
+                            Дополнительно=c.Description
+                        })
+                        .ToList();
+
+                    plannerTable.DataSource = displayData;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
 
 
