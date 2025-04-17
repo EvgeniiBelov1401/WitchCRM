@@ -23,14 +23,14 @@ namespace WitchCRM
         ////
 
         //ÊÍÎÏÊÀ "ÇÀÏÈÑÀÒÜ"
-        private void btnSave_Click(object sender, EventArgs e)
+        private void btnSave_Click_1(object sender, EventArgs e)
         {
             InputData();
             LoadClientsByDate();
         }
 
         //ÂÛÁĞÀÒÜ ÈÍÑÒÀÃĞÀÌ
-        private void rbInstagram_CheckedChanged(object sender, EventArgs e)
+        private void rbInstagram_CheckedChanged_1(object sender, EventArgs e)
         {
             if (rbInstagram.Checked)
             {
@@ -41,9 +41,8 @@ namespace WitchCRM
                 txtWhatsApp.Visible = false;
             }
         }
-
         //ÂÛÁĞÀÒÜ ÒÅËÅÃĞÀÌ
-        private void rbTelegram_CheckedChanged(object sender, EventArgs e)
+        private void rbTelegram_CheckedChanged_1(object sender, EventArgs e)
         {
             if (rbTelegram.Checked)
             {
@@ -54,9 +53,8 @@ namespace WitchCRM
                 txtInstagram.Visible = false;
             }
         }
-
         //ÂÛÁĞÀÒÜ WHATSAPP
-        private void rbWhatsApp_CheckedChanged(object sender, EventArgs e)
+        private void rbWhatsApp_CheckedChanged_1(object sender, EventArgs e)
         {
             if (rbWhatsApp.Checked)
             {
@@ -67,14 +65,13 @@ namespace WitchCRM
                 txtInstagram.Visible = false;
             }
         }
-
         //ÓÑÒÀÍÎÂÈÒÜ ÑÒÀÒÓÑ ÏÎÂÒÎĞÍÛÉ ÊËÈÅÍÒ
-        private void cbRepeatClient_CheckedChanged(object sender, EventArgs e)
+        private void cbRepeatClient_CheckedChanged_1(object sender, EventArgs e)
         {
             if (cbRepeatClient.Checked)
             {
                 _clientStatus = "Ïîâòîğíûé";
-            }           
+            }
         }
 
         //-------------------------------------------------------------------------------------------------------
@@ -127,7 +124,7 @@ namespace WitchCRM
                 MessageBox.Show("Ïîëå 'Ê îïëàòå' íå ìîæåò áûòü ïóñòûì!", "Îøèáêà",
                               MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            }           
+            }
             try
             {
                 if (decimal.TryParse(txtPrise.Text, out decimal prise))
@@ -263,6 +260,14 @@ namespace WitchCRM
         }
 
         
+
+
+
+
+
+
+
+
 
 
 
