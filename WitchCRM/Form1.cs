@@ -15,9 +15,9 @@ namespace WitchCRM
             _context = new AppDbContext();
             _context.Database.EnsureCreated();
 
-            
-            txtTelegram.Mask = "+7(999)000-00-00";
-            txtWhatsApp.Mask = "+7(999)000-00-00";
+
+            txtTelegram.Mask = "+79990000000";
+            txtWhatsApp.Mask = "+79990000000";
         }
 
         ////
