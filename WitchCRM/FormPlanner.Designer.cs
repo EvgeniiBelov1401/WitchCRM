@@ -1,6 +1,6 @@
 ﻿namespace WitchCRM
 {
-    partial class FormMain
+    partial class FormPlanner
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPlanner));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             txtName = new TextBox();
             dateTimePicker = new DateTimePicker();
             btnSave = new Button();
@@ -66,16 +67,16 @@
             // 
             // txtName
             // 
-            txtName.Location = new Point(6, 30);
+            txtName.Location = new Point(7, 34);
             txtName.Name = "txtName";
-            txtName.Size = new Size(267, 29);
+            txtName.Size = new Size(305, 34);
             txtName.TabIndex = 0;
             // 
             // dateTimePicker
             // 
-            dateTimePicker.Location = new Point(6, 35);
+            dateTimePicker.Location = new Point(7, 40);
             dateTimePicker.Name = "dateTimePicker";
-            dateTimePicker.Size = new Size(218, 29);
+            dateTimePicker.Size = new Size(249, 34);
             dateTimePicker.TabIndex = 1;
             // 
             // btnSave
@@ -83,9 +84,9 @@
             btnSave.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 204);
             btnSave.Image = (Image)resources.GetObject("btnSave.Image");
             btnSave.ImageAlign = ContentAlignment.MiddleRight;
-            btnSave.Location = new Point(889, 168);
+            btnSave.Location = new Point(1016, 190);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(182, 48);
+            btnSave.Size = new Size(208, 54);
             btnSave.TabIndex = 2;
             btnSave.Text = "Записать";
             btnSave.TextAlign = ContentAlignment.MiddleLeft;
@@ -103,9 +104,9 @@
             grNewClient.Controls.Add(grDate);
             grNewClient.Controls.Add(grName);
             grNewClient.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            grNewClient.Location = new Point(12, 12);
+            grNewClient.Location = new Point(14, 14);
             grNewClient.Name = "grNewClient";
-            grNewClient.Size = new Size(1402, 222);
+            grNewClient.Size = new Size(1565, 339);
             grNewClient.TabIndex = 3;
             grNewClient.TabStop = false;
             grNewClient.Text = "Новый клиент";
@@ -114,11 +115,9 @@
             // 
             grStatus.Controls.Add(cbRepeatClient);
             grStatus.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            grStatus.Location = new Point(17, 126);
-            grStatus.Margin = new Padding(3, 2, 3, 2);
+            grStatus.Location = new Point(19, 143);
             grStatus.Name = "grStatus";
-            grStatus.Padding = new Padding(3, 2, 3, 2);
-            grStatus.Size = new Size(536, 84);
+            grStatus.Size = new Size(613, 95);
             grStatus.TabIndex = 4;
             grStatus.TabStop = false;
             grStatus.Text = "Статус";
@@ -127,9 +126,9 @@
             // 
             cbRepeatClient.AutoSize = true;
             cbRepeatClient.Font = new Font("Times New Roman", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            cbRepeatClient.Location = new Point(104, 33);
+            cbRepeatClient.Location = new Point(119, 37);
             cbRepeatClient.Name = "cbRepeatClient";
-            cbRepeatClient.Size = new Size(334, 28);
+            cbRepeatClient.Size = new Size(436, 35);
             cbRepeatClient.TabIndex = 0;
             cbRepeatClient.Text = "Повторный/Постоянный клиент";
             cbRepeatClient.UseVisualStyleBackColor = true;
@@ -140,11 +139,9 @@
             grDesсription.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             grDesсription.Controls.Add(txtDescription);
             grDesсription.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            grDesсription.Location = new Point(1085, 42);
-            grDesсription.Margin = new Padding(3, 2, 3, 2);
+            grDesсription.Location = new Point(1240, 48);
             grDesсription.Name = "grDesсription";
-            grDesсription.Padding = new Padding(3, 2, 3, 2);
-            grDesсription.Size = new Size(306, 117);
+            grDesсription.Size = new Size(307, 133);
             grDesсription.TabIndex = 4;
             grDesсription.TabStop = false;
             grDesсription.Text = "Особые отметки";
@@ -152,11 +149,10 @@
             // txtDescription
             // 
             txtDescription.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            txtDescription.Location = new Point(14, 30);
-            txtDescription.Margin = new Padding(3, 2, 3, 2);
+            txtDescription.Location = new Point(16, 34);
             txtDescription.Multiline = true;
             txtDescription.Name = "txtDescription";
-            txtDescription.Size = new Size(280, 73);
+            txtDescription.Size = new Size(283, 82);
             txtDescription.TabIndex = 0;
             // 
             // grPrise
@@ -164,11 +160,9 @@
             grPrise.Controls.Add(lbPrise);
             grPrise.Controls.Add(txtPrise);
             grPrise.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            grPrise.Location = new Point(889, 42);
-            grPrise.Margin = new Padding(3, 2, 3, 2);
+            grPrise.Location = new Point(1016, 48);
             grPrise.Name = "grPrise";
-            grPrise.Padding = new Padding(3, 2, 3, 2);
-            grPrise.Size = new Size(182, 72);
+            grPrise.Size = new Size(208, 82);
             grPrise.TabIndex = 4;
             grPrise.TabStop = false;
             grPrise.Text = "К оплате";
@@ -176,18 +170,17 @@
             // lbPrise
             // 
             lbPrise.AutoSize = true;
-            lbPrise.Location = new Point(142, 36);
+            lbPrise.Location = new Point(162, 41);
             lbPrise.Name = "lbPrise";
-            lbPrise.Size = new Size(20, 22);
+            lbPrise.Size = new Size(24, 25);
             lbPrise.TabIndex = 1;
             lbPrise.Text = "₽";
             // 
             // txtPrise
             // 
-            txtPrise.Location = new Point(35, 30);
-            txtPrise.Margin = new Padding(3, 2, 3, 2);
+            txtPrise.Location = new Point(32, 34);
             txtPrise.Name = "txtPrise";
-            txtPrise.Size = new Size(106, 29);
+            txtPrise.Size = new Size(121, 34);
             txtPrise.TabIndex = 0;
             txtPrise.TextAlign = HorizontalAlignment.Right;
             // 
@@ -201,34 +194,34 @@
             grSource.Controls.Add(rbWhatsApp);
             grSource.FlatStyle = FlatStyle.Flat;
             grSource.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            grSource.Location = new Point(567, 42);
+            grSource.Location = new Point(648, 48);
             grSource.Name = "grSource";
-            grSource.Size = new Size(308, 168);
+            grSource.Size = new Size(352, 190);
             grSource.TabIndex = 4;
             grSource.TabStop = false;
             grSource.Text = "Источник";
             // 
             // txtWhatsApp
             // 
-            txtWhatsApp.Location = new Point(81, 124);
+            txtWhatsApp.Location = new Point(93, 140);
             txtWhatsApp.Name = "txtWhatsApp";
-            txtWhatsApp.Size = new Size(218, 29);
+            txtWhatsApp.Size = new Size(249, 34);
             txtWhatsApp.TabIndex = 4;
             txtWhatsApp.Visible = false;
             // 
             // txtTelegram
             // 
-            txtTelegram.Location = new Point(81, 78);
+            txtTelegram.Location = new Point(93, 88);
             txtTelegram.Name = "txtTelegram";
-            txtTelegram.Size = new Size(218, 29);
+            txtTelegram.Size = new Size(249, 34);
             txtTelegram.TabIndex = 4;
             txtTelegram.Visible = false;
             // 
             // txtInstagram
             // 
-            txtInstagram.Location = new Point(81, 33);
+            txtInstagram.Location = new Point(93, 37);
             txtInstagram.Name = "txtInstagram";
-            txtInstagram.Size = new Size(218, 29);
+            txtInstagram.Size = new Size(249, 34);
             txtInstagram.TabIndex = 4;
             txtInstagram.Visible = false;
             // 
@@ -237,9 +230,9 @@
             rbInstagram.AutoSize = true;
             rbInstagram.Image = (Image)resources.GetObject("rbInstagram.Image");
             rbInstagram.ImageAlign = ContentAlignment.MiddleRight;
-            rbInstagram.Location = new Point(14, 24);
+            rbInstagram.Location = new Point(16, 27);
             rbInstagram.Name = "rbInstagram";
-            rbInstagram.Size = new Size(68, 48);
+            rbInstagram.Size = new Size(81, 48);
             rbInstagram.TabIndex = 2;
             rbInstagram.TabStop = true;
             rbInstagram.Text = "        ";
@@ -251,9 +244,9 @@
             rbTelegram.AutoSize = true;
             rbTelegram.Image = (Image)resources.GetObject("rbTelegram.Image");
             rbTelegram.ImageAlign = ContentAlignment.MiddleRight;
-            rbTelegram.Location = new Point(14, 69);
+            rbTelegram.Location = new Point(16, 78);
             rbTelegram.Name = "rbTelegram";
-            rbTelegram.Size = new Size(68, 48);
+            rbTelegram.Size = new Size(81, 48);
             rbTelegram.TabIndex = 1;
             rbTelegram.TabStop = true;
             rbTelegram.Text = "        ";
@@ -265,10 +258,10 @@
             rbWhatsApp.AutoSize = true;
             rbWhatsApp.Image = (Image)resources.GetObject("rbWhatsApp.Image");
             rbWhatsApp.ImageAlign = ContentAlignment.MiddleRight;
-            rbWhatsApp.Location = new Point(14, 117);
+            rbWhatsApp.Location = new Point(16, 133);
             rbWhatsApp.Name = "rbWhatsApp";
             rbWhatsApp.RightToLeft = RightToLeft.No;
-            rbWhatsApp.Size = new Size(68, 48);
+            rbWhatsApp.Size = new Size(81, 48);
             rbWhatsApp.TabIndex = 0;
             rbWhatsApp.TabStop = true;
             rbWhatsApp.Text = "        ";
@@ -280,9 +273,9 @@
             // 
             grDate.Controls.Add(dateTimePicker);
             grDate.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            grDate.Location = new Point(315, 43);
+            grDate.Location = new Point(360, 48);
             grDate.Name = "grDate";
-            grDate.Size = new Size(238, 75);
+            grDate.Size = new Size(272, 85);
             grDate.TabIndex = 4;
             grDate.TabStop = false;
             grDate.Text = "Дата";
@@ -291,9 +284,9 @@
             // 
             grName.Controls.Add(txtName);
             grName.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            grName.Location = new Point(17, 43);
+            grName.Location = new Point(19, 48);
             grName.Name = "grName";
-            grName.Size = new Size(284, 75);
+            grName.Size = new Size(325, 85);
             grName.TabIndex = 0;
             grName.TabStop = false;
             grName.Text = "Имя";
@@ -301,9 +294,9 @@
             // plannerDate
             // 
             plannerDate.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            plannerDate.Location = new Point(17, 33);
+            plannerDate.Location = new Point(19, 37);
             plannerDate.Name = "plannerDate";
-            plannerDate.Size = new Size(218, 29);
+            plannerDate.Size = new Size(249, 35);
             plannerDate.TabIndex = 4;
             // 
             // grPlanner
@@ -313,9 +306,9 @@
             grPlanner.Controls.Add(lblPlannerClientCount);
             grPlanner.Controls.Add(plannerDate);
             grPlanner.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            grPlanner.Location = new Point(12, 240);
+            grPlanner.Location = new Point(14, 272);
             grPlanner.Name = "grPlanner";
-            grPlanner.Size = new Size(1402, 405);
+            grPlanner.Size = new Size(1565, 479);
             grPlanner.TabIndex = 7;
             grPlanner.TabStop = false;
             grPlanner.Text = "Планировщик";
@@ -325,29 +318,33 @@
             plannerTable.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             plannerTable.BackgroundColor = SystemColors.Window;
             plannerTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            plannerTable.Location = new Point(17, 68);
+            plannerTable.Location = new Point(19, 77);
             plannerTable.Name = "plannerTable";
-            plannerTable.Size = new Size(1374, 321);
+            plannerTable.RowHeadersWidth = 51;
+            dataGridViewCellStyle1.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            plannerTable.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            plannerTable.Size = new Size(1533, 384);
             plannerTable.TabIndex = 8;
             // 
             // lblPlannerClientCount
             // 
             lblPlannerClientCount.AutoSize = true;
             lblPlannerClientCount.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            lblPlannerClientCount.Location = new Point(241, 40);
+            lblPlannerClientCount.Location = new Point(275, 45);
             lblPlannerClientCount.Name = "lblPlannerClientCount";
-            lblPlannerClientCount.Size = new Size(0, 22);
+            lblPlannerClientCount.Size = new Size(0, 26);
             lblPlannerClientCount.TabIndex = 7;
             // 
-            // FormMain
+            // FormPlanner
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1436, 668);
+            ClientSize = new Size(1598, 777);
             Controls.Add(grPlanner);
             Controls.Add(grNewClient);
+            Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "FormMain";
+            Name = "FormPlanner";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Бухгалтерия ведьмы";
             grNewClient.ResumeLayout(false);

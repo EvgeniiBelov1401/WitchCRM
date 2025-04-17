@@ -2,7 +2,7 @@ using WitchCRM.Modules;
 
 namespace WitchCRM
 {
-    public partial class FormMain : Form
+    public partial class FormPlanner : Form
     {
         private AppDbContext? _context;
         private string? _clientStatus = "Новый";
@@ -10,7 +10,7 @@ namespace WitchCRM
         private string _sourceData = String.Empty;
 
 
-        public FormMain()
+        public FormPlanner()
         {
             InitializeComponent();
             LoadOptions();
@@ -243,7 +243,6 @@ namespace WitchCRM
                     var displayData = clients
                         .Select((c, index) => new
                         {
-                            n = index + 1,
                             Дата = c.Date.ToShortDateString(),
                             Имя = c.Name,
                             Статус = c.Status,
