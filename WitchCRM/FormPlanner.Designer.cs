@@ -51,12 +51,12 @@
             grName = new GroupBox();
             txtName = new TextBox();
             tabControl1 = new TabControl();
-            tabPage1 = new TabPage();
+            tabPagePlan = new TabPage();
             grPlanner = new GroupBox();
             plannerTable = new DataGridView();
             lblPlannerClientCount = new Label();
             plannerDate = new DateTimePicker();
-            tabPage2 = new TabPage();
+            tabPageStatistic = new TabPage();
             grNewClient.SuspendLayout();
             grStatus.SuspendLayout();
             grDesсription.SuspendLayout();
@@ -65,7 +65,7 @@
             grDate.SuspendLayout();
             grName.SuspendLayout();
             tabControl1.SuspendLayout();
-            tabPage1.SuspendLayout();
+            tabPagePlan.SuspendLayout();
             grPlanner.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)plannerTable).BeginInit();
             SuspendLayout();
@@ -306,29 +306,30 @@
             // tabControl1
             // 
             tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Controls.Add(tabPagePlan);
+            tabControl1.Controls.Add(tabPageStatistic);
             tabControl1.Location = new Point(8, 12);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(1675, 805);
             tabControl1.TabIndex = 17;
             // 
-            // tabPage1
+            // tabPagePlan
             // 
-            tabPage1.Controls.Add(grPlanner);
-            tabPage1.Controls.Add(grNewClient);
-            tabPage1.Location = new Point(4, 24);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1667, 777);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "tabPage1";
-            tabPage1.UseVisualStyleBackColor = true;
+            tabPagePlan.BackColor = Color.WhiteSmoke;
+            tabPagePlan.Controls.Add(grPlanner);
+            tabPagePlan.Controls.Add(grNewClient);
+            tabPagePlan.Font = new Font("Times New Roman", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tabPagePlan.Location = new Point(4, 24);
+            tabPagePlan.Name = "tabPagePlan";
+            tabPagePlan.Padding = new Padding(3);
+            tabPagePlan.Size = new Size(1667, 777);
+            tabPagePlan.TabIndex = 0;
+            tabPagePlan.Text = "Планирование";
             // 
             // grPlanner
             // 
-            grPlanner.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grPlanner.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             grPlanner.Controls.Add(plannerTable);
             grPlanner.Controls.Add(lblPlannerClientCount);
             grPlanner.Controls.Add(plannerDate);
@@ -370,15 +371,16 @@
             plannerDate.Size = new Size(249, 29);
             plannerDate.TabIndex = 4;
             // 
-            // tabPage2
+            // tabPageStatistic
             // 
-            tabPage2.Location = new Point(4, 24);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1667, 777);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "tabPage2";
-            tabPage2.UseVisualStyleBackColor = true;
+            tabPageStatistic.BackColor = Color.WhiteSmoke;
+            tabPageStatistic.Font = new Font("Times New Roman", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tabPageStatistic.Location = new Point(4, 24);
+            tabPageStatistic.Name = "tabPageStatistic";
+            tabPageStatistic.Padding = new Padding(3);
+            tabPageStatistic.Size = new Size(1667, 777);
+            tabPageStatistic.TabIndex = 1;
+            tabPageStatistic.Text = "Статистика";
             // 
             // FormPlanner
             // 
@@ -405,7 +407,7 @@
             grName.ResumeLayout(false);
             grName.PerformLayout();
             tabControl1.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
+            tabPagePlan.ResumeLayout(false);
             grPlanner.ResumeLayout(false);
             grPlanner.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)plannerTable).EndInit();
@@ -434,11 +436,11 @@
         private GroupBox grName;
         private TextBox txtName;
         private TabControl tabControl1;
-        private TabPage tabPage1;
+        private TabPage tabPagePlan;
         private GroupBox grPlanner;
         private DataGridView plannerTable;
         private Label lblPlannerClientCount;
         private DateTimePicker plannerDate;
-        private TabPage tabPage2;
+        private TabPage tabPageStatistic;
     }
 }
