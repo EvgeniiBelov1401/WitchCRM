@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPlanner));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             grNewClient = new GroupBox();
             grStatus = new GroupBox();
             cbRepeatClient = new CheckBox();
@@ -58,11 +58,13 @@
             plannerDate = new DateTimePicker();
             tabPageStatistic = new TabPage();
             grStatAllTime = new GroupBox();
-            txtStatAllTimeClientAvrDaylyCheque = new TextBox();
-            txtStatAllTimeClientWorkDays = new TextBox();
+            grStatAllTimeAvgValues = new GroupBox();
             txtStatAllTimeClientAvrCheque = new TextBox();
-            txtStatAllTimeClientSumPrise = new TextBox();
+            txtStatAllTimeClientAvrDaylyCheque = new TextBox();
             txtStatAllTimeClientCount = new TextBox();
+            txtStatAllTimeClientWorkDays = new TextBox();
+            txtStatAllTimeClientSumPrise = new TextBox();
+            txtStatAllTimeClientAvrCountDayly = new TextBox();
             grNewClient.SuspendLayout();
             grStatus.SuspendLayout();
             grDesсription.SuspendLayout();
@@ -76,6 +78,7 @@
             ((System.ComponentModel.ISupportInitialize)plannerTable).BeginInit();
             tabPageStatistic.SuspendLayout();
             grStatAllTime.SuspendLayout();
+            grStatAllTimeAvgValues.SuspendLayout();
             SuspendLayout();
             // 
             // grNewClient
@@ -356,8 +359,8 @@
             plannerTable.Location = new Point(19, 70);
             plannerTable.Name = "plannerTable";
             plannerTable.RowHeadersWidth = 51;
-            dataGridViewCellStyle1.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            plannerTable.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            plannerTable.RowsDefaultCellStyle = dataGridViewCellStyle2;
             plannerTable.Size = new Size(1636, 414);
             plannerTable.TabIndex = 8;
             // 
@@ -392,61 +395,51 @@
             // 
             // grStatAllTime
             // 
-            grStatAllTime.Controls.Add(txtStatAllTimeClientAvrDaylyCheque);
+            grStatAllTime.Controls.Add(grStatAllTimeAvgValues);
             grStatAllTime.Controls.Add(txtStatAllTimeClientCount);
             grStatAllTime.Controls.Add(txtStatAllTimeClientWorkDays);
-            grStatAllTime.Controls.Add(txtStatAllTimeClientAvrCheque);
             grStatAllTime.Controls.Add(txtStatAllTimeClientSumPrise);
-            grStatAllTime.Location = new Point(1204, 40);
+            grStatAllTime.Location = new Point(1207, 56);
             grStatAllTime.Name = "grStatAllTime";
             grStatAllTime.Size = new Size(454, 494);
             grStatAllTime.TabIndex = 0;
             grStatAllTime.TabStop = false;
             grStatAllTime.Text = "За все время";
             // 
-            // txtStatAllTimeClientAvrDaylyCheque
+            // grStatAllTimeAvgValues
             // 
-            txtStatAllTimeClientAvrDaylyCheque.BackColor = SystemColors.ControlLight;
-            txtStatAllTimeClientAvrDaylyCheque.Enabled = false;
-            txtStatAllTimeClientAvrDaylyCheque.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txtStatAllTimeClientAvrDaylyCheque.Location = new Point(15, 178);
-            txtStatAllTimeClientAvrDaylyCheque.Name = "txtStatAllTimeClientAvrDaylyCheque";
-            txtStatAllTimeClientAvrDaylyCheque.Size = new Size(414, 29);
-            txtStatAllTimeClientAvrDaylyCheque.TabIndex = 5;
-            txtStatAllTimeClientAvrDaylyCheque.TextAlign = HorizontalAlignment.Right;
-            // 
-            // txtStatAllTimeClientWorkDays
-            // 
-            txtStatAllTimeClientWorkDays.BackColor = SystemColors.ControlLight;
-            txtStatAllTimeClientWorkDays.Enabled = false;
-            txtStatAllTimeClientWorkDays.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txtStatAllTimeClientWorkDays.Location = new Point(15, 108);
-            txtStatAllTimeClientWorkDays.Name = "txtStatAllTimeClientWorkDays";
-            txtStatAllTimeClientWorkDays.Size = new Size(414, 29);
-            txtStatAllTimeClientWorkDays.TabIndex = 4;
-            txtStatAllTimeClientWorkDays.TextAlign = HorizontalAlignment.Right;
+            grStatAllTimeAvgValues.Controls.Add(txtStatAllTimeClientAvrCountDayly);
+            grStatAllTimeAvgValues.Controls.Add(txtStatAllTimeClientAvrCheque);
+            grStatAllTimeAvgValues.Controls.Add(txtStatAllTimeClientAvrDaylyCheque);
+            grStatAllTimeAvgValues.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            grStatAllTimeAvgValues.Location = new Point(15, 160);
+            grStatAllTimeAvgValues.Name = "grStatAllTimeAvgValues";
+            grStatAllTimeAvgValues.Size = new Size(433, 264);
+            grStatAllTimeAvgValues.TabIndex = 1;
+            grStatAllTimeAvgValues.TabStop = false;
+            grStatAllTimeAvgValues.Text = "Средние значения";
             // 
             // txtStatAllTimeClientAvrCheque
             // 
             txtStatAllTimeClientAvrCheque.BackColor = SystemColors.ControlLight;
             txtStatAllTimeClientAvrCheque.Enabled = false;
             txtStatAllTimeClientAvrCheque.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txtStatAllTimeClientAvrCheque.Location = new Point(15, 143);
+            txtStatAllTimeClientAvrCheque.Location = new Point(6, 31);
             txtStatAllTimeClientAvrCheque.Name = "txtStatAllTimeClientAvrCheque";
             txtStatAllTimeClientAvrCheque.Size = new Size(414, 29);
             txtStatAllTimeClientAvrCheque.TabIndex = 3;
-            txtStatAllTimeClientAvrCheque.TextAlign = HorizontalAlignment.Right;
+            txtStatAllTimeClientAvrCheque.TextAlign = HorizontalAlignment.Center;
             // 
-            // txtStatAllTimeClientSumPrise
+            // txtStatAllTimeClientAvrDaylyCheque
             // 
-            txtStatAllTimeClientSumPrise.BackColor = SystemColors.ControlLight;
-            txtStatAllTimeClientSumPrise.Enabled = false;
-            txtStatAllTimeClientSumPrise.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txtStatAllTimeClientSumPrise.Location = new Point(15, 38);
-            txtStatAllTimeClientSumPrise.Name = "txtStatAllTimeClientSumPrise";
-            txtStatAllTimeClientSumPrise.Size = new Size(414, 29);
-            txtStatAllTimeClientSumPrise.TabIndex = 2;
-            txtStatAllTimeClientSumPrise.TextAlign = HorizontalAlignment.Right;
+            txtStatAllTimeClientAvrDaylyCheque.BackColor = SystemColors.ControlLight;
+            txtStatAllTimeClientAvrDaylyCheque.Enabled = false;
+            txtStatAllTimeClientAvrDaylyCheque.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatAllTimeClientAvrDaylyCheque.Location = new Point(6, 66);
+            txtStatAllTimeClientAvrDaylyCheque.Name = "txtStatAllTimeClientAvrDaylyCheque";
+            txtStatAllTimeClientAvrDaylyCheque.Size = new Size(414, 29);
+            txtStatAllTimeClientAvrDaylyCheque.TabIndex = 5;
+            txtStatAllTimeClientAvrDaylyCheque.TextAlign = HorizontalAlignment.Center;
             // 
             // txtStatAllTimeClientCount
             // 
@@ -455,9 +448,42 @@
             txtStatAllTimeClientCount.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             txtStatAllTimeClientCount.Location = new Point(15, 73);
             txtStatAllTimeClientCount.Name = "txtStatAllTimeClientCount";
-            txtStatAllTimeClientCount.Size = new Size(414, 29);
+            txtStatAllTimeClientCount.Size = new Size(433, 29);
             txtStatAllTimeClientCount.TabIndex = 1;
-            txtStatAllTimeClientCount.TextAlign = HorizontalAlignment.Right;
+            txtStatAllTimeClientCount.TextAlign = HorizontalAlignment.Center;
+            // 
+            // txtStatAllTimeClientWorkDays
+            // 
+            txtStatAllTimeClientWorkDays.BackColor = SystemColors.ControlLight;
+            txtStatAllTimeClientWorkDays.Enabled = false;
+            txtStatAllTimeClientWorkDays.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatAllTimeClientWorkDays.Location = new Point(15, 108);
+            txtStatAllTimeClientWorkDays.Name = "txtStatAllTimeClientWorkDays";
+            txtStatAllTimeClientWorkDays.Size = new Size(433, 29);
+            txtStatAllTimeClientWorkDays.TabIndex = 4;
+            txtStatAllTimeClientWorkDays.TextAlign = HorizontalAlignment.Center;
+            // 
+            // txtStatAllTimeClientSumPrise
+            // 
+            txtStatAllTimeClientSumPrise.BackColor = SystemColors.ControlLight;
+            txtStatAllTimeClientSumPrise.Enabled = false;
+            txtStatAllTimeClientSumPrise.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatAllTimeClientSumPrise.Location = new Point(15, 38);
+            txtStatAllTimeClientSumPrise.Name = "txtStatAllTimeClientSumPrise";
+            txtStatAllTimeClientSumPrise.Size = new Size(433, 29);
+            txtStatAllTimeClientSumPrise.TabIndex = 2;
+            txtStatAllTimeClientSumPrise.TextAlign = HorizontalAlignment.Center;
+            // 
+            // txtStatAllTimeClientAvrCountDayly
+            // 
+            txtStatAllTimeClientAvrCountDayly.BackColor = SystemColors.ControlLight;
+            txtStatAllTimeClientAvrCountDayly.Enabled = false;
+            txtStatAllTimeClientAvrCountDayly.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatAllTimeClientAvrCountDayly.Location = new Point(6, 101);
+            txtStatAllTimeClientAvrCountDayly.Name = "txtStatAllTimeClientAvrCountDayly";
+            txtStatAllTimeClientAvrCountDayly.Size = new Size(414, 29);
+            txtStatAllTimeClientAvrCountDayly.TabIndex = 6;
+            txtStatAllTimeClientAvrCountDayly.TextAlign = HorizontalAlignment.Center;
             // 
             // FormPlanner
             // 
@@ -491,6 +517,8 @@
             tabPageStatistic.ResumeLayout(false);
             grStatAllTime.ResumeLayout(false);
             grStatAllTime.PerformLayout();
+            grStatAllTimeAvgValues.ResumeLayout(false);
+            grStatAllTimeAvgValues.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -528,5 +556,7 @@
         private TextBox txtStatAllTimeClientAvrCheque;
         private TextBox txtStatAllTimeClientWorkDays;
         private TextBox txtStatAllTimeClientAvrDaylyCheque;
+        private GroupBox grStatAllTimeAvgValues;
+        private TextBox txtStatAllTimeClientAvrCountDayly;
     }
 }

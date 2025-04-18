@@ -12,6 +12,8 @@ namespace WitchCRM
 
         private long totalClientsCount;
         private decimal totalClientsPrise;
+        private long totalWorkDays;
+        private decimal avgDaylyPrise;
 
 
         public FormPlanner()
@@ -274,21 +276,26 @@ namespace WitchCRM
             {
                 totalClientsCount = _context?.Clients?.Count() ?? 0;
                 totalClientsPrise = _context?.Clients?.Sum(c => (decimal?)c.Prise) ?? 0;
-                
+                totalWorkDays = (long)(_context?.Clients?.Select(c => c.Date.Date)?.Distinct()?.Count() ?? 0);
+                avgDaylyPrise = totalClientsPrise / totalWorkDays;
+
+
                 txtStatAllTimeClientCount.Text = $"Количество обращений: {totalClientsCount.ToString()}";
                 txtStatAllTimeClientSumPrise.Text= $"Заработано: {totalClientsPrise.ToString("F2")} руб.";
                 
                 if (totalClientsCount != 0)
                 {
-                    txtStatAllTimeClientAvrCheque.Text = $"Средний чек: {(totalClientsPrise/totalClientsCount).ToString("F2")} руб.";
-                    txtStatAllTimeClientWorkDays.Text = $"Кол-во рабочих дней: {_context?.Clients?.Select(c=>c.Date.Date)?.Distinct()?.Count()}";
-                    txtStatAllTimeClientAvrDaylyCheque.Text= $"Средний дневной заработок: {totalClientsPrise/(_context?.Clients?.Select(c => c.Date.Date)?.Distinct()?.Count())} руб.";
+                    txtStatAllTimeClientAvrCheque.Text = $"Средний чек: {(totalClientsPrise/totalClientsCount).ToString("F0")} руб.";
+                    txtStatAllTimeClientWorkDays.Text = $"Количество рабочих дней: {totalWorkDays}";
+                    txtStatAllTimeClientAvrDaylyCheque.Text= $"Средний дневной заработок: {avgDaylyPrise.ToString("F0")} руб.";
+                    txtStatAllTimeClientAvrCountDayly.Text = $"Средняя дневная загрузка: {(totalClientsCount/totalWorkDays).ToString("F0")}";
                 }
                 else
                 {
                     txtStatAllTimeClientAvrCheque.Text = $"Средний чек: 0,00 руб.";
                     txtStatAllTimeClientWorkDays.Text = $"Кол-во рабочих дней: 0";
                     txtStatAllTimeClientAvrDaylyCheque.Text = $"Средний дневной заработок: 0,00 руб.";
+                    txtStatAllTimeClientAvrCountDayly.Text = $"Средняя дневная загрузка: 0";
                 }
             }
             catch (Exception ex)
