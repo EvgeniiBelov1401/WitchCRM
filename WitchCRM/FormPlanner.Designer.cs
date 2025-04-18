@@ -58,6 +58,9 @@
             plannerDate = new DateTimePicker();
             tabPageStatistic = new TabPage();
             grStatAllTime = new GroupBox();
+            txtStatAllTimeClientAvrDaylyCheque = new TextBox();
+            txtStatAllTimeClientWorkDays = new TextBox();
+            txtStatAllTimeClientAvrCheque = new TextBox();
             txtStatAllTimeClientSumPrise = new TextBox();
             txtStatAllTimeClientCount = new TextBox();
             grNewClient.SuspendLayout();
@@ -389,8 +392,11 @@
             // 
             // grStatAllTime
             // 
-            grStatAllTime.Controls.Add(txtStatAllTimeClientSumPrise);
+            grStatAllTime.Controls.Add(txtStatAllTimeClientAvrDaylyCheque);
             grStatAllTime.Controls.Add(txtStatAllTimeClientCount);
+            grStatAllTime.Controls.Add(txtStatAllTimeClientWorkDays);
+            grStatAllTime.Controls.Add(txtStatAllTimeClientAvrCheque);
+            grStatAllTime.Controls.Add(txtStatAllTimeClientSumPrise);
             grStatAllTime.Location = new Point(1204, 40);
             grStatAllTime.Name = "grStatAllTime";
             grStatAllTime.Size = new Size(454, 494);
@@ -398,23 +404,60 @@
             grStatAllTime.TabStop = false;
             grStatAllTime.Text = "За все время";
             // 
+            // txtStatAllTimeClientAvrDaylyCheque
+            // 
+            txtStatAllTimeClientAvrDaylyCheque.BackColor = SystemColors.ControlLight;
+            txtStatAllTimeClientAvrDaylyCheque.Enabled = false;
+            txtStatAllTimeClientAvrDaylyCheque.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatAllTimeClientAvrDaylyCheque.Location = new Point(15, 178);
+            txtStatAllTimeClientAvrDaylyCheque.Name = "txtStatAllTimeClientAvrDaylyCheque";
+            txtStatAllTimeClientAvrDaylyCheque.Size = new Size(414, 29);
+            txtStatAllTimeClientAvrDaylyCheque.TabIndex = 5;
+            txtStatAllTimeClientAvrDaylyCheque.TextAlign = HorizontalAlignment.Right;
+            // 
+            // txtStatAllTimeClientWorkDays
+            // 
+            txtStatAllTimeClientWorkDays.BackColor = SystemColors.ControlLight;
+            txtStatAllTimeClientWorkDays.Enabled = false;
+            txtStatAllTimeClientWorkDays.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatAllTimeClientWorkDays.Location = new Point(15, 108);
+            txtStatAllTimeClientWorkDays.Name = "txtStatAllTimeClientWorkDays";
+            txtStatAllTimeClientWorkDays.Size = new Size(414, 29);
+            txtStatAllTimeClientWorkDays.TabIndex = 4;
+            txtStatAllTimeClientWorkDays.TextAlign = HorizontalAlignment.Right;
+            // 
+            // txtStatAllTimeClientAvrCheque
+            // 
+            txtStatAllTimeClientAvrCheque.BackColor = SystemColors.ControlLight;
+            txtStatAllTimeClientAvrCheque.Enabled = false;
+            txtStatAllTimeClientAvrCheque.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatAllTimeClientAvrCheque.Location = new Point(15, 143);
+            txtStatAllTimeClientAvrCheque.Name = "txtStatAllTimeClientAvrCheque";
+            txtStatAllTimeClientAvrCheque.Size = new Size(414, 29);
+            txtStatAllTimeClientAvrCheque.TabIndex = 3;
+            txtStatAllTimeClientAvrCheque.TextAlign = HorizontalAlignment.Right;
+            // 
             // txtStatAllTimeClientSumPrise
             // 
             txtStatAllTimeClientSumPrise.BackColor = SystemColors.ControlLight;
             txtStatAllTimeClientSumPrise.Enabled = false;
-            txtStatAllTimeClientSumPrise.Location = new Point(15, 94);
+            txtStatAllTimeClientSumPrise.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatAllTimeClientSumPrise.Location = new Point(15, 38);
             txtStatAllTimeClientSumPrise.Name = "txtStatAllTimeClientSumPrise";
-            txtStatAllTimeClientSumPrise.Size = new Size(414, 39);
+            txtStatAllTimeClientSumPrise.Size = new Size(414, 29);
             txtStatAllTimeClientSumPrise.TabIndex = 2;
+            txtStatAllTimeClientSumPrise.TextAlign = HorizontalAlignment.Right;
             // 
             // txtStatAllTimeClientCount
             // 
             txtStatAllTimeClientCount.BackColor = SystemColors.ControlLight;
             txtStatAllTimeClientCount.Enabled = false;
-            txtStatAllTimeClientCount.Location = new Point(15, 38);
+            txtStatAllTimeClientCount.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatAllTimeClientCount.Location = new Point(15, 73);
             txtStatAllTimeClientCount.Name = "txtStatAllTimeClientCount";
-            txtStatAllTimeClientCount.Size = new Size(414, 39);
+            txtStatAllTimeClientCount.Size = new Size(414, 29);
             txtStatAllTimeClientCount.TabIndex = 1;
+            txtStatAllTimeClientCount.TextAlign = HorizontalAlignment.Right;
             // 
             // FormPlanner
             // 
@@ -482,5 +525,8 @@
         private GroupBox grStatAllTime;
         private TextBox txtStatAllTimeClientCount;
         private TextBox txtStatAllTimeClientSumPrise;
+        private TextBox txtStatAllTimeClientAvrCheque;
+        private TextBox txtStatAllTimeClientWorkDays;
+        private TextBox txtStatAllTimeClientAvrDaylyCheque;
     }
 }

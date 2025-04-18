@@ -274,9 +274,22 @@ namespace WitchCRM
             {
                 totalClientsCount = _context?.Clients?.Count() ?? 0;
                 totalClientsPrise = _context?.Clients?.Sum(c => (decimal?)c.Prise) ?? 0;
-
+                
                 txtStatAllTimeClientCount.Text = $"Количество обращений: {totalClientsCount.ToString()}";
-                txtStatAllTimeClientSumPrise.Text= $"Заработано: {totalClientsPrise.ToString()}";
+                txtStatAllTimeClientSumPrise.Text= $"Заработано: {totalClientsPrise.ToString("F2")} руб.";
+                
+                if (totalClientsCount != 0)
+                {
+                    txtStatAllTimeClientAvrCheque.Text = $"Средний чек: {(totalClientsPrise/totalClientsCount).ToString("F2")} руб.";
+                    txtStatAllTimeClientWorkDays.Text = $"Кол-во рабочих дней: {_context?.Clients?.Select(c=>c.Date.Date)?.Distinct()?.Count()}";
+                    txtStatAllTimeClientAvrDaylyCheque.Text= $"Средний дневной заработок: {totalClientsPrise/(_context?.Clients?.Select(c => c.Date.Date)?.Distinct()?.Count())} руб.";
+                }
+                else
+                {
+                    txtStatAllTimeClientAvrCheque.Text = $"Средний чек: 0,00 руб.";
+                    txtStatAllTimeClientWorkDays.Text = $"Кол-во рабочих дней: 0";
+                    txtStatAllTimeClientAvrDaylyCheque.Text = $"Средний дневной заработок: 0,00 руб.";
+                }
             }
             catch (Exception ex)
             {
