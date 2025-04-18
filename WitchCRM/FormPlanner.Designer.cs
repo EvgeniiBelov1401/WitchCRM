@@ -116,9 +116,9 @@
             grDesсription.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             grDesсription.Controls.Add(txtDescription);
             grDesсription.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            grDesсription.Location = new Point(1241, 48);
+            grDesсription.Location = new Point(1346, 48);
             grDesсription.Name = "grDesсription";
-            grDesсription.Size = new Size(414, 190);
+            grDesсription.Size = new Size(309, 190);
             grDesсription.TabIndex = 4;
             grDesсription.TabStop = false;
             grDesсription.Text = "Особые отметки";
@@ -127,23 +127,22 @@
             // 
             txtDescription.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtDescription.ForeColor = Color.FromArgb(192, 0, 0);
-            txtDescription.Location = new Point(16, 32);
+            txtDescription.Location = new Point(19, 32);
             txtDescription.Multiline = true;
             txtDescription.Name = "txtDescription";
-            txtDescription.Size = new Size(382, 149);
+            txtDescription.Size = new Size(274, 137);
             txtDescription.TabIndex = 0;
             // 
             // btnSave
             // 
-            btnSave.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            btnSave.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point, 204);
             btnSave.Image = (Image)resources.GetObject("btnSave.Image");
             btnSave.ImageAlign = ContentAlignment.MiddleRight;
-            btnSave.Location = new Point(1016, 184);
+            btnSave.Location = new Point(1016, 169);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(208, 54);
+            btnSave.Size = new Size(310, 69);
             btnSave.TabIndex = 2;
             btnSave.Text = "Записать";
-            btnSave.TextAlign = ContentAlignment.MiddleLeft;
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click_1;
             // 
@@ -154,7 +153,7 @@
             grPrise.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
             grPrise.Location = new Point(1016, 48);
             grPrise.Name = "grPrise";
-            grPrise.Size = new Size(208, 82);
+            grPrise.Size = new Size(310, 101);
             grPrise.TabIndex = 4;
             grPrise.TabStop = false;
             grPrise.Text = "К оплате";
@@ -163,7 +162,7 @@
             // 
             lbPrise.AutoSize = true;
             lbPrise.Font = new Font("Times New Roman", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            lbPrise.Location = new Point(173, 37);
+            lbPrise.Location = new Point(264, 42);
             lbPrise.Name = "lbPrise";
             lbPrise.Size = new Size(28, 31);
             lbPrise.TabIndex = 1;
@@ -171,11 +170,11 @@
             // 
             // txtPrise
             // 
-            txtPrise.Font = new Font("Times New Roman", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            txtPrise.Font = new Font("Times New Roman", 36F, FontStyle.Bold, GraphicsUnit.Point, 204);
             txtPrise.ForeColor = Color.DarkGreen;
-            txtPrise.Location = new Point(19, 34);
+            txtPrise.Location = new Point(19, 27);
             txtPrise.Name = "txtPrise";
-            txtPrise.Size = new Size(148, 39);
+            txtPrise.Size = new Size(239, 63);
             txtPrise.TabIndex = 0;
             txtPrise.TextAlign = HorizontalAlignment.Right;
             // 
