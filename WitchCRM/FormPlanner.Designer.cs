@@ -57,6 +57,9 @@
             lblPlannerClientCount = new Label();
             plannerDate = new DateTimePicker();
             tabPageStatistic = new TabPage();
+            grStatAllTime = new GroupBox();
+            txtStatAllTimeClientSumPrise = new TextBox();
+            txtStatAllTimeClientCount = new TextBox();
             grNewClient.SuspendLayout();
             grStatus.SuspendLayout();
             grDesсription.SuspendLayout();
@@ -68,6 +71,8 @@
             tabPagePlan.SuspendLayout();
             grPlanner.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)plannerTable).BeginInit();
+            tabPageStatistic.SuspendLayout();
+            grStatAllTime.SuspendLayout();
             SuspendLayout();
             // 
             // grNewClient
@@ -279,7 +284,7 @@
             // 
             // dateTimePicker
             // 
-            dateTimePicker.Location = new Point(7, 40);
+            dateTimePicker.Location = new Point(6, 35);
             dateTimePicker.Name = "dateTimePicker";
             dateTimePicker.Size = new Size(249, 29);
             dateTimePicker.TabIndex = 1;
@@ -288,7 +293,7 @@
             // 
             grName.Controls.Add(txtName);
             grName.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            grName.Location = new Point(19, 48);
+            grName.Location = new Point(20, 48);
             grName.Name = "grName";
             grName.Size = new Size(325, 85);
             grName.TabIndex = 0;
@@ -373,6 +378,7 @@
             // tabPageStatistic
             // 
             tabPageStatistic.BackColor = Color.WhiteSmoke;
+            tabPageStatistic.Controls.Add(grStatAllTime);
             tabPageStatistic.Font = new Font("Times New Roman", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             tabPageStatistic.Location = new Point(4, 24);
             tabPageStatistic.Name = "tabPageStatistic";
@@ -380,6 +386,35 @@
             tabPageStatistic.Size = new Size(1667, 777);
             tabPageStatistic.TabIndex = 1;
             tabPageStatistic.Text = "Статистика";
+            // 
+            // grStatAllTime
+            // 
+            grStatAllTime.Controls.Add(txtStatAllTimeClientSumPrise);
+            grStatAllTime.Controls.Add(txtStatAllTimeClientCount);
+            grStatAllTime.Location = new Point(1204, 40);
+            grStatAllTime.Name = "grStatAllTime";
+            grStatAllTime.Size = new Size(454, 494);
+            grStatAllTime.TabIndex = 0;
+            grStatAllTime.TabStop = false;
+            grStatAllTime.Text = "За все время";
+            // 
+            // txtStatAllTimeClientSumPrise
+            // 
+            txtStatAllTimeClientSumPrise.BackColor = SystemColors.ControlLight;
+            txtStatAllTimeClientSumPrise.Enabled = false;
+            txtStatAllTimeClientSumPrise.Location = new Point(15, 94);
+            txtStatAllTimeClientSumPrise.Name = "txtStatAllTimeClientSumPrise";
+            txtStatAllTimeClientSumPrise.Size = new Size(414, 39);
+            txtStatAllTimeClientSumPrise.TabIndex = 2;
+            // 
+            // txtStatAllTimeClientCount
+            // 
+            txtStatAllTimeClientCount.BackColor = SystemColors.ControlLight;
+            txtStatAllTimeClientCount.Enabled = false;
+            txtStatAllTimeClientCount.Location = new Point(15, 38);
+            txtStatAllTimeClientCount.Name = "txtStatAllTimeClientCount";
+            txtStatAllTimeClientCount.Size = new Size(414, 39);
+            txtStatAllTimeClientCount.TabIndex = 1;
             // 
             // FormPlanner
             // 
@@ -410,6 +445,9 @@
             grPlanner.ResumeLayout(false);
             grPlanner.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)plannerTable).EndInit();
+            tabPageStatistic.ResumeLayout(false);
+            grStatAllTime.ResumeLayout(false);
+            grStatAllTime.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -441,5 +479,8 @@
         private Label lblPlannerClientCount;
         private DateTimePicker plannerDate;
         private TabPage tabPageStatistic;
+        private GroupBox grStatAllTime;
+        private TextBox txtStatAllTimeClientCount;
+        private TextBox txtStatAllTimeClientSumPrise;
     }
 }

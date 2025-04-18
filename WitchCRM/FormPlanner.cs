@@ -1,3 +1,4 @@
+using System.Windows.Forms;
 using WitchCRM.Modules;
 
 namespace WitchCRM
@@ -9,12 +10,17 @@ namespace WitchCRM
         private string _sourceName = String.Empty;
         private string _sourceData = String.Empty;
 
+        private long totalClientsCount;
+        private decimal totalClientsPrise;
+
 
         public FormPlanner()
         {
             InitializeComponent();
             LoadOptions();
             LoadClientsByDate();
+
+            LoadStatAllTime();
         }
 
 
@@ -27,6 +33,8 @@ namespace WitchCRM
         {
             InputData();
             LoadClientsByDate();
+
+            LoadStatAllTime();
         }
 
         //ВЫБРАТЬ ИНСТАГРАМ
@@ -259,7 +267,27 @@ namespace WitchCRM
             }
         }
 
-        
+        //Метод загрузки статистики "ЗА ВСЕ ВРЕМЯ"
+        private void LoadStatAllTime()
+        {
+            try
+            {
+                totalClientsCount = _context?.Clients?.Count() ?? 0;
+                totalClientsPrise = _context?.Clients?.Sum(c => (decimal?)c.Prise) ?? 0;
+
+                txtStatAllTimeClientCount.Text = $"Количество обращений: {totalClientsCount.ToString()}";
+                txtStatAllTimeClientSumPrise.Text= $"Заработано: {totalClientsPrise.ToString()}";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка загрузки статистики: {ex.Message}", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+     
+
+
 
 
 
