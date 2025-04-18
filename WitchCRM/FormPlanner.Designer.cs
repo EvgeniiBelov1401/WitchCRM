@@ -28,12 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPlanner));
-            grPlanner = new GroupBox();
-            plannerTable = new DataGridView();
-            lblPlannerClientCount = new Label();
-            plannerDate = new DateTimePicker();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             grNewClient = new GroupBox();
             grStatus = new GroupBox();
             cbRepeatClient = new CheckBox();
@@ -54,8 +50,13 @@
             dateTimePicker = new DateTimePicker();
             grName = new GroupBox();
             txtName = new TextBox();
-            grPlanner.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)plannerTable).BeginInit();
+            tabControl1 = new TabControl();
+            tabPage1 = new TabPage();
+            grPlanner = new GroupBox();
+            plannerTable = new DataGridView();
+            lblPlannerClientCount = new Label();
+            plannerDate = new DateTimePicker();
+            tabPage2 = new TabPage();
             grNewClient.SuspendLayout();
             grStatus.SuspendLayout();
             grDesсription.SuspendLayout();
@@ -63,55 +64,15 @@
             grSource.SuspendLayout();
             grDate.SuspendLayout();
             grName.SuspendLayout();
+            tabControl1.SuspendLayout();
+            tabPage1.SuspendLayout();
+            grPlanner.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)plannerTable).BeginInit();
             SuspendLayout();
-            // 
-            // grPlanner
-            // 
-            grPlanner.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            grPlanner.Controls.Add(plannerTable);
-            grPlanner.Controls.Add(lblPlannerClientCount);
-            grPlanner.Controls.Add(plannerDate);
-            grPlanner.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            grPlanner.Location = new Point(8, 280);
-            grPlanner.Name = "grPlanner";
-            grPlanner.Size = new Size(1608, 464);
-            grPlanner.TabIndex = 16;
-            grPlanner.TabStop = false;
-            grPlanner.Text = "Планировщик";
-            // 
-            // plannerTable
-            // 
-            plannerTable.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            plannerTable.BackgroundColor = SystemColors.Window;
-            plannerTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            plannerTable.Location = new Point(16, 88);
-            plannerTable.Name = "plannerTable";
-            plannerTable.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            plannerTable.RowsDefaultCellStyle = dataGridViewCellStyle3;
-            plannerTable.Size = new Size(1576, 360);
-            plannerTable.TabIndex = 8;
-            // 
-            // lblPlannerClientCount
-            // 
-            lblPlannerClientCount.AutoSize = true;
-            lblPlannerClientCount.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            lblPlannerClientCount.Location = new Point(275, 45);
-            lblPlannerClientCount.Name = "lblPlannerClientCount";
-            lblPlannerClientCount.Size = new Size(0, 26);
-            lblPlannerClientCount.TabIndex = 7;
-            // 
-            // plannerDate
-            // 
-            plannerDate.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            plannerDate.Location = new Point(24, 32);
-            plannerDate.Name = "plannerDate";
-            plannerDate.Size = new Size(249, 35);
-            plannerDate.TabIndex = 4;
             // 
             // grNewClient
             // 
-            grNewClient.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grNewClient.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             grNewClient.Controls.Add(grStatus);
             grNewClient.Controls.Add(grDesсription);
             grNewClient.Controls.Add(btnSave);
@@ -120,9 +81,9 @@
             grNewClient.Controls.Add(grDate);
             grNewClient.Controls.Add(grName);
             grNewClient.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            grNewClient.Location = new Point(8, 8);
+            grNewClient.Location = new Point(3, 6);
             grNewClient.Name = "grNewClient";
-            grNewClient.Size = new Size(1608, 264);
+            grNewClient.Size = new Size(1661, 261);
             grNewClient.TabIndex = 15;
             grNewClient.TabStop = false;
             grNewClient.Text = "Новый клиент";
@@ -144,7 +105,7 @@
             cbRepeatClient.Font = new Font("Times New Roman", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
             cbRepeatClient.Location = new Point(119, 37);
             cbRepeatClient.Name = "cbRepeatClient";
-            cbRepeatClient.Size = new Size(436, 35);
+            cbRepeatClient.Size = new Size(334, 28);
             cbRepeatClient.TabIndex = 0;
             cbRepeatClient.Text = "Повторный/Постоянный клиент";
             cbRepeatClient.UseVisualStyleBackColor = true;
@@ -152,21 +113,24 @@
             // 
             // grDesсription
             // 
+            grDesсription.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             grDesсription.Controls.Add(txtDescription);
             grDesсription.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            grDesсription.Location = new Point(1232, 48);
+            grDesсription.Location = new Point(1241, 48);
             grDesсription.Name = "grDesсription";
-            grDesсription.Size = new Size(368, 160);
+            grDesсription.Size = new Size(414, 190);
             grDesсription.TabIndex = 4;
             grDesсription.TabStop = false;
             grDesсription.Text = "Особые отметки";
             // 
             // txtDescription
             // 
+            txtDescription.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtDescription.ForeColor = Color.FromArgb(192, 0, 0);
             txtDescription.Location = new Point(16, 32);
             txtDescription.Multiline = true;
             txtDescription.Name = "txtDescription";
-            txtDescription.Size = new Size(336, 112);
+            txtDescription.Size = new Size(382, 149);
             txtDescription.TabIndex = 0;
             // 
             // btnSave
@@ -174,7 +138,7 @@
             btnSave.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 204);
             btnSave.Image = (Image)resources.GetObject("btnSave.Image");
             btnSave.ImageAlign = ContentAlignment.MiddleRight;
-            btnSave.Location = new Point(1016, 192);
+            btnSave.Location = new Point(1016, 184);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(208, 54);
             btnSave.TabIndex = 2;
@@ -198,17 +162,20 @@
             // lbPrise
             // 
             lbPrise.AutoSize = true;
-            lbPrise.Location = new Point(162, 41);
+            lbPrise.Font = new Font("Times New Roman", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            lbPrise.Location = new Point(173, 37);
             lbPrise.Name = "lbPrise";
-            lbPrise.Size = new Size(24, 25);
+            lbPrise.Size = new Size(28, 31);
             lbPrise.TabIndex = 1;
             lbPrise.Text = "₽";
             // 
             // txtPrise
             // 
-            txtPrise.Location = new Point(32, 34);
+            txtPrise.Font = new Font("Times New Roman", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            txtPrise.ForeColor = Color.DarkGreen;
+            txtPrise.Location = new Point(19, 34);
             txtPrise.Name = "txtPrise";
-            txtPrise.Size = new Size(121, 34);
+            txtPrise.Size = new Size(148, 39);
             txtPrise.TabIndex = 0;
             txtPrise.TextAlign = HorizontalAlignment.Right;
             // 
@@ -231,25 +198,28 @@
             // 
             // txtWhatsApp
             // 
+            txtWhatsApp.ForeColor = Color.FromArgb(0, 192, 0);
             txtWhatsApp.Location = new Point(93, 140);
             txtWhatsApp.Name = "txtWhatsApp";
-            txtWhatsApp.Size = new Size(249, 34);
+            txtWhatsApp.Size = new Size(249, 29);
             txtWhatsApp.TabIndex = 4;
             txtWhatsApp.Visible = false;
             // 
             // txtTelegram
             // 
+            txtTelegram.ForeColor = Color.Blue;
             txtTelegram.Location = new Point(93, 88);
             txtTelegram.Name = "txtTelegram";
-            txtTelegram.Size = new Size(249, 34);
+            txtTelegram.Size = new Size(249, 29);
             txtTelegram.TabIndex = 4;
             txtTelegram.Visible = false;
             // 
             // txtInstagram
             // 
+            txtInstagram.ForeColor = Color.FromArgb(192, 0, 192);
             txtInstagram.Location = new Point(93, 37);
             txtInstagram.Name = "txtInstagram";
-            txtInstagram.Size = new Size(249, 34);
+            txtInstagram.Size = new Size(249, 29);
             txtInstagram.TabIndex = 4;
             txtInstagram.Visible = false;
             // 
@@ -260,7 +230,7 @@
             rbInstagram.ImageAlign = ContentAlignment.MiddleRight;
             rbInstagram.Location = new Point(16, 27);
             rbInstagram.Name = "rbInstagram";
-            rbInstagram.Size = new Size(81, 48);
+            rbInstagram.Size = new Size(68, 48);
             rbInstagram.TabIndex = 2;
             rbInstagram.TabStop = true;
             rbInstagram.Text = "        ";
@@ -274,7 +244,7 @@
             rbTelegram.ImageAlign = ContentAlignment.MiddleRight;
             rbTelegram.Location = new Point(16, 78);
             rbTelegram.Name = "rbTelegram";
-            rbTelegram.Size = new Size(81, 48);
+            rbTelegram.Size = new Size(68, 48);
             rbTelegram.TabIndex = 1;
             rbTelegram.TabStop = true;
             rbTelegram.Text = "        ";
@@ -289,7 +259,7 @@
             rbWhatsApp.Location = new Point(16, 133);
             rbWhatsApp.Name = "rbWhatsApp";
             rbWhatsApp.RightToLeft = RightToLeft.No;
-            rbWhatsApp.Size = new Size(81, 48);
+            rbWhatsApp.Size = new Size(68, 48);
             rbWhatsApp.TabIndex = 0;
             rbWhatsApp.TabStop = true;
             rbWhatsApp.Text = "        ";
@@ -312,7 +282,7 @@
             // 
             dateTimePicker.Location = new Point(7, 40);
             dateTimePicker.Name = "dateTimePicker";
-            dateTimePicker.Size = new Size(249, 34);
+            dateTimePicker.Size = new Size(249, 29);
             dateTimePicker.TabIndex = 1;
             // 
             // grName
@@ -330,24 +300,98 @@
             // 
             txtName.Location = new Point(7, 34);
             txtName.Name = "txtName";
-            txtName.Size = new Size(305, 34);
+            txtName.Size = new Size(305, 29);
             txtName.TabIndex = 0;
+            // 
+            // tabControl1
+            // 
+            tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Location = new Point(8, 12);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(1675, 805);
+            tabControl1.TabIndex = 17;
+            // 
+            // tabPage1
+            // 
+            tabPage1.Controls.Add(grPlanner);
+            tabPage1.Controls.Add(grNewClient);
+            tabPage1.Location = new Point(4, 24);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(1667, 777);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "tabPage1";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // grPlanner
+            // 
+            grPlanner.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grPlanner.Controls.Add(plannerTable);
+            grPlanner.Controls.Add(lblPlannerClientCount);
+            grPlanner.Controls.Add(plannerDate);
+            grPlanner.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            grPlanner.Location = new Point(3, 273);
+            grPlanner.Name = "grPlanner";
+            grPlanner.Size = new Size(1661, 490);
+            grPlanner.TabIndex = 17;
+            grPlanner.TabStop = false;
+            grPlanner.Text = "Планировщик";
+            // 
+            // plannerTable
+            // 
+            plannerTable.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            plannerTable.BackgroundColor = SystemColors.Window;
+            plannerTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            plannerTable.Location = new Point(19, 70);
+            plannerTable.Name = "plannerTable";
+            plannerTable.RowHeadersWidth = 51;
+            dataGridViewCellStyle1.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            plannerTable.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            plannerTable.Size = new Size(1636, 414);
+            plannerTable.TabIndex = 8;
+            // 
+            // lblPlannerClientCount
+            // 
+            lblPlannerClientCount.AutoSize = true;
+            lblPlannerClientCount.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            lblPlannerClientCount.Location = new Point(275, 45);
+            lblPlannerClientCount.Name = "lblPlannerClientCount";
+            lblPlannerClientCount.Size = new Size(0, 22);
+            lblPlannerClientCount.TabIndex = 7;
+            // 
+            // plannerDate
+            // 
+            plannerDate.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            plannerDate.Location = new Point(20, 35);
+            plannerDate.Name = "plannerDate";
+            plannerDate.Size = new Size(249, 29);
+            plannerDate.TabIndex = 4;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(1667, 777);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "tabPage2";
+            tabPage2.UseVisualStyleBackColor = true;
             // 
             // FormPlanner
             // 
-            AutoScaleDimensions = new SizeF(8F, 17F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1642, 803);
-            Controls.Add(grPlanner);
-            Controls.Add(grNewClient);
+            BackColor = SystemColors.AppWorkspace;
+            ClientSize = new Size(1695, 829);
+            Controls.Add(tabControl1);
             Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormPlanner";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Бухгалтерия ведьмы";
-            grPlanner.ResumeLayout(false);
-            grPlanner.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)plannerTable).EndInit();
             grNewClient.ResumeLayout(false);
             grStatus.ResumeLayout(false);
             grStatus.PerformLayout();
@@ -360,15 +404,15 @@
             grDate.ResumeLayout(false);
             grName.ResumeLayout(false);
             grName.PerformLayout();
+            tabControl1.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            grPlanner.ResumeLayout(false);
+            grPlanner.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)plannerTable).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private GroupBox grPlanner;
-        private DataGridView plannerTable;
-        private Label lblPlannerClientCount;
-        private DateTimePicker plannerDate;
         private GroupBox grNewClient;
         private GroupBox grStatus;
         private CheckBox cbRepeatClient;
@@ -389,5 +433,12 @@
         private DateTimePicker dateTimePicker;
         private GroupBox grName;
         private TextBox txtName;
+        private TabControl tabControl1;
+        private TabPage tabPage1;
+        private GroupBox grPlanner;
+        private DataGridView plannerTable;
+        private Label lblPlannerClientCount;
+        private DateTimePicker plannerDate;
+        private TabPage tabPage2;
     }
 }
