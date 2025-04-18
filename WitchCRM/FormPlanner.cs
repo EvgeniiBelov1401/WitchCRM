@@ -10,11 +10,7 @@ namespace WitchCRM
         private string _sourceName = String.Empty;
         private string _sourceData = String.Empty;
 
-        private long totalClientsCount;
-        private decimal totalClientsPrise;
-        private long totalWorkDays;
-        private decimal avgDaylyPrise;
-
+        private IStatistic? _statistic;
 
         public FormPlanner()
         {
@@ -274,29 +270,45 @@ namespace WitchCRM
         {
             try
             {
-                totalClientsCount = _context?.Clients?.Count() ?? 0;
-                totalClientsPrise = _context?.Clients?.Sum(c => (decimal?)c.Prise) ?? 0;
-                totalWorkDays = (long)(_context?.Clients?.Select(c => c.Date.Date)?.Distinct()?.Count() ?? 0);
-                avgDaylyPrise = totalClientsPrise / totalWorkDays;
+                _statistic = new StatisticAllTime()
+                {
+                    TotalClientsCount = _context?.Clients?.Count() ?? 0,
+                    TotalClientsPrise = _context?.Clients?.Sum(c => (decimal?)c.Prise) ?? 0,
+                    TotalWorkDays = (long)(_context?.Clients?.Select(c => c.Date.Date)?.Distinct()?.Count() ?? 0)
+                };
 
 
-                txtStatAllTimeClientCount.Text = $"Количество обращений: {totalClientsCount.ToString()}";
-                txtStatAllTimeClientSumPrise.Text= $"Заработано: {totalClientsPrise.ToString("F2")} руб.";
-                
-                if (totalClientsCount != 0)
-                {
-                    txtStatAllTimeClientAvrCheque.Text = $"Средний чек: {(totalClientsPrise/totalClientsCount).ToString("F0")} руб.";
-                    txtStatAllTimeClientWorkDays.Text = $"Количество рабочих дней: {totalWorkDays}";
-                    txtStatAllTimeClientAvrDaylyCheque.Text= $"Средний дневной заработок: {avgDaylyPrise.ToString("F0")} руб.";
-                    txtStatAllTimeClientAvrCountDayly.Text = $"Средняя дневная загрузка: {(totalClientsCount/totalWorkDays).ToString("F0")}";
-                }
-                else
-                {
-                    txtStatAllTimeClientAvrCheque.Text = $"Средний чек: 0,00 руб.";
-                    txtStatAllTimeClientWorkDays.Text = $"Кол-во рабочих дней: 0";
-                    txtStatAllTimeClientAvrDaylyCheque.Text = $"Средний дневной заработок: 0,00 руб.";
-                    txtStatAllTimeClientAvrCountDayly.Text = $"Средняя дневная загрузка: 0";
-                }
+                _statistic.AvgDaylyPrise = _statistic.TotalWorkDays > 0
+                    ? _statistic.TotalClientsPrise / _statistic.TotalWorkDays
+                    : 0;
+
+                _statistic.AvgPayCheque = _statistic.TotalClientsCount > 0
+                    ? _statistic.TotalClientsPrise / _statistic.TotalClientsCount
+                    : 0;
+
+                _statistic.AvgDailyLoad = _statistic.TotalWorkDays > 0
+                    ? _statistic.TotalClientsCount / _statistic.TotalWorkDays
+                    : 0;
+            
+
+            if (_statistic.TotalClientsCount != 0)
+            {
+                txtStatAllTimeClientCount.Text = $"Количество обращений: {_statistic.TotalClientsCount}";
+                txtStatAllTimeClientSumPrise.Text = $"Заработано: {_statistic.TotalClientsPrise:F2} руб.";
+                txtStatAllTimeClientWorkDays.Text = $"Количество рабочих дней: {_statistic.TotalWorkDays}";
+                txtStatAllTimeClientAvrCheque.Text = $"Средний чек: {_statistic.AvgPayCheque:F0} руб.";
+                txtStatAllTimeClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic.AvgDaylyPrise:F0} руб.";
+                txtStatAllTimeClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic.AvgDailyLoad:F0}";
+            }
+            else
+            {
+                throw new NoStatisticException();
+            }
+        }
+            catch (NoStatisticException)
+            {
+                MessageBox.Show($"Ошибка загрузки статистики: нет ни одного обращения", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
