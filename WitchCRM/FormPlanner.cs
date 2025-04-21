@@ -115,7 +115,7 @@ namespace WitchCRM
             {
                 yearChoose.Maximum = DateTime.Now.Year;
             }
-            yearChoose.Value = DateTime.Now.Year;
+            yearChoose.Value = DateTime.Now.Year;//устанавливает значение текущего года как значение по умолчанию для статистики "ЗА ГОД"
         }
 
         //Метод ввода данных
