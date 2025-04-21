@@ -17,5 +17,7 @@ namespace WitchCRM.Modules
         long SourceInstagramCount { get; set; }
         long SourceTelegramCount { get; set; }
         long SourceWhatsAppCount { get; set; }
+        long StatusNewClientCount { get; set; }
+        long StatusRepeatClientCount { get; set; }
     }
 }

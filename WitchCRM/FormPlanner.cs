@@ -277,7 +277,9 @@ namespace WitchCRM
                     TotalWorkDays = (long)(_context?.Clients?.Select(c => c.Date.Date)?.Distinct()?.Count() ?? 0),
                     SourceInstagramCount = _context?.Clients?.Where(c => c.SourceName == "Instagram").Count() ?? 0,
                     SourceTelegramCount = _context?.Clients?.Where(c => c.SourceName == "Telegram").Count() ?? 0,
-                    SourceWhatsAppCount = _context?.Clients?.Where(c => c.SourceName == "WhatsApp").Count() ?? 0
+                    SourceWhatsAppCount = _context?.Clients?.Where(c => c.SourceName == "WhatsApp").Count() ?? 0,
+                    StatusNewClientCount=_context?.Clients?.Where(c=>c.Status=="Новый").Count()??0,
+                    StatusRepeatClientCount = _context?.Clients?.Where(c => c.Status == "Повторный").Count() ?? 0
                 };
 
 
@@ -305,8 +307,11 @@ namespace WitchCRM
                     txtStatAllTimeClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic.AvgDailyLoad:F0}";
 
                     txtStatAllTimeSourceInstagram.Text = $"Instagram: {_statistic.SourceInstagramCount}";
-                    txtStatAllTimeSourceTelegram.Text= $"Telegram: {_statistic.SourceTelegramCount}";
+                    txtStatAllTimeSourceTelegram.Text = $"Telegram: {_statistic.SourceTelegramCount}";
                     txtStatAllTimeSourceWhatsApp.Text = $"WhatsApp: {_statistic.SourceWhatsAppCount}";
+
+                    txtStatAllTimeStatusNew.Text = $"Обращений новых клиентов: {_statistic.StatusNewClientCount}";
+                    txtStatAllTimeStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic.StatusRepeatClientCount}";
                 }
                 else
                 {
@@ -324,6 +329,7 @@ namespace WitchCRM
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
 

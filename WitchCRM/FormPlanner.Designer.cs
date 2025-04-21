@@ -58,17 +58,21 @@
             plannerDate = new DateTimePicker();
             tabPageStatistic = new TabPage();
             grStatAllTime = new GroupBox();
+            grStatAllTimeCommonValues = new GroupBox();
+            txtStatAllTimeClientSumPrise = new TextBox();
+            txtStatAllTimeClientWorkDays = new TextBox();
+            txtStatAllTimeClientCount = new TextBox();
+            grStatAllTimeStatus = new GroupBox();
+            txtStatAllTimeStatusRepeat = new TextBox();
+            txtStatAllTimeStatusNew = new TextBox();
+            grStatAllTimeSource = new GroupBox();
+            txtStatAllTimeSourceWhatsApp = new TextBox();
+            txtStatAllTimeSourceTelegram = new TextBox();
+            txtStatAllTimeSourceInstagram = new TextBox();
             grStatAllTimeAvgValues = new GroupBox();
             txtStatAllTimeClientAvrCountDayly = new TextBox();
             txtStatAllTimeClientAvrCheque = new TextBox();
             txtStatAllTimeClientAvrDaylyCheque = new TextBox();
-            txtStatAllTimeClientCount = new TextBox();
-            txtStatAllTimeClientWorkDays = new TextBox();
-            txtStatAllTimeClientSumPrise = new TextBox();
-            grStatAllTimeSource = new GroupBox();
-            txtStatAllTimeSourceInstagram = new TextBox();
-            txtStatAllTimeSourceTelegram = new TextBox();
-            txtStatAllTimeSourceWhatsApp = new TextBox();
             grNewClient.SuspendLayout();
             grStatus.SuspendLayout();
             grDesсription.SuspendLayout();
@@ -82,8 +86,10 @@
             ((System.ComponentModel.ISupportInitialize)plannerTable).BeginInit();
             tabPageStatistic.SuspendLayout();
             grStatAllTime.SuspendLayout();
-            grStatAllTimeAvgValues.SuspendLayout();
+            grStatAllTimeCommonValues.SuspendLayout();
+            grStatAllTimeStatus.SuspendLayout();
             grStatAllTimeSource.SuspendLayout();
+            grStatAllTimeAvgValues.SuspendLayout();
             SuspendLayout();
             // 
             // grNewClient
@@ -400,17 +406,142 @@
             // 
             // grStatAllTime
             // 
+            grStatAllTime.Controls.Add(grStatAllTimeCommonValues);
+            grStatAllTime.Controls.Add(grStatAllTimeStatus);
             grStatAllTime.Controls.Add(grStatAllTimeSource);
             grStatAllTime.Controls.Add(grStatAllTimeAvgValues);
-            grStatAllTime.Controls.Add(txtStatAllTimeClientCount);
-            grStatAllTime.Controls.Add(txtStatAllTimeClientWorkDays);
-            grStatAllTime.Controls.Add(txtStatAllTimeClientSumPrise);
             grStatAllTime.Location = new Point(1207, 56);
             grStatAllTime.Name = "grStatAllTime";
-            grStatAllTime.Size = new Size(454, 494);
+            grStatAllTime.Size = new Size(454, 556);
             grStatAllTime.TabIndex = 0;
             grStatAllTime.TabStop = false;
             grStatAllTime.Text = "За все время";
+            // 
+            // grStatAllTimeCommonValues
+            // 
+            grStatAllTimeCommonValues.Controls.Add(txtStatAllTimeClientSumPrise);
+            grStatAllTimeCommonValues.Controls.Add(txtStatAllTimeClientWorkDays);
+            grStatAllTimeCommonValues.Controls.Add(txtStatAllTimeClientCount);
+            grStatAllTimeCommonValues.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            grStatAllTimeCommonValues.Location = new Point(21, 44);
+            grStatAllTimeCommonValues.Name = "grStatAllTimeCommonValues";
+            grStatAllTimeCommonValues.Size = new Size(427, 129);
+            grStatAllTimeCommonValues.TabIndex = 1;
+            grStatAllTimeCommonValues.TabStop = false;
+            grStatAllTimeCommonValues.Text = "Основные показатели";
+            // 
+            // txtStatAllTimeClientSumPrise
+            // 
+            txtStatAllTimeClientSumPrise.BackColor = SystemColors.ControlLight;
+            txtStatAllTimeClientSumPrise.Enabled = false;
+            txtStatAllTimeClientSumPrise.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatAllTimeClientSumPrise.Location = new Point(6, 31);
+            txtStatAllTimeClientSumPrise.Name = "txtStatAllTimeClientSumPrise";
+            txtStatAllTimeClientSumPrise.Size = new Size(414, 26);
+            txtStatAllTimeClientSumPrise.TabIndex = 2;
+            txtStatAllTimeClientSumPrise.TextAlign = HorizontalAlignment.Center;
+            // 
+            // txtStatAllTimeClientWorkDays
+            // 
+            txtStatAllTimeClientWorkDays.BackColor = SystemColors.ControlLight;
+            txtStatAllTimeClientWorkDays.Enabled = false;
+            txtStatAllTimeClientWorkDays.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatAllTimeClientWorkDays.Location = new Point(6, 95);
+            txtStatAllTimeClientWorkDays.Name = "txtStatAllTimeClientWorkDays";
+            txtStatAllTimeClientWorkDays.Size = new Size(414, 26);
+            txtStatAllTimeClientWorkDays.TabIndex = 4;
+            txtStatAllTimeClientWorkDays.TextAlign = HorizontalAlignment.Center;
+            // 
+            // txtStatAllTimeClientCount
+            // 
+            txtStatAllTimeClientCount.BackColor = SystemColors.ControlLight;
+            txtStatAllTimeClientCount.Enabled = false;
+            txtStatAllTimeClientCount.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatAllTimeClientCount.Location = new Point(6, 63);
+            txtStatAllTimeClientCount.Name = "txtStatAllTimeClientCount";
+            txtStatAllTimeClientCount.Size = new Size(414, 26);
+            txtStatAllTimeClientCount.TabIndex = 1;
+            txtStatAllTimeClientCount.TextAlign = HorizontalAlignment.Center;
+            // 
+            // grStatAllTimeStatus
+            // 
+            grStatAllTimeStatus.Controls.Add(txtStatAllTimeStatusRepeat);
+            grStatAllTimeStatus.Controls.Add(txtStatAllTimeStatusNew);
+            grStatAllTimeStatus.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            grStatAllTimeStatus.Location = new Point(21, 451);
+            grStatAllTimeStatus.Name = "grStatAllTimeStatus";
+            grStatAllTimeStatus.Size = new Size(427, 97);
+            grStatAllTimeStatus.TabIndex = 6;
+            grStatAllTimeStatus.TabStop = false;
+            grStatAllTimeStatus.Text = "Кол-во обращений по статусам";
+            // 
+            // txtStatAllTimeStatusRepeat
+            // 
+            txtStatAllTimeStatusRepeat.BackColor = SystemColors.ControlLight;
+            txtStatAllTimeStatusRepeat.Enabled = false;
+            txtStatAllTimeStatusRepeat.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatAllTimeStatusRepeat.Location = new Point(6, 63);
+            txtStatAllTimeStatusRepeat.Name = "txtStatAllTimeStatusRepeat";
+            txtStatAllTimeStatusRepeat.Size = new Size(414, 26);
+            txtStatAllTimeStatusRepeat.TabIndex = 5;
+            txtStatAllTimeStatusRepeat.TextAlign = HorizontalAlignment.Center;
+            // 
+            // txtStatAllTimeStatusNew
+            // 
+            txtStatAllTimeStatusNew.BackColor = SystemColors.ControlLight;
+            txtStatAllTimeStatusNew.Enabled = false;
+            txtStatAllTimeStatusNew.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatAllTimeStatusNew.Location = new Point(6, 31);
+            txtStatAllTimeStatusNew.Name = "txtStatAllTimeStatusNew";
+            txtStatAllTimeStatusNew.Size = new Size(414, 26);
+            txtStatAllTimeStatusNew.TabIndex = 4;
+            txtStatAllTimeStatusNew.TextAlign = HorizontalAlignment.Center;
+            // 
+            // grStatAllTimeSource
+            // 
+            grStatAllTimeSource.Controls.Add(txtStatAllTimeSourceWhatsApp);
+            grStatAllTimeSource.Controls.Add(txtStatAllTimeSourceTelegram);
+            grStatAllTimeSource.Controls.Add(txtStatAllTimeSourceInstagram);
+            grStatAllTimeSource.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            grStatAllTimeSource.Location = new Point(21, 314);
+            grStatAllTimeSource.Name = "grStatAllTimeSource";
+            grStatAllTimeSource.Size = new Size(427, 131);
+            grStatAllTimeSource.TabIndex = 5;
+            grStatAllTimeSource.TabStop = false;
+            grStatAllTimeSource.Text = "Кол-во обращений по источникам";
+            // 
+            // txtStatAllTimeSourceWhatsApp
+            // 
+            txtStatAllTimeSourceWhatsApp.BackColor = SystemColors.ControlLight;
+            txtStatAllTimeSourceWhatsApp.Enabled = false;
+            txtStatAllTimeSourceWhatsApp.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatAllTimeSourceWhatsApp.Location = new Point(6, 95);
+            txtStatAllTimeSourceWhatsApp.Name = "txtStatAllTimeSourceWhatsApp";
+            txtStatAllTimeSourceWhatsApp.Size = new Size(414, 26);
+            txtStatAllTimeSourceWhatsApp.TabIndex = 6;
+            txtStatAllTimeSourceWhatsApp.TextAlign = HorizontalAlignment.Center;
+            // 
+            // txtStatAllTimeSourceTelegram
+            // 
+            txtStatAllTimeSourceTelegram.BackColor = SystemColors.ControlLight;
+            txtStatAllTimeSourceTelegram.Enabled = false;
+            txtStatAllTimeSourceTelegram.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatAllTimeSourceTelegram.Location = new Point(6, 63);
+            txtStatAllTimeSourceTelegram.Name = "txtStatAllTimeSourceTelegram";
+            txtStatAllTimeSourceTelegram.Size = new Size(414, 26);
+            txtStatAllTimeSourceTelegram.TabIndex = 5;
+            txtStatAllTimeSourceTelegram.TextAlign = HorizontalAlignment.Center;
+            // 
+            // txtStatAllTimeSourceInstagram
+            // 
+            txtStatAllTimeSourceInstagram.BackColor = SystemColors.ControlLight;
+            txtStatAllTimeSourceInstagram.Enabled = false;
+            txtStatAllTimeSourceInstagram.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatAllTimeSourceInstagram.Location = new Point(6, 31);
+            txtStatAllTimeSourceInstagram.Name = "txtStatAllTimeSourceInstagram";
+            txtStatAllTimeSourceInstagram.Size = new Size(414, 26);
+            txtStatAllTimeSourceInstagram.TabIndex = 4;
+            txtStatAllTimeSourceInstagram.TextAlign = HorizontalAlignment.Center;
             // 
             // grStatAllTimeAvgValues
             // 
@@ -418,9 +549,9 @@
             grStatAllTimeAvgValues.Controls.Add(txtStatAllTimeClientAvrCheque);
             grStatAllTimeAvgValues.Controls.Add(txtStatAllTimeClientAvrDaylyCheque);
             grStatAllTimeAvgValues.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            grStatAllTimeAvgValues.Location = new Point(15, 160);
+            grStatAllTimeAvgValues.Location = new Point(21, 179);
             grStatAllTimeAvgValues.Name = "grStatAllTimeAvgValues";
-            grStatAllTimeAvgValues.Size = new Size(433, 143);
+            grStatAllTimeAvgValues.Size = new Size(427, 129);
             grStatAllTimeAvgValues.TabIndex = 1;
             grStatAllTimeAvgValues.TabStop = false;
             grStatAllTimeAvgValues.Text = "Средние значения";
@@ -429,10 +560,10 @@
             // 
             txtStatAllTimeClientAvrCountDayly.BackColor = SystemColors.ControlLight;
             txtStatAllTimeClientAvrCountDayly.Enabled = false;
-            txtStatAllTimeClientAvrCountDayly.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txtStatAllTimeClientAvrCountDayly.Location = new Point(6, 101);
+            txtStatAllTimeClientAvrCountDayly.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatAllTimeClientAvrCountDayly.Location = new Point(6, 95);
             txtStatAllTimeClientAvrCountDayly.Name = "txtStatAllTimeClientAvrCountDayly";
-            txtStatAllTimeClientAvrCountDayly.Size = new Size(414, 29);
+            txtStatAllTimeClientAvrCountDayly.Size = new Size(414, 26);
             txtStatAllTimeClientAvrCountDayly.TabIndex = 6;
             txtStatAllTimeClientAvrCountDayly.TextAlign = HorizontalAlignment.Center;
             // 
@@ -440,10 +571,10 @@
             // 
             txtStatAllTimeClientAvrCheque.BackColor = SystemColors.ControlLight;
             txtStatAllTimeClientAvrCheque.Enabled = false;
-            txtStatAllTimeClientAvrCheque.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatAllTimeClientAvrCheque.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
             txtStatAllTimeClientAvrCheque.Location = new Point(6, 31);
             txtStatAllTimeClientAvrCheque.Name = "txtStatAllTimeClientAvrCheque";
-            txtStatAllTimeClientAvrCheque.Size = new Size(414, 29);
+            txtStatAllTimeClientAvrCheque.Size = new Size(414, 26);
             txtStatAllTimeClientAvrCheque.TabIndex = 3;
             txtStatAllTimeClientAvrCheque.TextAlign = HorizontalAlignment.Center;
             // 
@@ -451,91 +582,12 @@
             // 
             txtStatAllTimeClientAvrDaylyCheque.BackColor = SystemColors.ControlLight;
             txtStatAllTimeClientAvrDaylyCheque.Enabled = false;
-            txtStatAllTimeClientAvrDaylyCheque.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txtStatAllTimeClientAvrDaylyCheque.Location = new Point(6, 66);
+            txtStatAllTimeClientAvrDaylyCheque.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatAllTimeClientAvrDaylyCheque.Location = new Point(6, 63);
             txtStatAllTimeClientAvrDaylyCheque.Name = "txtStatAllTimeClientAvrDaylyCheque";
-            txtStatAllTimeClientAvrDaylyCheque.Size = new Size(414, 29);
+            txtStatAllTimeClientAvrDaylyCheque.Size = new Size(414, 26);
             txtStatAllTimeClientAvrDaylyCheque.TabIndex = 5;
             txtStatAllTimeClientAvrDaylyCheque.TextAlign = HorizontalAlignment.Center;
-            // 
-            // txtStatAllTimeClientCount
-            // 
-            txtStatAllTimeClientCount.BackColor = SystemColors.ControlLight;
-            txtStatAllTimeClientCount.Enabled = false;
-            txtStatAllTimeClientCount.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txtStatAllTimeClientCount.Location = new Point(15, 73);
-            txtStatAllTimeClientCount.Name = "txtStatAllTimeClientCount";
-            txtStatAllTimeClientCount.Size = new Size(433, 29);
-            txtStatAllTimeClientCount.TabIndex = 1;
-            txtStatAllTimeClientCount.TextAlign = HorizontalAlignment.Center;
-            // 
-            // txtStatAllTimeClientWorkDays
-            // 
-            txtStatAllTimeClientWorkDays.BackColor = SystemColors.ControlLight;
-            txtStatAllTimeClientWorkDays.Enabled = false;
-            txtStatAllTimeClientWorkDays.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txtStatAllTimeClientWorkDays.Location = new Point(15, 108);
-            txtStatAllTimeClientWorkDays.Name = "txtStatAllTimeClientWorkDays";
-            txtStatAllTimeClientWorkDays.Size = new Size(433, 29);
-            txtStatAllTimeClientWorkDays.TabIndex = 4;
-            txtStatAllTimeClientWorkDays.TextAlign = HorizontalAlignment.Center;
-            // 
-            // txtStatAllTimeClientSumPrise
-            // 
-            txtStatAllTimeClientSumPrise.BackColor = SystemColors.ControlLight;
-            txtStatAllTimeClientSumPrise.Enabled = false;
-            txtStatAllTimeClientSumPrise.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txtStatAllTimeClientSumPrise.Location = new Point(15, 38);
-            txtStatAllTimeClientSumPrise.Name = "txtStatAllTimeClientSumPrise";
-            txtStatAllTimeClientSumPrise.Size = new Size(433, 29);
-            txtStatAllTimeClientSumPrise.TabIndex = 2;
-            txtStatAllTimeClientSumPrise.TextAlign = HorizontalAlignment.Center;
-            // 
-            // grStatAllTimeSource
-            // 
-            grStatAllTimeSource.Controls.Add(txtStatAllTimeSourceWhatsApp);
-            grStatAllTimeSource.Controls.Add(txtStatAllTimeSourceTelegram);
-            grStatAllTimeSource.Controls.Add(txtStatAllTimeSourceInstagram);
-            grStatAllTimeSource.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            grStatAllTimeSource.Location = new Point(21, 319);
-            grStatAllTimeSource.Name = "grStatAllTimeSource";
-            grStatAllTimeSource.Size = new Size(427, 139);
-            grStatAllTimeSource.TabIndex = 5;
-            grStatAllTimeSource.TabStop = false;
-            grStatAllTimeSource.Text = "Кол-во обращений по источникам";
-            // 
-            // txtStatAllTimeSourceInstagram
-            // 
-            txtStatAllTimeSourceInstagram.BackColor = SystemColors.ControlLight;
-            txtStatAllTimeSourceInstagram.Enabled = false;
-            txtStatAllTimeSourceInstagram.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txtStatAllTimeSourceInstagram.Location = new Point(6, 31);
-            txtStatAllTimeSourceInstagram.Name = "txtStatAllTimeSourceInstagram";
-            txtStatAllTimeSourceInstagram.Size = new Size(414, 29);
-            txtStatAllTimeSourceInstagram.TabIndex = 4;
-            txtStatAllTimeSourceInstagram.TextAlign = HorizontalAlignment.Center;
-            // 
-            // txtStatAllTimeSourceTelegram
-            // 
-            txtStatAllTimeSourceTelegram.BackColor = SystemColors.ControlLight;
-            txtStatAllTimeSourceTelegram.Enabled = false;
-            txtStatAllTimeSourceTelegram.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txtStatAllTimeSourceTelegram.Location = new Point(7, 66);
-            txtStatAllTimeSourceTelegram.Name = "txtStatAllTimeSourceTelegram";
-            txtStatAllTimeSourceTelegram.Size = new Size(414, 29);
-            txtStatAllTimeSourceTelegram.TabIndex = 5;
-            txtStatAllTimeSourceTelegram.TextAlign = HorizontalAlignment.Center;
-            // 
-            // txtStatAllTimeSourceWhatsApp
-            // 
-            txtStatAllTimeSourceWhatsApp.BackColor = SystemColors.ControlLight;
-            txtStatAllTimeSourceWhatsApp.Enabled = false;
-            txtStatAllTimeSourceWhatsApp.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txtStatAllTimeSourceWhatsApp.Location = new Point(7, 101);
-            txtStatAllTimeSourceWhatsApp.Name = "txtStatAllTimeSourceWhatsApp";
-            txtStatAllTimeSourceWhatsApp.Size = new Size(414, 29);
-            txtStatAllTimeSourceWhatsApp.TabIndex = 6;
-            txtStatAllTimeSourceWhatsApp.TextAlign = HorizontalAlignment.Center;
             // 
             // FormPlanner
             // 
@@ -568,11 +620,14 @@
             ((System.ComponentModel.ISupportInitialize)plannerTable).EndInit();
             tabPageStatistic.ResumeLayout(false);
             grStatAllTime.ResumeLayout(false);
-            grStatAllTime.PerformLayout();
-            grStatAllTimeAvgValues.ResumeLayout(false);
-            grStatAllTimeAvgValues.PerformLayout();
+            grStatAllTimeCommonValues.ResumeLayout(false);
+            grStatAllTimeCommonValues.PerformLayout();
+            grStatAllTimeStatus.ResumeLayout(false);
+            grStatAllTimeStatus.PerformLayout();
             grStatAllTimeSource.ResumeLayout(false);
             grStatAllTimeSource.PerformLayout();
+            grStatAllTimeAvgValues.ResumeLayout(false);
+            grStatAllTimeAvgValues.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -616,5 +671,9 @@
         private TextBox txtStatAllTimeSourceWhatsApp;
         private TextBox txtStatAllTimeSourceTelegram;
         private TextBox txtStatAllTimeSourceInstagram;
+        private GroupBox grStatAllTimeStatus;
+        private TextBox txtStatAllTimeStatusRepeat;
+        private TextBox txtStatAllTimeStatusNew;
+        private GroupBox grStatAllTimeCommonValues;
     }
 }
