@@ -15,12 +15,15 @@ namespace WitchCRM
         public FormPlanner()
         {
             InitializeComponent();
-            LoadOptions();
-            LoadClientsByDate();
+            LoadOptions();//устанавливает начальные настройки при загрузке формы
+            LoadClientsByDate();//отображает планировщик в зависимости от выбранной даты
 
-            LoadStatAllTime();
+            LoadStatAllTime();//загружает статистику "ЗА ВСЕ ВРЕМЯ" при загрузке формы
+            yearChoose.ValueChanged += yearChoose_ValueChanged!;//меняет статистику "ЗА ГОД" в зависимости от выбранного года
+            LoadStatYear();//загружает статистику "ЗА ГОД" при загрузке формы
         }
 
+        
 
         ////
         //Органы управления
@@ -30,9 +33,10 @@ namespace WitchCRM
         private void btnSave_Click_1(object sender, EventArgs e)
         {
             InputData();
-            LoadClientsByDate();
+            LoadClientsByDate();//обновляет планировщик в зависимости от выбранной даты при записи нового клиента
 
-            LoadStatAllTime();
+            LoadStatAllTime();//обновляет статистику "ЗА ВСЕ ВРЕМЯ" при записи нового клиента
+            LoadStatYear();//обновляет статистику "ЗА ГОД" при записи нового клиента
         }
 
         //ВЫБРАТЬ ИНСТАГРАМ
@@ -80,6 +84,8 @@ namespace WitchCRM
             }
         }
 
+        
+
         //-------------------------------------------------------------------------------------------------------
 
         ////
@@ -100,10 +106,16 @@ namespace WitchCRM
 
             plannerDate.Format = DateTimePickerFormat.Long;
             plannerDate.Value = DateTime.Today;
-            plannerDate.ValueChanged += (s, e) => LoadClientsByDate();
+            plannerDate.ValueChanged += (s, e) => LoadClientsByDate();//обновляет планировщик во время смены даты
 
             plannerTable.AutoSizeColumnsMode = (DataGridViewAutoSizeColumnsMode)DataGridViewAutoSizeColumnMode.Fill;
             plannerTable.AllowUserToAddRows = false;
+
+            if (DateTime.Now.Year > yearChoose.Maximum)
+            {
+                yearChoose.Maximum = DateTime.Now.Year;
+            }
+            yearChoose.Value = DateTime.Now.Year;
         }
 
         //Метод ввода данных
@@ -264,8 +276,11 @@ namespace WitchCRM
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        //----------------------------------------------------------------------------------------------------------
 
-        //Метод загрузки статистики "ЗА ВСЕ ВРЕМЯ"
+
+        //СТАТИСТИКА "ЗА ВСЕ ВРЕМЯ"
+        //Метод выгрузки и отрисовки статистики "ЗА ВСЕ ВРЕМЯ"
         private void LoadStatAllTime()
         {
             try
@@ -296,32 +311,79 @@ namespace WitchCRM
                     : 0;
 
 
-                if (_statistic.TotalClientsCount != 0)
-                {
-                    txtStatAllTimeClientCount.Text = $"Количество обращений: {_statistic.TotalClientsCount}";
-                    txtStatAllTimeClientSumPrise.Text = $"Заработано: {_statistic.TotalClientsPrise:F2} руб.";
-                    txtStatAllTimeClientWorkDays.Text = $"Количество рабочих дней: {_statistic.TotalWorkDays}";
+                txtStatAllTimeClientCount.Text = $"Количество обращений: {_statistic.TotalClientsCount}";
+                txtStatAllTimeClientSumPrise.Text = $"Заработано: {_statistic.TotalClientsPrise:F2} руб.";
+                txtStatAllTimeClientWorkDays.Text = $"Количество рабочих дней: {_statistic.TotalWorkDays}";
 
-                    txtStatAllTimeClientAvrCheque.Text = $"Средний чек: {_statistic.AvgPayCheque:F0} руб.";
-                    txtStatAllTimeClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic.AvgDaylyPrise:F0} руб.";
-                    txtStatAllTimeClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic.AvgDailyLoad:F0}";
+                txtStatAllTimeClientAvrCheque.Text = $"Средний чек: {_statistic.AvgPayCheque:F0} руб.";
+                txtStatAllTimeClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic.AvgDaylyPrise:F0} руб.";
+                txtStatAllTimeClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic.AvgDailyLoad:F0}";
 
-                    txtStatAllTimeSourceInstagram.Text = $"Instagram: {_statistic.SourceInstagramCount}";
-                    txtStatAllTimeSourceTelegram.Text = $"Telegram: {_statistic.SourceTelegramCount}";
-                    txtStatAllTimeSourceWhatsApp.Text = $"WhatsApp: {_statistic.SourceWhatsAppCount}";
+                txtStatAllTimeSourceInstagram.Text = $"Instagram: {_statistic.SourceInstagramCount}";
+                txtStatAllTimeSourceTelegram.Text = $"Telegram: {_statistic.SourceTelegramCount}";
+                txtStatAllTimeSourceWhatsApp.Text = $"WhatsApp: {_statistic.SourceWhatsAppCount}";
 
-                    txtStatAllTimeStatusNew.Text = $"Обращений новых клиентов: {_statistic.StatusNewClientCount}";
-                    txtStatAllTimeStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic.StatusRepeatClientCount}";
-                }
-                else
-                {
-                    throw new NoStatisticException();
-                }
-            }
-            catch (NoStatisticException)
+                txtStatAllTimeStatusNew.Text = $"Обращений новых клиентов: {_statistic.StatusNewClientCount}";
+                txtStatAllTimeStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic.StatusRepeatClientCount}";
+
+            }           
+            catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка загрузки статистики: нет ни одного обращения", "Ошибка",
+                MessageBox.Show($"Ошибка загрузки статистики: {ex.Message}", "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        //----------------------------------------------------------------------------------------------------------
+
+        //СТАТИСТИКА "ЗА ГОД"
+        //Метод выгрузки и отрисовки статистики "ЗА ГОД"
+        private void LoadStatYear()
+        {
+            int selectedYear = (int)yearChoose.Value;
+            var clientsInYear = _context?.Clients?
+                .Where(c => c.Date.Year == selectedYear)
+                .ToList();
+            try
+            {
+                _statistic = new StatisticYear()
+                {
+                    TotalClientsCount = clientsInYear?.Count ?? 0,
+                    TotalClientsPrise = clientsInYear?.Sum(c => (decimal?)c.Prise) ?? 0,
+                    TotalWorkDays = (long)(clientsInYear?.Select(c => c.Date.Date)?.Distinct()?.Count() ?? 0),
+                    SourceInstagramCount = clientsInYear?.Count(c => c.SourceName == "Instagram") ?? 0,
+                    SourceTelegramCount = clientsInYear?.Count(c => c.SourceName == "Telegram") ?? 0,
+                    SourceWhatsAppCount = clientsInYear?.Count(c => c.SourceName == "WhatsApp") ?? 0,
+                    StatusNewClientCount = clientsInYear?.Count(c => c.Status == "Новый") ?? 0,
+                    StatusRepeatClientCount = clientsInYear?.Count(c => c.Status == "Повторный") ?? 0
+                };
+
+
+                _statistic.AvgDaylyPrise = _statistic.TotalWorkDays > 0
+                    ? _statistic.TotalClientsPrise / _statistic.TotalWorkDays
+                    : 0;
+
+                _statistic.AvgPayCheque = _statistic.TotalClientsCount > 0
+                    ? _statistic.TotalClientsPrise / _statistic.TotalClientsCount
+                    : 0;
+
+                _statistic.AvgDailyLoad = _statistic.TotalWorkDays > 0
+                    ? (decimal)_statistic.TotalClientsCount / _statistic.TotalWorkDays 
+                    : 0;
+
+                txtStatYearClientCount.Text = $"Количество обращений: {_statistic.TotalClientsCount}";
+                txtStatYearClientSumPrise.Text = $"Заработано: {_statistic.TotalClientsPrise:F2} руб.";
+                txtStatYearClientWorkDays.Text = $"Количество рабочих дней: {_statistic.TotalWorkDays}";
+
+                txtStatYearClientAvrCheque.Text = $"Средний чек: {_statistic.AvgPayCheque:F0} руб.";
+                txtStatYearClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic.AvgDaylyPrise:F0} руб.";
+                txtStatYearClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic.AvgDailyLoad:F0}";
+
+                txtStatYearSourceInstagram.Text = $"Instagram: {_statistic.SourceInstagramCount}";
+                txtStatYearSourceTelegram.Text = $"Telegram: {_statistic.SourceTelegramCount}";
+                txtStatYearSourceWhatsApp.Text = $"WhatsApp: {_statistic.SourceWhatsAppCount}";
+
+                txtStatYearStatusNew.Text = $"Обращений новых клиентов: {_statistic.StatusNewClientCount}";
+                txtStatYearStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic.StatusRepeatClientCount}";
             }
             catch (Exception ex)
             {
@@ -330,7 +392,65 @@ namespace WitchCRM
             }
         }
 
+        //Метод обновления статистики "ЗА ГОД" в зависимости от выбранного года при загрузке формы
+        private void FormPlanner_Load(object sender, EventArgs e)
+        {
+            UpdateStatisticsYear();
+            UpdateTextBoxesForStatisticYear();
+        }
+        //Метод обновления статистики "ЗА ГОД" в зависимости от выбранного года
+        private void yearChoose_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateStatisticsYear();
+            UpdateTextBoxesForStatisticYear();
+        }
+        //Метод обновления свойств класса StatisticAllTime для статистики "ЗА ГОД"
+        private void UpdateStatisticsYear()
+        {
+            int selectedYear = (int)yearChoose.Value;
+            var clientsInYear = _context?.Clients?.Where(c => c.Date.Year == selectedYear).ToList();
 
+            _statistic = new StatisticAllTime()
+            {
+                TotalClientsCount = clientsInYear?.Count ?? 0,
+                TotalClientsPrise = clientsInYear?.Sum(c => (decimal?)c.Prise) ?? 0,
+                TotalWorkDays = (long)(clientsInYear?.Select(c => c.Date.Date)?.Distinct()?.Count() ?? 0),
+                SourceInstagramCount = clientsInYear?.Count(c => c.SourceName == "Instagram") ?? 0,
+                SourceTelegramCount = clientsInYear?.Count(c => c.SourceName == "Telegram") ?? 0,
+                SourceWhatsAppCount = clientsInYear?.Count(c => c.SourceName == "WhatsApp") ?? 0,
+                StatusNewClientCount = clientsInYear?.Count(c => c.Status == "Новый") ?? 0,
+                StatusRepeatClientCount = clientsInYear?.Count(c => c.Status == "Повторный") ?? 0
+            };
+
+            _statistic.AvgDaylyPrise = _statistic.TotalWorkDays > 0
+                ? _statistic.TotalClientsPrise / _statistic.TotalWorkDays
+                : 0;
+
+            _statistic.AvgPayCheque = _statistic.TotalClientsCount > 0
+                ? _statistic.TotalClientsPrise / _statistic.TotalClientsCount
+                : 0;
+
+            _statistic.AvgDailyLoad = _statistic.TotalWorkDays > 0
+                ? (decimal)_statistic.TotalClientsCount / _statistic.TotalWorkDays
+                : 0;
+        }
+
+        //Метод обновления тектовых полей для статистики "ЗА ГОД"
+        private void UpdateTextBoxesForStatisticYear()
+        {
+            txtStatYearClientCount.Text = $"Количество обращений: {_statistic.TotalClientsCount}";
+            txtStatYearClientSumPrise.Text = $"Заработано: {_statistic?.TotalClientsPrise:F2} руб.";
+            txtStatYearClientWorkDays.Text = $"Количество рабочих дней: {_statistic.TotalWorkDays}";
+            txtStatYearSourceInstagram.Text = $"Instagram: {_statistic.SourceInstagramCount}";
+            txtStatYearSourceTelegram.Text = $"Telegram: {_statistic.SourceTelegramCount}";
+            txtStatYearSourceWhatsApp.Text = $"WhatsApp: {_statistic.SourceWhatsAppCount}";
+            txtStatYearStatusNew.Text = $"Обращений новых клиентов: {_statistic.StatusNewClientCount}";
+            txtStatYearStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic.StatusRepeatClientCount}";
+            txtStatYearClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic.AvgDaylyPrise:F0} руб.";
+            txtStatYearClientAvrCheque.Text = $"Средний чек: {_statistic.AvgPayCheque:F0} руб.";
+            txtStatYearClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic.AvgDailyLoad:F0}";
+        }
+        //----------------------------------------------------------------------------------------------------------
 
 
 
