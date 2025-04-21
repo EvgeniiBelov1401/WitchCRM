@@ -274,7 +274,10 @@ namespace WitchCRM
                 {
                     TotalClientsCount = _context?.Clients?.Count() ?? 0,
                     TotalClientsPrise = _context?.Clients?.Sum(c => (decimal?)c.Prise) ?? 0,
-                    TotalWorkDays = (long)(_context?.Clients?.Select(c => c.Date.Date)?.Distinct()?.Count() ?? 0)
+                    TotalWorkDays = (long)(_context?.Clients?.Select(c => c.Date.Date)?.Distinct()?.Count() ?? 0),
+                    SourceInstagramCount = _context?.Clients?.Where(c => c.SourceName == "Instagram").Count() ?? 0,
+                    SourceTelegramCount = _context?.Clients?.Where(c => c.SourceName == "Telegram").Count() ?? 0,
+                    SourceWhatsAppCount = _context?.Clients?.Where(c => c.SourceName == "WhatsApp").Count() ?? 0
                 };
 
 
@@ -289,22 +292,27 @@ namespace WitchCRM
                 _statistic.AvgDailyLoad = _statistic.TotalWorkDays > 0
                     ? _statistic.TotalClientsCount / _statistic.TotalWorkDays
                     : 0;
-            
 
-            if (_statistic.TotalClientsCount != 0)
-            {
-                txtStatAllTimeClientCount.Text = $"Количество обращений: {_statistic.TotalClientsCount}";
-                txtStatAllTimeClientSumPrise.Text = $"Заработано: {_statistic.TotalClientsPrise:F2} руб.";
-                txtStatAllTimeClientWorkDays.Text = $"Количество рабочих дней: {_statistic.TotalWorkDays}";
-                txtStatAllTimeClientAvrCheque.Text = $"Средний чек: {_statistic.AvgPayCheque:F0} руб.";
-                txtStatAllTimeClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic.AvgDaylyPrise:F0} руб.";
-                txtStatAllTimeClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic.AvgDailyLoad:F0}";
+
+                if (_statistic.TotalClientsCount != 0)
+                {
+                    txtStatAllTimeClientCount.Text = $"Количество обращений: {_statistic.TotalClientsCount}";
+                    txtStatAllTimeClientSumPrise.Text = $"Заработано: {_statistic.TotalClientsPrise:F2} руб.";
+                    txtStatAllTimeClientWorkDays.Text = $"Количество рабочих дней: {_statistic.TotalWorkDays}";
+
+                    txtStatAllTimeClientAvrCheque.Text = $"Средний чек: {_statistic.AvgPayCheque:F0} руб.";
+                    txtStatAllTimeClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic.AvgDaylyPrise:F0} руб.";
+                    txtStatAllTimeClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic.AvgDailyLoad:F0}";
+
+                    txtStatAllTimeSourceInstagram.Text = $"Instagram: {_statistic.SourceInstagramCount}";
+                    txtStatAllTimeSourceTelegram.Text= $"Telegram: {_statistic.SourceTelegramCount}";
+                    txtStatAllTimeSourceWhatsApp.Text = $"WhatsApp: {_statistic.SourceWhatsAppCount}";
+                }
+                else
+                {
+                    throw new NoStatisticException();
+                }
             }
-            else
-            {
-                throw new NoStatisticException();
-            }
-        }
             catch (NoStatisticException)
             {
                 MessageBox.Show($"Ошибка загрузки статистики: нет ни одного обращения", "Ошибка",
@@ -317,7 +325,7 @@ namespace WitchCRM
             }
         }
 
-     
+
 
 
 

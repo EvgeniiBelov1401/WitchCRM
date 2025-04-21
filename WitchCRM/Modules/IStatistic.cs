@@ -14,5 +14,8 @@ namespace WitchCRM.Modules
         decimal AvgDaylyPrise { get; set; }
         decimal AvgPayCheque { get; set; }
         decimal AvgDailyLoad { get; set; }
+        long SourceInstagramCount { get; set; }
+        long SourceTelegramCount { get; set; }
+        long SourceWhatsAppCount { get; set; }
     }
 }
