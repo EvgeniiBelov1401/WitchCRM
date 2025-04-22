@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Windows.Forms;
 using WitchCRM.Modules;
 
@@ -23,7 +24,44 @@ namespace WitchCRM
             LoadStatYear();//загружает статистику "ЗА ГОД" при загрузке формы
         }
 
-        
+        //Метод обновления формы
+        private void FormPlanner_Load(object sender, EventArgs e)
+        {
+            UpdateStatisticsYear();
+            UpdateTextBoxesForStatisticYear();
+
+            string[] months = new string[]
+            {
+                "Январь", "Февраль", "Март",
+                "Апрель", "Май", "Июнь",
+                "Июль", "Август", "Сентябрь",
+                "Октябрь", "Ноябрь", "Декабрь"
+            };
+
+            foreach (string month in months)
+            {
+                monthChoose.Items.Add(month);
+            }
+
+            monthChoose.SelectedIndex = DateTime.Now.Month - 1;
+        }
+
+        private void monthChoose_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (monthChoose.SelectedItem != null)
+            {
+                string selectedMonth = monthChoose.SelectedItem?.ToString()!;
+                int monthNumber = monthChoose.SelectedIndex + 1;
+            }
+        }
+
+        //Метод обновления статистики "ЗА ГОД" в зависимости от выбранного года
+        private void yearChoose_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateStatisticsYear();
+            UpdateTextBoxesForStatisticYear();
+        }
+
 
         ////
         //Органы управления
@@ -392,18 +430,7 @@ namespace WitchCRM
             }
         }
 
-        //Метод обновления статистики "ЗА ГОД" в зависимости от выбранного года при загрузке формы
-        private void FormPlanner_Load(object sender, EventArgs e)
-        {
-            UpdateStatisticsYear();
-            UpdateTextBoxesForStatisticYear();
-        }
-        //Метод обновления статистики "ЗА ГОД" в зависимости от выбранного года
-        private void yearChoose_ValueChanged(object sender, EventArgs e)
-        {
-            UpdateStatisticsYear();
-            UpdateTextBoxesForStatisticYear();
-        }
+        
         //Метод обновления свойств класса StatisticAllTime для статистики "ЗА ГОД"
         private void UpdateStatisticsYear()
         {
@@ -438,17 +465,17 @@ namespace WitchCRM
         //Метод обновления тектовых полей для статистики "ЗА ГОД"
         private void UpdateTextBoxesForStatisticYear()
         {
-            txtStatYearClientCount.Text = $"Количество обращений: {_statistic.TotalClientsCount}";
+            txtStatYearClientCount.Text = $"Количество обращений: {_statistic?.TotalClientsCount}";
             txtStatYearClientSumPrise.Text = $"Заработано: {_statistic?.TotalClientsPrise:F2} руб.";
-            txtStatYearClientWorkDays.Text = $"Количество рабочих дней: {_statistic.TotalWorkDays}";
-            txtStatYearSourceInstagram.Text = $"Instagram: {_statistic.SourceInstagramCount}";
-            txtStatYearSourceTelegram.Text = $"Telegram: {_statistic.SourceTelegramCount}";
-            txtStatYearSourceWhatsApp.Text = $"WhatsApp: {_statistic.SourceWhatsAppCount}";
-            txtStatYearStatusNew.Text = $"Обращений новых клиентов: {_statistic.StatusNewClientCount}";
-            txtStatYearStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic.StatusRepeatClientCount}";
-            txtStatYearClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic.AvgDaylyPrise:F0} руб.";
-            txtStatYearClientAvrCheque.Text = $"Средний чек: {_statistic.AvgPayCheque:F0} руб.";
-            txtStatYearClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic.AvgDailyLoad:F0}";
+            txtStatYearClientWorkDays.Text = $"Количество рабочих дней: {_statistic?.TotalWorkDays}";
+            txtStatYearSourceInstagram.Text = $"Instagram: {_statistic?.SourceInstagramCount}";
+            txtStatYearSourceTelegram.Text = $"Telegram: {_statistic?.SourceTelegramCount}";
+            txtStatYearSourceWhatsApp.Text = $"WhatsApp: {_statistic?.SourceWhatsAppCount}";
+            txtStatYearStatusNew.Text = $"Обращений новых клиентов: {_statistic?.StatusNewClientCount}";
+            txtStatYearStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic?.StatusRepeatClientCount}";
+            txtStatYearClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic?.AvgDaylyPrise:F0} руб.";
+            txtStatYearClientAvrCheque.Text = $"Средний чек: {_statistic?.AvgPayCheque:F0} руб.";
+            txtStatYearClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic?.AvgDailyLoad:F0}";
         }
         //----------------------------------------------------------------------------------------------------------
 

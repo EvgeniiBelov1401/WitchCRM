@@ -57,6 +57,23 @@
             lblPlannerClientCount = new Label();
             plannerDate = new DateTimePicker();
             tabPageStatistic = new TabPage();
+            grStatMonth = new GroupBox();
+            monthChoose = new ComboBox();
+            groupBox6 = new GroupBox();
+            txtStatMonthClientSumPrise = new TextBox();
+            txtStatMonthClientWorkDays = new TextBox();
+            txtStatMonthClientCount = new TextBox();
+            groupBox7 = new GroupBox();
+            txtStatMonthStatusRepeat = new TextBox();
+            txtStatMonthStatusNew = new TextBox();
+            groupBox8 = new GroupBox();
+            txtStatMonthSourceWhatsApp = new TextBox();
+            txtStatMonthSourceTelegram = new TextBox();
+            txtStatMonthSourceInstagram = new TextBox();
+            groupBox9 = new GroupBox();
+            txtStatMonthClientAvrCountDayly = new TextBox();
+            txtStatMonthClientAvrCheque = new TextBox();
+            txtStatMonthClientAvrDaylyCheque = new TextBox();
             grStatYear = new GroupBox();
             yearChoose = new NumericUpDown();
             groupBox2 = new GroupBox();
@@ -102,6 +119,11 @@
             grPlanner.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)plannerTable).BeginInit();
             tabPageStatistic.SuspendLayout();
+            grStatMonth.SuspendLayout();
+            groupBox6.SuspendLayout();
+            groupBox7.SuspendLayout();
+            groupBox8.SuspendLayout();
+            groupBox9.SuspendLayout();
             grStatYear.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)yearChoose).BeginInit();
             groupBox2.SuspendLayout();
@@ -418,6 +440,7 @@
             // tabPageStatistic
             // 
             tabPageStatistic.BackColor = Color.WhiteSmoke;
+            tabPageStatistic.Controls.Add(grStatMonth);
             tabPageStatistic.Controls.Add(grStatYear);
             tabPageStatistic.Controls.Add(grStatAllTime);
             tabPageStatistic.Font = new Font("Times New Roman", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
@@ -428,8 +451,206 @@
             tabPageStatistic.TabIndex = 1;
             tabPageStatistic.Text = "Статистика";
             // 
+            // grStatMonth
+            // 
+            grStatMonth.Anchor = AnchorStyles.Top;
+            grStatMonth.Controls.Add(monthChoose);
+            grStatMonth.Controls.Add(groupBox6);
+            grStatMonth.Controls.Add(groupBox7);
+            grStatMonth.Controls.Add(groupBox8);
+            grStatMonth.Controls.Add(groupBox9);
+            grStatMonth.Location = new Point(49, 56);
+            grStatMonth.Name = "grStatMonth";
+            grStatMonth.Size = new Size(454, 704);
+            grStatMonth.TabIndex = 2;
+            grStatMonth.TabStop = false;
+            grStatMonth.Text = "За месяц";
+            // 
+            // monthChoose
+            // 
+            monthChoose.DropDownStyle = ComboBoxStyle.DropDownList;
+            monthChoose.FormattingEnabled = true;
+            monthChoose.Location = new Point(27, 38);
+            monthChoose.Name = "monthChoose";
+            monthChoose.Size = new Size(190, 39);
+            monthChoose.TabIndex = 7;
+            monthChoose.SelectedIndexChanged += monthChoose_SelectedIndexChanged;
+            // 
+            // groupBox6
+            // 
+            groupBox6.Controls.Add(txtStatMonthClientSumPrise);
+            groupBox6.Controls.Add(txtStatMonthClientWorkDays);
+            groupBox6.Controls.Add(txtStatMonthClientCount);
+            groupBox6.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            groupBox6.Location = new Point(21, 96);
+            groupBox6.Name = "groupBox6";
+            groupBox6.Size = new Size(427, 129);
+            groupBox6.TabIndex = 1;
+            groupBox6.TabStop = false;
+            groupBox6.Text = "Основные показатели";
+            // 
+            // txtStatMonthClientSumPrise
+            // 
+            txtStatMonthClientSumPrise.BackColor = SystemColors.ControlLight;
+            txtStatMonthClientSumPrise.Enabled = false;
+            txtStatMonthClientSumPrise.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatMonthClientSumPrise.Location = new Point(6, 31);
+            txtStatMonthClientSumPrise.Name = "txtStatMonthClientSumPrise";
+            txtStatMonthClientSumPrise.Size = new Size(414, 26);
+            txtStatMonthClientSumPrise.TabIndex = 2;
+            txtStatMonthClientSumPrise.TextAlign = HorizontalAlignment.Center;
+            // 
+            // txtStatMonthClientWorkDays
+            // 
+            txtStatMonthClientWorkDays.BackColor = SystemColors.ControlLight;
+            txtStatMonthClientWorkDays.Enabled = false;
+            txtStatMonthClientWorkDays.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatMonthClientWorkDays.Location = new Point(6, 95);
+            txtStatMonthClientWorkDays.Name = "txtStatMonthClientWorkDays";
+            txtStatMonthClientWorkDays.Size = new Size(414, 26);
+            txtStatMonthClientWorkDays.TabIndex = 4;
+            txtStatMonthClientWorkDays.TextAlign = HorizontalAlignment.Center;
+            // 
+            // txtStatMonthClientCount
+            // 
+            txtStatMonthClientCount.BackColor = SystemColors.ControlLight;
+            txtStatMonthClientCount.Enabled = false;
+            txtStatMonthClientCount.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatMonthClientCount.Location = new Point(6, 63);
+            txtStatMonthClientCount.Name = "txtStatMonthClientCount";
+            txtStatMonthClientCount.Size = new Size(414, 26);
+            txtStatMonthClientCount.TabIndex = 1;
+            txtStatMonthClientCount.TextAlign = HorizontalAlignment.Center;
+            // 
+            // groupBox7
+            // 
+            groupBox7.Controls.Add(txtStatMonthStatusRepeat);
+            groupBox7.Controls.Add(txtStatMonthStatusNew);
+            groupBox7.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            groupBox7.Location = new Point(21, 503);
+            groupBox7.Name = "groupBox7";
+            groupBox7.Size = new Size(427, 97);
+            groupBox7.TabIndex = 6;
+            groupBox7.TabStop = false;
+            groupBox7.Text = "Кол-во обращений по статусам";
+            // 
+            // txtStatMonthStatusRepeat
+            // 
+            txtStatMonthStatusRepeat.BackColor = SystemColors.ControlLight;
+            txtStatMonthStatusRepeat.Enabled = false;
+            txtStatMonthStatusRepeat.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatMonthStatusRepeat.Location = new Point(6, 63);
+            txtStatMonthStatusRepeat.Name = "txtStatMonthStatusRepeat";
+            txtStatMonthStatusRepeat.Size = new Size(414, 26);
+            txtStatMonthStatusRepeat.TabIndex = 5;
+            txtStatMonthStatusRepeat.TextAlign = HorizontalAlignment.Center;
+            // 
+            // txtStatMonthStatusNew
+            // 
+            txtStatMonthStatusNew.BackColor = SystemColors.ControlLight;
+            txtStatMonthStatusNew.Enabled = false;
+            txtStatMonthStatusNew.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatMonthStatusNew.Location = new Point(6, 31);
+            txtStatMonthStatusNew.Name = "txtStatMonthStatusNew";
+            txtStatMonthStatusNew.Size = new Size(414, 26);
+            txtStatMonthStatusNew.TabIndex = 4;
+            txtStatMonthStatusNew.TextAlign = HorizontalAlignment.Center;
+            // 
+            // groupBox8
+            // 
+            groupBox8.Controls.Add(txtStatMonthSourceWhatsApp);
+            groupBox8.Controls.Add(txtStatMonthSourceTelegram);
+            groupBox8.Controls.Add(txtStatMonthSourceInstagram);
+            groupBox8.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            groupBox8.Location = new Point(21, 366);
+            groupBox8.Name = "groupBox8";
+            groupBox8.Size = new Size(427, 131);
+            groupBox8.TabIndex = 5;
+            groupBox8.TabStop = false;
+            groupBox8.Text = "Кол-во обращений по источникам";
+            // 
+            // txtStatMonthSourceWhatsApp
+            // 
+            txtStatMonthSourceWhatsApp.BackColor = SystemColors.ControlLight;
+            txtStatMonthSourceWhatsApp.Enabled = false;
+            txtStatMonthSourceWhatsApp.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatMonthSourceWhatsApp.Location = new Point(6, 95);
+            txtStatMonthSourceWhatsApp.Name = "txtStatMonthSourceWhatsApp";
+            txtStatMonthSourceWhatsApp.Size = new Size(414, 26);
+            txtStatMonthSourceWhatsApp.TabIndex = 6;
+            txtStatMonthSourceWhatsApp.TextAlign = HorizontalAlignment.Center;
+            // 
+            // txtStatMonthSourceTelegram
+            // 
+            txtStatMonthSourceTelegram.BackColor = SystemColors.ControlLight;
+            txtStatMonthSourceTelegram.Enabled = false;
+            txtStatMonthSourceTelegram.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatMonthSourceTelegram.Location = new Point(6, 63);
+            txtStatMonthSourceTelegram.Name = "txtStatMonthSourceTelegram";
+            txtStatMonthSourceTelegram.Size = new Size(414, 26);
+            txtStatMonthSourceTelegram.TabIndex = 5;
+            txtStatMonthSourceTelegram.TextAlign = HorizontalAlignment.Center;
+            // 
+            // txtStatMonthSourceInstagram
+            // 
+            txtStatMonthSourceInstagram.BackColor = SystemColors.ControlLight;
+            txtStatMonthSourceInstagram.Enabled = false;
+            txtStatMonthSourceInstagram.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatMonthSourceInstagram.Location = new Point(6, 31);
+            txtStatMonthSourceInstagram.Name = "txtStatMonthSourceInstagram";
+            txtStatMonthSourceInstagram.Size = new Size(414, 26);
+            txtStatMonthSourceInstagram.TabIndex = 4;
+            txtStatMonthSourceInstagram.TextAlign = HorizontalAlignment.Center;
+            // 
+            // groupBox9
+            // 
+            groupBox9.Controls.Add(txtStatMonthClientAvrCountDayly);
+            groupBox9.Controls.Add(txtStatMonthClientAvrCheque);
+            groupBox9.Controls.Add(txtStatMonthClientAvrDaylyCheque);
+            groupBox9.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            groupBox9.Location = new Point(21, 231);
+            groupBox9.Name = "groupBox9";
+            groupBox9.Size = new Size(427, 129);
+            groupBox9.TabIndex = 1;
+            groupBox9.TabStop = false;
+            groupBox9.Text = "Средние значения";
+            // 
+            // txtStatMonthClientAvrCountDayly
+            // 
+            txtStatMonthClientAvrCountDayly.BackColor = SystemColors.ControlLight;
+            txtStatMonthClientAvrCountDayly.Enabled = false;
+            txtStatMonthClientAvrCountDayly.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatMonthClientAvrCountDayly.Location = new Point(6, 95);
+            txtStatMonthClientAvrCountDayly.Name = "txtStatMonthClientAvrCountDayly";
+            txtStatMonthClientAvrCountDayly.Size = new Size(414, 26);
+            txtStatMonthClientAvrCountDayly.TabIndex = 6;
+            txtStatMonthClientAvrCountDayly.TextAlign = HorizontalAlignment.Center;
+            // 
+            // txtStatMonthClientAvrCheque
+            // 
+            txtStatMonthClientAvrCheque.BackColor = SystemColors.ControlLight;
+            txtStatMonthClientAvrCheque.Enabled = false;
+            txtStatMonthClientAvrCheque.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatMonthClientAvrCheque.Location = new Point(6, 31);
+            txtStatMonthClientAvrCheque.Name = "txtStatMonthClientAvrCheque";
+            txtStatMonthClientAvrCheque.Size = new Size(414, 26);
+            txtStatMonthClientAvrCheque.TabIndex = 3;
+            txtStatMonthClientAvrCheque.TextAlign = HorizontalAlignment.Center;
+            // 
+            // txtStatMonthClientAvrDaylyCheque
+            // 
+            txtStatMonthClientAvrDaylyCheque.BackColor = SystemColors.ControlLight;
+            txtStatMonthClientAvrDaylyCheque.Enabled = false;
+            txtStatMonthClientAvrDaylyCheque.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatMonthClientAvrDaylyCheque.Location = new Point(6, 63);
+            txtStatMonthClientAvrDaylyCheque.Name = "txtStatMonthClientAvrDaylyCheque";
+            txtStatMonthClientAvrDaylyCheque.Size = new Size(414, 26);
+            txtStatMonthClientAvrDaylyCheque.TabIndex = 5;
+            txtStatMonthClientAvrDaylyCheque.TextAlign = HorizontalAlignment.Center;
+            // 
             // grStatYear
             // 
+            grStatYear.Anchor = AnchorStyles.Top;
             grStatYear.Controls.Add(yearChoose);
             grStatYear.Controls.Add(groupBox2);
             grStatYear.Controls.Add(groupBox3);
@@ -627,6 +848,7 @@
             // 
             // grStatAllTime
             // 
+            grStatAllTime.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             grStatAllTime.Controls.Add(grStatAllTimeCommonValues);
             grStatAllTime.Controls.Add(grStatAllTimeStatus);
             grStatAllTime.Controls.Add(grStatAllTimeSource);
@@ -822,6 +1044,7 @@
             Name = "FormPlanner";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Бухгалтерия ведьмы";
+            Load += FormPlanner_Load;
             grNewClient.ResumeLayout(false);
             grStatus.ResumeLayout(false);
             grStatus.PerformLayout();
@@ -840,6 +1063,15 @@
             grPlanner.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)plannerTable).EndInit();
             tabPageStatistic.ResumeLayout(false);
+            grStatMonth.ResumeLayout(false);
+            groupBox6.ResumeLayout(false);
+            groupBox6.PerformLayout();
+            groupBox7.ResumeLayout(false);
+            groupBox7.PerformLayout();
+            groupBox8.ResumeLayout(false);
+            groupBox8.PerformLayout();
+            groupBox9.ResumeLayout(false);
+            groupBox9.PerformLayout();
             grStatYear.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)yearChoose).EndInit();
             groupBox2.ResumeLayout(false);
@@ -923,5 +1155,22 @@
         private TextBox txtStatYearClientAvrCheque;
         private TextBox txtStatYearClientAvrDaylyCheque;
         private NumericUpDown yearChoose;
+        private GroupBox grStatMonth;
+        private GroupBox groupBox6;
+        private TextBox txtStatMonthClientSumPrise;
+        private TextBox txtStatMonthClientWorkDays;
+        private TextBox txtStatMonthClientCount;
+        private GroupBox groupBox7;
+        private TextBox txtStatMonthStatusRepeat;
+        private TextBox txtStatMonthStatusNew;
+        private GroupBox groupBox8;
+        private TextBox txtStatMonthSourceWhatsApp;
+        private TextBox txtStatMonthSourceTelegram;
+        private TextBox txtStatMonthSourceInstagram;
+        private GroupBox groupBox9;
+        private TextBox txtStatMonthClientAvrCountDayly;
+        private TextBox txtStatMonthClientAvrCheque;
+        private TextBox txtStatMonthClientAvrDaylyCheque;
+        private ComboBox monthChoose;
     }
 }
