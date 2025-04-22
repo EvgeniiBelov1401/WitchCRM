@@ -13,6 +13,9 @@ namespace WitchCRM
 
         private IStatistic? _statistic;
 
+        private int selectedMonthNumber;
+        private int selectedYear;
+
         public FormPlanner()
         {
             InitializeComponent();
@@ -22,6 +25,8 @@ namespace WitchCRM
             LoadStatAllTime();//загружает статистику "ЗА ВСЕ ВРЕМЯ" при загрузке формы
             yearChoose.ValueChanged += yearChoose_ValueChanged!;//меняет статистику "ЗА ГОД" в зависимости от выбранного года
             LoadStatYear();//загружает статистику "ЗА ГОД" при загрузке формы
+            monthChoose.ValueMemberChanged += yearChoose_ValueChanged!;//меняет статистику "ЗА МЕСЯЦ" в зависимости от выбранного месяца
+            LoadStatMonth();//загружает статистику "ЗА МЕСЯЦ" при загрузке формы
         }
 
         //Метод-событие обновления формы
@@ -29,6 +34,8 @@ namespace WitchCRM
         {
             UpdateStatisticsYear();
             UpdateTextBoxesForStatisticYear();
+            UpdateStatisticsMonth();
+            UpdateTextBoxesForStatisticMonth();
 
             string[] months = new string[]
             {
@@ -38,22 +45,22 @@ namespace WitchCRM
                 "Октябрь", "Ноябрь", "Декабрь"
             };
 
-            foreach (string month in months)
-            {
-                monthChoose.Items.Add(month);
-            }
+            monthChoose.Items.AddRange(months);
 
-            monthChoose.SelectedIndex = DateTime.Now.Month - 1;
+            monthChoose.SelectedIndex = DateTime.Now.Month - 1;//устанавливает значение по умочаниею - текущий месяц
+            monthChoose_SelectedIndexChanged(null!, EventArgs.Empty);// Можно сразу вызвать обработчик для первоначальной загрузки данных
         }
 
         //Метод-событие обновления статистики "ЗА МЕСЯЦ" в зависимости от выбранного месяца
         private void monthChoose_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (monthChoose.SelectedItem != null)
+            if (monthChoose.SelectedItem != null && monthChoose.SelectedIndex != -1)
             {
-                string selectedMonth = monthChoose.SelectedItem?.ToString()!;
-                int monthNumber = monthChoose.SelectedIndex + 1;
+                selectedMonthNumber = monthChoose.SelectedIndex + 1;
+                selectedYear = DateTime.Now.Year;
             }
+            UpdateStatisticsMonth();
+            UpdateTextBoxesForStatisticMonth();
         }
 
         //Метод-событие обновления статистики "ЗА ГОД" в зависимости от выбранного года
@@ -76,6 +83,7 @@ namespace WitchCRM
 
             LoadStatAllTime();//обновляет статистику "ЗА ВСЕ ВРЕМЯ" при записи нового клиента
             LoadStatYear();//обновляет статистику "ЗА ГОД" при записи нового клиента
+            LoadStatMonth();//обновляет статистику "ЗА МЕСЯЦ" при записи нового клиента
         }
 
         //ВЫБРАТЬ ИНСТАГРАМ
@@ -431,14 +439,14 @@ namespace WitchCRM
             }
         }
 
-        
-        //Метод обновления свойств класса StatisticAllTime для статистики "ЗА ГОД"
+
+        //Метод обновления свойств класса StatisticYear для статистики "ЗА ГОД"
         private void UpdateStatisticsYear()
         {
             int selectedYear = (int)yearChoose.Value;
             var clientsInYear = _context?.Clients?.Where(c => c.Date.Year == selectedYear).ToList();
 
-            _statistic = new StatisticAllTime()
+            _statistic = new StatisticYear()
             {
                 TotalClientsCount = clientsInYear?.Count ?? 0,
                 TotalClientsPrise = clientsInYear?.Sum(c => (decimal?)c.Prise) ?? 0,
@@ -480,19 +488,114 @@ namespace WitchCRM
         }
         //----------------------------------------------------------------------------------------------------------
 
-        //СТАТИСТИКА "ЗА ГОД"
-        //Метод выгрузки и отрисовки статистики "ЗА ГОД"
+        //СТАТИСТИКА "ЗА МЕСЯЦ"
+        //Метод выгрузки и отрисовки статистики "ЗА МЕСЯЦ"
         private void LoadStatMonth()
         {
+            var clientsInMonth = _context?.Clients?
+            .Where(c => c.Date.Year == selectedYear &&
+                        c.Date.Month == selectedMonthNumber)
+            .ToList();
             try
             {
-                
+                _statistic = new StatisticMonth()
+                {
+                    TotalClientsCount = clientsInMonth?.Count ?? 0,
+                    TotalClientsPrise = clientsInMonth?.Sum(c => (decimal?)c.Prise) ?? 0,
+                    TotalWorkDays = (long)(clientsInMonth?.Select(c => c.Date.Date)?.Distinct()?.Count() ?? 0),
+                    SourceInstagramCount = clientsInMonth?.Count(c => c.SourceName == "Instagram") ?? 0,
+                    SourceTelegramCount = clientsInMonth?.Count(c => c.SourceName == "Telegram") ?? 0,
+                    SourceWhatsAppCount = clientsInMonth?.Count(c => c.SourceName == "WhatsApp") ?? 0,
+                    StatusNewClientCount = clientsInMonth?.Count(c => c.Status == "Новый") ?? 0,
+                    StatusRepeatClientCount = clientsInMonth?.Count(c => c.Status == "Повторный") ?? 0
+                };
+
+
+                _statistic.AvgDaylyPrise = _statistic.TotalWorkDays > 0
+                    ? _statistic.TotalClientsPrise / _statistic.TotalWorkDays
+                    : 0;
+
+                _statistic.AvgPayCheque = _statistic.TotalClientsCount > 0
+                    ? _statistic.TotalClientsPrise / _statistic.TotalClientsCount
+                    : 0;
+
+                _statistic.AvgDailyLoad = _statistic.TotalWorkDays > 0
+                    ? (decimal)_statistic.TotalClientsCount / _statistic.TotalWorkDays
+                    : 0;
+
+                txtStatMonthClientCount.Text = $"Количество обращений: {_statistic.TotalClientsCount}";
+                txtStatMonthClientSumPrise.Text = $"Заработано: {_statistic.TotalClientsPrise:F2} руб.";
+                txtStatMonthClientWorkDays.Text = $"Количество рабочих дней: {_statistic.TotalWorkDays}";
+
+                txtStatMonthClientAvrCheque.Text = $"Средний чек: {_statistic.AvgPayCheque:F0} руб.";
+                txtStatMonthClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic.AvgDaylyPrise:F0} руб.";
+                txtStatMonthClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic.AvgDailyLoad:F0}";
+
+                txtStatMonthSourceInstagram.Text = $"Instagram: {_statistic.SourceInstagramCount}";
+                txtStatMonthSourceTelegram.Text = $"Telegram: {_statistic.SourceTelegramCount}";
+                txtStatMonthSourceWhatsApp.Text = $"WhatsApp: {_statistic.SourceWhatsAppCount}";
+
+                txtStatMonthStatusNew.Text = $"Обращений новых клиентов: {_statistic.StatusNewClientCount}";
+                txtStatMonthStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic.StatusRepeatClientCount}";
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка загрузки статистики: {ex.Message}", "Ошибка",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        //Метод обновления свойств класса StatisticMonth для статистики "ЗА ГОД"
+        private void UpdateStatisticsMonth()
+        {
+            var clientsInMonth = _context?.Clients?
+            .Where(c => c.Date.Year == selectedYear &&
+                        c.Date.Month == selectedMonthNumber)
+            .ToList();
+
+            _statistic = new StatisticMonth()
+            {
+                TotalClientsCount = clientsInMonth?.Count ?? 0,
+                TotalClientsPrise = clientsInMonth?.Sum(c => (decimal?)c.Prise) ?? 0,
+                TotalWorkDays = (long)(clientsInMonth?.Select(c => c.Date.Date)?.Distinct()?.Count() ?? 0),
+                SourceInstagramCount = clientsInMonth?.Count(c => c.SourceName == "Instagram") ?? 0,
+                SourceTelegramCount = clientsInMonth?.Count(c => c.SourceName == "Telegram") ?? 0,
+                SourceWhatsAppCount = clientsInMonth?.Count(c => c.SourceName == "WhatsApp") ?? 0,
+                StatusNewClientCount = clientsInMonth?.Count(c => c.Status == "Новый") ?? 0,
+                StatusRepeatClientCount = clientsInMonth?.Count(c => c.Status == "Повторный") ?? 0
+            };
+
+
+            _statistic.AvgDaylyPrise = _statistic.TotalWorkDays > 0
+                ? _statistic.TotalClientsPrise / _statistic.TotalWorkDays
+                : 0;
+
+            _statistic.AvgPayCheque = _statistic.TotalClientsCount > 0
+                ? _statistic.TotalClientsPrise / _statistic.TotalClientsCount
+                : 0;
+
+            _statistic.AvgDailyLoad = _statistic.TotalWorkDays > 0
+                ? (decimal)_statistic.TotalClientsCount / _statistic.TotalWorkDays
+                : 0;
+        }
+
+        //Метод обновления тектовых полей для статистики "ЗА МЕСЯЦ"
+        private void UpdateTextBoxesForStatisticMonth()
+        {
+            txtStatMonthClientCount.Text = $"Количество обращений: {_statistic?.TotalClientsCount}";
+            txtStatMonthClientSumPrise.Text = $"Заработано: {_statistic?.TotalClientsPrise:F2} руб.";
+            txtStatMonthClientWorkDays.Text = $"Количество рабочих дней: {_statistic?.TotalWorkDays}";
+
+            txtStatMonthClientAvrCheque.Text = $"Средний чек: {_statistic?.AvgPayCheque:F0} руб.";
+            txtStatMonthClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic?.AvgDaylyPrise:F0} руб.";
+            txtStatMonthClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic?.AvgDailyLoad:F0}";
+
+            txtStatMonthSourceInstagram.Text = $"Instagram: {_statistic?.SourceInstagramCount}";
+            txtStatMonthSourceTelegram.Text = $"Telegram: {_statistic?.SourceTelegramCount}";
+            txtStatMonthSourceWhatsApp.Text = $"WhatsApp: {_statistic?.SourceWhatsAppCount}";
+
+            txtStatMonthStatusNew.Text = $"Обращений новых клиентов: {_statistic?.StatusNewClientCount}";
+            txtStatMonthStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic?.StatusRepeatClientCount}";
         }
 
 
