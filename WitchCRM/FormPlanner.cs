@@ -24,7 +24,7 @@ namespace WitchCRM
             LoadStatYear();//загружает статистику "ЗА ГОД" при загрузке формы
         }
 
-        //Метод обновления формы
+        //Метод-событие обновления формы
         private void FormPlanner_Load(object sender, EventArgs e)
         {
             UpdateStatisticsYear();
@@ -46,6 +46,7 @@ namespace WitchCRM
             monthChoose.SelectedIndex = DateTime.Now.Month - 1;
         }
 
+        //Метод-событие обновления статистики "ЗА МЕСЯЦ" в зависимости от выбранного месяца
         private void monthChoose_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (monthChoose.SelectedItem != null)
@@ -55,7 +56,7 @@ namespace WitchCRM
             }
         }
 
-        //Метод обновления статистики "ЗА ГОД" в зависимости от выбранного года
+        //Метод-событие обновления статистики "ЗА ГОД" в зависимости от выбранного года
         private void yearChoose_ValueChanged(object sender, EventArgs e)
         {
             UpdateStatisticsYear();
@@ -479,6 +480,20 @@ namespace WitchCRM
         }
         //----------------------------------------------------------------------------------------------------------
 
+        //СТАТИСТИКА "ЗА ГОД"
+        //Метод выгрузки и отрисовки статистики "ЗА ГОД"
+        private void LoadStatMonth()
+        {
+            try
+            {
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка загрузки статистики: {ex.Message}", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
 
 
@@ -491,9 +506,7 @@ namespace WitchCRM
 
 
 
-
-
-
+        //----------------------------------------------------------------------------------------------------------
         //-------------------------------------------------------------------------------------------------------
     }
 }
