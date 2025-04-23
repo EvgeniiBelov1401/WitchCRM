@@ -16,8 +16,12 @@ namespace WitchCRM
         private int selectedMonthNumber;
         private int selectedYear;
 
-        private string? exTotalClientsPrise;
-        private string? exTotoalClientsCount;
+        private string? exMonthClientsPrise;
+        private string? exMonthClientsCount;
+
+        private string? exYearClientsPrise;
+        private string? exYearClientsCount;
+        int daysInYear = DateTime.IsLeapYear(DateTime.Now.Year) ? 366 : 365;
 
         public FormPlanner()
         {
@@ -82,12 +86,13 @@ namespace WitchCRM
         private void btnSave_Click_1(object sender, EventArgs e)
         {
             InputData();
+            plannerDate.Value = dateTimePicker.Value;
             LoadClientsByDate();//обновляет планировщик в зависимости от выбранной даты при записи нового клиента
 
             LoadStatAllTime();//обновляет статистику "ЗА ВСЕ ВРЕМЯ" при записи нового клиента
             LoadStatYear();//обновляет статистику "ЗА ГОД" при записи нового клиента
             LoadStatMonth();//обновляет статистику "ЗА МЕСЯЦ" при записи нового клиента
-            dateTimePicker.Value = DateTime.Now;
+            dateTimePicker.Value = DateTime.Now;//после клика "Записать" возвращает в dateTimePicker текущую дату
         }
 
         //ВЫБРАТЬ ИНСТАГРАМ
@@ -366,9 +371,9 @@ namespace WitchCRM
                 txtStatAllTimeClientSumPrise.Text = $"Заработано: {_statistic.TotalClientsPrise:F2} руб.";
                 txtStatAllTimeClientWorkDays.Text = $"Количество рабочих дней: {_statistic.TotalWorkDays}";
 
-                txtStatAllTimeClientAvrCheque.Text = $"Средний чек: {_statistic.AvgPayCheque:F0} руб.";
-                txtStatAllTimeClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic.AvgDaylyPrise:F0} руб.";
-                txtStatAllTimeClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic.AvgDailyLoad:F0}";
+                txtStatAllTimeClientAvrCheque.Text = $"Средний чек: {_statistic.AvgPayCheque:F2} руб.";
+                txtStatAllTimeClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic.AvgDaylyPrise:F2} руб.";
+                txtStatAllTimeClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic.AvgDailyLoad:F1}";
 
                 txtStatAllTimeSourceInstagram.Text = $"Instagram: {_statistic.SourceInstagramCount}";
                 txtStatAllTimeSourceTelegram.Text = $"Telegram: {_statistic.SourceTelegramCount}";
@@ -421,13 +426,30 @@ namespace WitchCRM
                     ? (decimal)_statistic.TotalClientsCount / _statistic.TotalWorkDays
                     : 0;
 
-                txtStatYearClientCount.Text = $"Количество обращений: {_statistic.TotalClientsCount}";
-                txtStatYearClientSumPrise.Text = $"Заработано: {_statistic.TotalClientsPrise:F2} руб.";
+                //для отображения информации "Ожидание"
+                if ((int)yearChoose.Value==DateTime.Now.Year)
+                {
+                    _statistic.ExTotalClientsPrise = _statistic.AvgDaylyPrise * daysInYear;
+                    _statistic.ExTotalClientsCount = _statistic.AvgDailyLoad * daysInYear;
+
+                    exYearClientsPrise = $"(Ожидание: {_statistic.ExTotalClientsPrise:F2} руб.)";
+                    exYearClientsCount = $"(Ожидание: {_statistic.ExTotalClientsCount:F0})";
+                }
+                else
+                {
+                    _statistic.ExTotalClientsPrise = null;
+                    _statistic.ExTotalClientsCount = null;
+                    exYearClientsPrise = String.Empty;
+                    exYearClientsCount = String.Empty;
+                }
+
+                txtStatYearClientCount.Text = $"Количество обращений: {_statistic.TotalClientsCount} " + exYearClientsCount;
+                txtStatYearClientSumPrise.Text = $"Заработано: {_statistic.TotalClientsPrise:F2} руб. " + exYearClientsPrise;
                 txtStatYearClientWorkDays.Text = $"Количество рабочих дней: {_statistic.TotalWorkDays}";
 
-                txtStatYearClientAvrCheque.Text = $"Средний чек: {_statistic.AvgPayCheque:F0} руб.";
-                txtStatYearClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic.AvgDaylyPrise:F0} руб.";
-                txtStatYearClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic.AvgDailyLoad:F0}";
+                txtStatYearClientAvrCheque.Text = $"Средний чек: {_statistic.AvgPayCheque:F2} руб.";
+                txtStatYearClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic.AvgDaylyPrise:F2} руб.";
+                txtStatYearClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic.AvgDailyLoad:F1}";
 
                 txtStatYearSourceInstagram.Text = $"Instagram: {_statistic.SourceInstagramCount}";
                 txtStatYearSourceTelegram.Text = $"Telegram: {_statistic.SourceTelegramCount}";
@@ -473,22 +495,39 @@ namespace WitchCRM
             _statistic.AvgDailyLoad = _statistic.TotalWorkDays > 0
                 ? (decimal)_statistic.TotalClientsCount / _statistic.TotalWorkDays
                 : 0;
+
+            //для отображения информации "Ожидание"
+            if ((int)yearChoose.Value == DateTime.Now.Year)
+            {
+                _statistic.ExTotalClientsPrise = _statistic.AvgDaylyPrise * daysInYear;
+                _statistic.ExTotalClientsCount = _statistic.AvgDailyLoad * daysInYear;
+
+                exYearClientsPrise = $"(Ожидание: {_statistic.ExTotalClientsPrise:F2} руб.)";
+                exYearClientsCount = $"(Ожидание: {_statistic.ExTotalClientsCount:F0})";
+            }
+            else
+            {
+                _statistic.ExTotalClientsPrise = null;
+                _statistic.ExTotalClientsCount = null;
+                exYearClientsPrise = String.Empty;
+                exYearClientsCount = String.Empty;
+            }
         }
 
         //Метод обновления тектовых полей для статистики "ЗА ГОД"
         private void UpdateTextBoxesForStatisticYear()
         {
-            txtStatYearClientCount.Text = $"Количество обращений: {_statistic?.TotalClientsCount}";
-            txtStatYearClientSumPrise.Text = $"Заработано: {_statistic?.TotalClientsPrise:F2} руб.";
+            txtStatYearClientCount.Text = $"Количество обращений: {_statistic?.TotalClientsCount} " + exYearClientsCount;
+            txtStatYearClientSumPrise.Text = $"Заработано: {_statistic?.TotalClientsPrise:F2} руб. " + exYearClientsPrise;
             txtStatYearClientWorkDays.Text = $"Количество рабочих дней: {_statistic?.TotalWorkDays}";
             txtStatYearSourceInstagram.Text = $"Instagram: {_statistic?.SourceInstagramCount}";
             txtStatYearSourceTelegram.Text = $"Telegram: {_statistic?.SourceTelegramCount}";
             txtStatYearSourceWhatsApp.Text = $"WhatsApp: {_statistic?.SourceWhatsAppCount}";
             txtStatYearStatusNew.Text = $"Обращений новых клиентов: {_statistic?.StatusNewClientCount}";
             txtStatYearStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic?.StatusRepeatClientCount}";
-            txtStatYearClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic?.AvgDaylyPrise:F0} руб.";
-            txtStatYearClientAvrCheque.Text = $"Средний чек: {_statistic?.AvgPayCheque:F0} руб.";
-            txtStatYearClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic?.AvgDailyLoad:F0}";
+            txtStatYearClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic?.AvgDaylyPrise:F2} руб.";
+            txtStatYearClientAvrCheque.Text = $"Средний чек: {_statistic?.AvgPayCheque:F2} руб.";
+            txtStatYearClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic?.AvgDailyLoad:F1}";
         }
         //----------------------------------------------------------------------------------------------------------
 
@@ -526,29 +565,30 @@ namespace WitchCRM
                     ? (decimal)_statistic.TotalClientsCount / _statistic.TotalWorkDays
                     : 0;
 
+                //для отображения информации "Ожидание"
                 if (selectedMonthNumber == DateTime.Now.Month)
                 {
                     _statistic.ExTotalClientsPrise = _statistic.AvgDaylyPrise * (DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
                     _statistic.ExTotalClientsCount = _statistic.AvgDailyLoad * (DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
 
-                    exTotalClientsPrise = $"(Ожидание: {_statistic.ExTotalClientsPrise:F2} руб.)";
-                    exTotoalClientsCount = $"(Ожидание: {_statistic.ExTotalClientsCount:F0})";
+                    exMonthClientsPrise = $"(Ожидание: {_statistic.ExTotalClientsPrise:F2} руб.)";
+                    exMonthClientsCount = $"(Ожидание: {_statistic.ExTotalClientsCount:F0})";
                 }
                 else
                 {
                     _statistic.ExTotalClientsPrise = null;
                     _statistic.ExTotalClientsCount = null;
-                    exTotalClientsPrise = String.Empty;
-                    exTotoalClientsCount = String.Empty;
+                    exMonthClientsPrise = String.Empty;
+                    exMonthClientsCount = String.Empty;
                 }
 
-                txtStatMonthClientCount.Text = $"Количество обращений: {_statistic.TotalClientsCount} " + exTotoalClientsCount;
-                txtStatMonthClientSumPrise.Text = $"Заработано: {_statistic.TotalClientsPrise:F2} руб. " + exTotalClientsPrise;
+                txtStatMonthClientCount.Text = $"Количество обращений: {_statistic.TotalClientsCount} " + exMonthClientsCount;
+                txtStatMonthClientSumPrise.Text = $"Заработано: {_statistic.TotalClientsPrise:F2} руб. " + exMonthClientsPrise;
                 txtStatMonthClientWorkDays.Text = $"Количество рабочих дней: {_statistic.TotalWorkDays}";
 
-                txtStatMonthClientAvrCheque.Text = $"Средний чек: {_statistic.AvgPayCheque:F0} руб.";
-                txtStatMonthClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic.AvgDaylyPrise:F0} руб.";
-                txtStatMonthClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic.AvgDailyLoad:F0}";
+                txtStatMonthClientAvrCheque.Text = $"Средний чек: {_statistic.AvgPayCheque:F2} руб.";
+                txtStatMonthClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic.AvgDaylyPrise:F2} руб.";
+                txtStatMonthClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic.AvgDailyLoad:F1}";
 
                 txtStatMonthSourceInstagram.Text = $"Instagram: {_statistic.SourceInstagramCount}";
                 txtStatMonthSourceTelegram.Text = $"Telegram: {_statistic.SourceTelegramCount}";
@@ -597,33 +637,34 @@ namespace WitchCRM
                 ? (decimal)_statistic.TotalClientsCount / _statistic.TotalWorkDays
                 : 0;
 
+            //для отображения информации "Ожидание"
             if (selectedMonthNumber == DateTime.Now.Month)
             {
                 _statistic.ExTotalClientsPrise = _statistic.AvgDaylyPrise * (DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
                 _statistic.ExTotalClientsCount = _statistic.AvgDailyLoad * (DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
 
-                exTotalClientsPrise = $"(Ожидание: {_statistic.ExTotalClientsPrise:F2} руб.)";
-                exTotoalClientsCount = $"(Ожидание: {_statistic.ExTotalClientsCount:F0})";
+                exMonthClientsPrise = $"(Ожидание: {_statistic.ExTotalClientsPrise:F2} руб.)";
+                exMonthClientsCount = $"(Ожидание: {_statistic.ExTotalClientsCount:F0})";
             }
             else
             {
                 _statistic.ExTotalClientsPrise = null;
                 _statistic.ExTotalClientsCount = null;
-                exTotalClientsPrise = String.Empty;
-                exTotoalClientsCount = String.Empty;
+                exMonthClientsPrise = String.Empty;
+                exMonthClientsCount = String.Empty;
             }
         }
 
         //Метод обновления тектовых полей для статистики "ЗА МЕСЯЦ"
         private void UpdateTextBoxesForStatisticMonth()
         {
-            txtStatMonthClientCount.Text = $"Количество обращений: {_statistic?.TotalClientsCount} " + exTotoalClientsCount;
-            txtStatMonthClientSumPrise.Text = $"Заработано: {_statistic?.TotalClientsPrise:F2} руб. " + exTotalClientsPrise;
+            txtStatMonthClientCount.Text = $"Количество обращений: {_statistic?.TotalClientsCount} " + exMonthClientsCount;
+            txtStatMonthClientSumPrise.Text = $"Заработано: {_statistic?.TotalClientsPrise:F2} руб. " + exMonthClientsPrise;
             txtStatMonthClientWorkDays.Text = $"Количество рабочих дней: {_statistic?.TotalWorkDays}";
 
-            txtStatMonthClientAvrCheque.Text = $"Средний чек: {_statistic?.AvgPayCheque:F0} руб.";
-            txtStatMonthClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic?.AvgDaylyPrise:F0} руб.";
-            txtStatMonthClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic?.AvgDailyLoad:F0}";
+            txtStatMonthClientAvrCheque.Text = $"Средний чек: {_statistic?.AvgPayCheque:F2} руб.";
+            txtStatMonthClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic?.AvgDaylyPrise:F2} руб.";
+            txtStatMonthClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic?.AvgDailyLoad:F1}";
 
             txtStatMonthSourceInstagram.Text = $"Instagram: {_statistic?.SourceInstagramCount}";
             txtStatMonthSourceTelegram.Text = $"Telegram: {_statistic?.SourceTelegramCount}";
