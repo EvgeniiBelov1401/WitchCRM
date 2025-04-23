@@ -493,7 +493,8 @@
             // 
             txtStatMonthClientSumPrise.BackColor = SystemColors.ControlLight;
             txtStatMonthClientSumPrise.Enabled = false;
-            txtStatMonthClientSumPrise.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatMonthClientSumPrise.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            txtStatMonthClientSumPrise.ForeColor = SystemColors.WindowText;
             txtStatMonthClientSumPrise.Location = new Point(6, 31);
             txtStatMonthClientSumPrise.Name = "txtStatMonthClientSumPrise";
             txtStatMonthClientSumPrise.Size = new Size(414, 26);
@@ -515,7 +516,8 @@
             // 
             txtStatMonthClientCount.BackColor = SystemColors.ControlLight;
             txtStatMonthClientCount.Enabled = false;
-            txtStatMonthClientCount.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtStatMonthClientCount.Font = new Font("Times New Roman", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            txtStatMonthClientCount.ForeColor = SystemColors.WindowText;
             txtStatMonthClientCount.Location = new Point(6, 63);
             txtStatMonthClientCount.Name = "txtStatMonthClientCount";
             txtStatMonthClientCount.Size = new Size(414, 26);
