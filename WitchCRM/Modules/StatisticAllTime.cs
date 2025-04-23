@@ -19,5 +19,8 @@ namespace WitchCRM.Modules
         public long SourceWhatsAppCount { get; set; }
         public long StatusNewClientCount { get; set; }
         public long StatusRepeatClientCount { get; set; }
+        
+        public decimal? ExTotalClientsCount { get; set; }
+        public decimal? ExTotalClientsPrise { get; set; }
     }
 }
