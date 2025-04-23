@@ -92,6 +92,7 @@
             txtStatYearClientAvrCheque = new TextBox();
             txtStatYearClientAvrDaylyCheque = new TextBox();
             grStatAllTime = new GroupBox();
+            txtAllYears = new TextBox();
             grStatAllTimeCommonValues = new GroupBox();
             txtStatAllTimeClientSumPrise = new TextBox();
             txtStatAllTimeClientWorkDays = new TextBox();
@@ -426,7 +427,7 @@
             // 
             lblPlannerClientCount.AutoSize = true;
             lblPlannerClientCount.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            lblPlannerClientCount.Location = new Point(275, 45);
+            lblPlannerClientCount.Location = new Point(275, 41);
             lblPlannerClientCount.Name = "lblPlannerClientCount";
             lblPlannerClientCount.Size = new Size(0, 22);
             lblPlannerClientCount.TabIndex = 7;
@@ -875,6 +876,7 @@
             // grStatAllTime
             // 
             grStatAllTime.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            grStatAllTime.Controls.Add(txtAllYears);
             grStatAllTime.Controls.Add(grStatAllTimeCommonValues);
             grStatAllTime.Controls.Add(grStatAllTimeStatus);
             grStatAllTime.Controls.Add(grStatAllTimeSource);
@@ -885,6 +887,16 @@
             grStatAllTime.TabIndex = 0;
             grStatAllTime.TabStop = false;
             grStatAllTime.Text = "За все время";
+            // 
+            // txtAllYears
+            // 
+            txtAllYears.Enabled = false;
+            txtAllYears.Font = new Font("Times New Roman", 12F, FontStyle.Italic, GraphicsUnit.Point, 204);
+            txtAllYears.Location = new Point(21, 37);
+            txtAllYears.Multiline = true;
+            txtAllYears.Name = "txtAllYears";
+            txtAllYears.Size = new Size(511, 53);
+            txtAllYears.TabIndex = 7;
             // 
             // grStatAllTimeCommonValues
             // 
@@ -1120,6 +1132,7 @@
             groupBox5.ResumeLayout(false);
             groupBox5.PerformLayout();
             grStatAllTime.ResumeLayout(false);
+            grStatAllTime.PerformLayout();
             grStatAllTimeCommonValues.ResumeLayout(false);
             grStatAllTimeCommonValues.PerformLayout();
             grStatAllTimeStatus.ResumeLayout(false);
@@ -1209,5 +1222,6 @@
         private TextBox txtStatMonthClientAvrCheque;
         private TextBox txtStatMonthClientAvrDaylyCheque;
         private ComboBox monthChoose;
+        private TextBox txtAllYears;
     }
 }

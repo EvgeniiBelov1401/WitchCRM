@@ -21,6 +21,8 @@ namespace WitchCRM
 
         private string? exYearClientsPrise;
         private string? exYearClientsCount;
+
+        private string? allYears = String.Empty;
         int daysInYear = DateTime.IsLeapYear(DateTime.Now.Year) ? 366 : 365;
 
         public FormPlanner()
@@ -167,7 +169,7 @@ namespace WitchCRM
             plannerTable.AutoSizeColumnsMode = (DataGridViewAutoSizeColumnsMode)DataGridViewAutoSizeColumnMode.Fill;
             plannerTable.AllowUserToAddRows = false;
 
-            if (DateTime.Now.Year > yearChoose.Maximum)
+            if (DateTime.Now.Year > (int)yearChoose.Maximum)//ПРОВЕРИТЬ ЭТОТ МОМЕНТ!!!!!!!!!!!!!!
             {
                 yearChoose.Maximum = DateTime.Now.Year;
             }
@@ -382,6 +384,12 @@ namespace WitchCRM
                 txtStatAllTimeStatusNew.Text = $"Обращений новых клиентов: {_statistic.StatusNewClientCount}";
                 txtStatAllTimeStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic.StatusRepeatClientCount}";
 
+
+                for (decimal i=yearChoose.Minimum;i<=yearChoose.Maximum;i++)
+                {
+                    allYears += $"{i}г., ";
+                }
+                txtAllYears.Text = allYears;
             }
             catch (Exception ex)
             {
