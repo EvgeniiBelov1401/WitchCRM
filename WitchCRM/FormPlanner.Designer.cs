@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPlanner));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             grNewClient = new GroupBox();
             grStatus = new GroupBox();
             cbRepeatClient = new CheckBox();
@@ -108,6 +108,9 @@
             txtStatAllTimeClientAvrCountDayly = new TextBox();
             txtStatAllTimeClientAvrCheque = new TextBox();
             txtStatAllTimeClientAvrDaylyCheque = new TextBox();
+            tabOptions = new TabPage();
+            btnBackUp = new Button();
+            grBackup = new GroupBox();
             grNewClient.SuspendLayout();
             grStatus.SuspendLayout();
             grDesсription.SuspendLayout();
@@ -136,6 +139,8 @@
             grStatAllTimeStatus.SuspendLayout();
             grStatAllTimeSource.SuspendLayout();
             grStatAllTimeAvgValues.SuspendLayout();
+            tabOptions.SuspendLayout();
+            grBackup.SuspendLayout();
             SuspendLayout();
             // 
             // grNewClient
@@ -377,6 +382,7 @@
             tabControl1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControl1.Controls.Add(tabPagePlan);
             tabControl1.Controls.Add(tabPageStatistic);
+            tabControl1.Controls.Add(tabOptions);
             tabControl1.Location = new Point(8, 12);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -418,8 +424,8 @@
             plannerTable.Location = new Point(19, 70);
             plannerTable.Name = "plannerTable";
             plannerTable.RowHeadersWidth = 51;
-            dataGridViewCellStyle1.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            plannerTable.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            plannerTable.RowsDefaultCellStyle = dataGridViewCellStyle2;
             plannerTable.Size = new Size(1636, 414);
             plannerTable.TabIndex = 8;
             // 
@@ -1081,6 +1087,38 @@
             txtStatAllTimeClientAvrDaylyCheque.TabIndex = 5;
             txtStatAllTimeClientAvrDaylyCheque.TextAlign = HorizontalAlignment.Center;
             // 
+            // tabOptions
+            // 
+            tabOptions.BackColor = Color.WhiteSmoke;
+            tabOptions.Controls.Add(grBackup);
+            tabOptions.Location = new Point(4, 24);
+            tabOptions.Name = "tabOptions";
+            tabOptions.Size = new Size(1667, 777);
+            tabOptions.TabIndex = 2;
+            tabOptions.Text = "Настройки";
+            // 
+            // btnBackUp
+            // 
+            btnBackUp.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            btnBackUp.Location = new Point(27, 57);
+            btnBackUp.Name = "btnBackUp";
+            btnBackUp.Size = new Size(272, 52);
+            btnBackUp.TabIndex = 0;
+            btnBackUp.Text = "Сделать BackUp базы данных";
+            btnBackUp.UseVisualStyleBackColor = true;
+            btnBackUp.Click += btnBackUp_Click;
+            // 
+            // grBackup
+            // 
+            grBackup.Controls.Add(btnBackUp);
+            grBackup.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            grBackup.Location = new Point(32, 38);
+            grBackup.Name = "grBackup";
+            grBackup.Size = new Size(331, 170);
+            grBackup.TabIndex = 1;
+            grBackup.TabStop = false;
+            grBackup.Text = "Back up";
+            // 
             // FormPlanner
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1141,6 +1179,8 @@
             grStatAllTimeSource.PerformLayout();
             grStatAllTimeAvgValues.ResumeLayout(false);
             grStatAllTimeAvgValues.PerformLayout();
+            tabOptions.ResumeLayout(false);
+            grBackup.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -1223,5 +1263,8 @@
         private TextBox txtStatMonthClientAvrDaylyCheque;
         private ComboBox monthChoose;
         private TextBox txtAllYears;
+        private TabPage tabOptions;
+        private Button btnBackUp;
+        private GroupBox grBackup;
     }
 }

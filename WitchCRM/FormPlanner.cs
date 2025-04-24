@@ -97,6 +97,12 @@ namespace WitchCRM
             dateTimePicker.Value = DateTime.Now;//после клика "Записать" возвращает в dateTimePicker текущую дату
         }
 
+        //КНОПКА "Сделать BackUp базы данных"
+        private void btnBackUp_Click(object sender, EventArgs e)
+        {
+            DoBackUpDB();
+        }
+
         //ВЫБРАТЬ ИНСТАГРАМ
         private void rbInstagram_CheckedChanged_1(object sender, EventArgs e)
         {
@@ -386,7 +392,7 @@ namespace WitchCRM
                 txtStatAllTimeStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic.StatusRepeatClientCount}";
 
 
-                for (decimal i=yearChoose.Minimum;i<=yearChoose.Maximum;i++)
+                for (decimal i = yearChoose.Minimum; i <= yearChoose.Maximum; i++)
                 {
                     allYears += $"{i}г., ";
                 }
@@ -436,7 +442,7 @@ namespace WitchCRM
                     : 0;
 
                 //для отображения информации "Ожидание"
-                if ((int)yearChoose.Value==DateTime.Now.Year)
+                if ((int)yearChoose.Value == DateTime.Now.Year)
                 {
                     _statistic.ExTotalClientsPrise = _statistic.AvgDaylyPrise * daysInYear;
                     _statistic.ExTotalClientsCount = _statistic.AvgDailyLoad * daysInYear;
@@ -683,18 +689,46 @@ namespace WitchCRM
             txtStatMonthStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic?.StatusRepeatClientCount}";
         }
 
-
-
-
-
-
-
-
-
-
-
-
         //----------------------------------------------------------------------------------------------------------
+
+        //Метод, который делает бэкап базы данных
+        private void DoBackUpDB()
+        {
+            string sourceDbDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "Source"));
+            string sourceDbPath = Path.Combine(sourceDbDirectory, "ClientsDB.db");
+
+            string backupFolder = @"C:\Backup";
+            string backupPath = Path.Combine(backupFolder, $"ClientsDB_{DateTime.Now:yyyyMMdd_HHmmss}.db");
+
+            try
+            {
+                if (!File.Exists(sourceDbPath))
+                {
+                    MessageBox.Show($"Исходная база данных не найдена!", "Ошибка",
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                Directory.CreateDirectory(backupFolder);
+
+                if (Directory.Exists(backupFolder))
+                {
+                    foreach (string file in Directory.EnumerateFiles(backupFolder, "*", SearchOption.AllDirectories))
+                    {
+                        File.Delete(file);
+                    }
+                }
+
+                File.Copy(sourceDbPath, backupPath, overwrite: true);
+                MessageBox.Show($"Бэкап успешно создан: {backupPath}", "Успех",
+                                   MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при создании Backup(а): {ex.Message}", "Ошибка",
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         //-------------------------------------------------------------------------------------------------------
     }
 }
