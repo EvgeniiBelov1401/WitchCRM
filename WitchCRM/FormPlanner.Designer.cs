@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPlanner));
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             grNewClient = new GroupBox();
             grStatus = new GroupBox();
             cbRepeatClient = new CheckBox();
@@ -58,6 +58,9 @@
             plannerDate = new DateTimePicker();
             tabPageStatistic = new TabPage();
             grStatMonth = new GroupBox();
+            lblCurrentYear = new Label();
+            grBestDay = new GroupBox();
+            txtBestDay = new TextBox();
             monthChoose = new ComboBox();
             groupBox6 = new GroupBox();
             txtStatMonthClientSumPrise = new TextBox();
@@ -75,6 +78,8 @@
             txtStatMonthClientAvrCheque = new TextBox();
             txtStatMonthClientAvrDaylyCheque = new TextBox();
             grStatYear = new GroupBox();
+            grBestMonth = new GroupBox();
+            txtBestMonth = new TextBox();
             yearChoose = new NumericUpDown();
             groupBox2 = new GroupBox();
             txtStatYearClientSumPrise = new TextBox();
@@ -109,8 +114,8 @@
             txtStatAllTimeClientAvrCheque = new TextBox();
             txtStatAllTimeClientAvrDaylyCheque = new TextBox();
             tabOptions = new TabPage();
-            btnBackUp = new Button();
             grBackup = new GroupBox();
+            btnBackUp = new Button();
             grNewClient.SuspendLayout();
             grStatus.SuspendLayout();
             grDesсription.SuspendLayout();
@@ -124,11 +129,13 @@
             ((System.ComponentModel.ISupportInitialize)plannerTable).BeginInit();
             tabPageStatistic.SuspendLayout();
             grStatMonth.SuspendLayout();
+            grBestDay.SuspendLayout();
             groupBox6.SuspendLayout();
             groupBox7.SuspendLayout();
             groupBox8.SuspendLayout();
             groupBox9.SuspendLayout();
             grStatYear.SuspendLayout();
+            grBestMonth.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)yearChoose).BeginInit();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -424,8 +431,8 @@
             plannerTable.Location = new Point(19, 70);
             plannerTable.Name = "plannerTable";
             plannerTable.RowHeadersWidth = 51;
-            dataGridViewCellStyle2.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            plannerTable.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            plannerTable.RowsDefaultCellStyle = dataGridViewCellStyle1;
             plannerTable.Size = new Size(1636, 414);
             plannerTable.TabIndex = 8;
             // 
@@ -462,7 +469,8 @@
             // 
             // grStatMonth
             // 
-            grStatMonth.Anchor = AnchorStyles.Top;
+            grStatMonth.Controls.Add(lblCurrentYear);
+            grStatMonth.Controls.Add(grBestDay);
             grStatMonth.Controls.Add(monthChoose);
             grStatMonth.Controls.Add(groupBox6);
             grStatMonth.Controls.Add(groupBox7);
@@ -474,6 +482,38 @@
             grStatMonth.TabIndex = 2;
             grStatMonth.TabStop = false;
             grStatMonth.Text = "За месяц";
+            // 
+            // lblCurrentYear
+            // 
+            lblCurrentYear.AutoSize = true;
+            lblCurrentYear.ImageAlign = ContentAlignment.BottomCenter;
+            lblCurrentYear.Location = new Point(217, 43);
+            lblCurrentYear.Name = "lblCurrentYear";
+            lblCurrentYear.Size = new Size(0, 31);
+            lblCurrentYear.TabIndex = 9;
+            lblCurrentYear.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // grBestDay
+            // 
+            grBestDay.Controls.Add(txtBestDay);
+            grBestDay.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            grBestDay.Location = new Point(21, 595);
+            grBestDay.Name = "grBestDay";
+            grBestDay.Size = new Size(518, 99);
+            grBestDay.TabIndex = 8;
+            grBestDay.TabStop = false;
+            grBestDay.Text = "Самый продуктивный день";
+            // 
+            // txtBestDay
+            // 
+            txtBestDay.Enabled = false;
+            txtBestDay.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtBestDay.Location = new Point(6, 31);
+            txtBestDay.Multiline = true;
+            txtBestDay.Name = "txtBestDay";
+            txtBestDay.Size = new Size(505, 62);
+            txtBestDay.TabIndex = 0;
+            txtBestDay.TextAlign = HorizontalAlignment.Center;
             // 
             // monthChoose
             // 
@@ -491,7 +531,7 @@
             groupBox6.Controls.Add(txtStatMonthClientWorkDays);
             groupBox6.Controls.Add(txtStatMonthClientCount);
             groupBox6.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            groupBox6.Location = new Point(21, 96);
+            groupBox6.Location = new Point(21, 85);
             groupBox6.Name = "groupBox6";
             groupBox6.Size = new Size(518, 129);
             groupBox6.TabIndex = 1;
@@ -541,7 +581,7 @@
             groupBox7.Controls.Add(txtStatMonthStatusRepeat);
             groupBox7.Controls.Add(txtStatMonthStatusNew);
             groupBox7.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            groupBox7.Location = new Point(21, 503);
+            groupBox7.Location = new Point(21, 492);
             groupBox7.Name = "groupBox7";
             groupBox7.Size = new Size(518, 97);
             groupBox7.TabIndex = 6;
@@ -578,7 +618,7 @@
             groupBox8.Controls.Add(txtStatMonthSourceTelegram);
             groupBox8.Controls.Add(txtStatMonthSourceInstagram);
             groupBox8.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            groupBox8.Location = new Point(21, 366);
+            groupBox8.Location = new Point(21, 355);
             groupBox8.Name = "groupBox8";
             groupBox8.Size = new Size(518, 131);
             groupBox8.TabIndex = 5;
@@ -627,7 +667,7 @@
             groupBox9.Controls.Add(txtStatMonthClientAvrCheque);
             groupBox9.Controls.Add(txtStatMonthClientAvrDaylyCheque);
             groupBox9.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            groupBox9.Location = new Point(21, 231);
+            groupBox9.Location = new Point(21, 220);
             groupBox9.Name = "groupBox9";
             groupBox9.Size = new Size(518, 129);
             groupBox9.TabIndex = 1;
@@ -673,6 +713,7 @@
             // grStatYear
             // 
             grStatYear.Anchor = AnchorStyles.Top;
+            grStatYear.Controls.Add(grBestMonth);
             grStatYear.Controls.Add(yearChoose);
             grStatYear.Controls.Add(groupBox2);
             grStatYear.Controls.Add(groupBox3);
@@ -684,6 +725,28 @@
             grStatYear.TabIndex = 1;
             grStatYear.TabStop = false;
             grStatYear.Text = "За год";
+            // 
+            // grBestMonth
+            // 
+            grBestMonth.Controls.Add(txtBestMonth);
+            grBestMonth.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            grBestMonth.Location = new Point(20, 595);
+            grBestMonth.Name = "grBestMonth";
+            grBestMonth.Size = new Size(518, 99);
+            grBestMonth.TabIndex = 9;
+            grBestMonth.TabStop = false;
+            grBestMonth.Text = "Самый продуктивный месяц";
+            // 
+            // txtBestMonth
+            // 
+            txtBestMonth.Enabled = false;
+            txtBestMonth.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtBestMonth.Location = new Point(6, 31);
+            txtBestMonth.Multiline = true;
+            txtBestMonth.Name = "txtBestMonth";
+            txtBestMonth.Size = new Size(505, 62);
+            txtBestMonth.TabIndex = 0;
+            txtBestMonth.TextAlign = HorizontalAlignment.Center;
             // 
             // yearChoose
             // 
@@ -702,7 +765,7 @@
             groupBox2.Controls.Add(txtStatYearClientWorkDays);
             groupBox2.Controls.Add(txtStatYearClientCount);
             groupBox2.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            groupBox2.Location = new Point(21, 96);
+            groupBox2.Location = new Point(20, 85);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(518, 129);
             groupBox2.TabIndex = 1;
@@ -750,7 +813,7 @@
             groupBox3.Controls.Add(txtStatYearStatusRepeat);
             groupBox3.Controls.Add(txtStatYearStatusNew);
             groupBox3.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            groupBox3.Location = new Point(21, 503);
+            groupBox3.Location = new Point(21, 492);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(518, 97);
             groupBox3.TabIndex = 6;
@@ -787,7 +850,7 @@
             groupBox4.Controls.Add(txtStatYearSourceTelegram);
             groupBox4.Controls.Add(txtStatYearSourceInstagram);
             groupBox4.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            groupBox4.Location = new Point(21, 366);
+            groupBox4.Location = new Point(21, 355);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(518, 131);
             groupBox4.TabIndex = 5;
@@ -836,7 +899,7 @@
             groupBox5.Controls.Add(txtStatYearClientAvrCheque);
             groupBox5.Controls.Add(txtStatYearClientAvrDaylyCheque);
             groupBox5.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            groupBox5.Location = new Point(21, 231);
+            groupBox5.Location = new Point(21, 220);
             groupBox5.Name = "groupBox5";
             groupBox5.Size = new Size(518, 129);
             groupBox5.TabIndex = 1;
@@ -897,11 +960,11 @@
             // txtAllYears
             // 
             txtAllYears.Enabled = false;
-            txtAllYears.Font = new Font("Times New Roman", 12F, FontStyle.Italic, GraphicsUnit.Point, 204);
+            txtAllYears.Font = new Font("Times New Roman", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 204);
             txtAllYears.Location = new Point(21, 37);
             txtAllYears.Multiline = true;
             txtAllYears.Name = "txtAllYears";
-            txtAllYears.Size = new Size(511, 53);
+            txtAllYears.Size = new Size(511, 40);
             txtAllYears.TabIndex = 7;
             // 
             // grStatAllTimeCommonValues
@@ -910,7 +973,7 @@
             grStatAllTimeCommonValues.Controls.Add(txtStatAllTimeClientWorkDays);
             grStatAllTimeCommonValues.Controls.Add(txtStatAllTimeClientCount);
             grStatAllTimeCommonValues.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            grStatAllTimeCommonValues.Location = new Point(21, 96);
+            grStatAllTimeCommonValues.Location = new Point(21, 85);
             grStatAllTimeCommonValues.Name = "grStatAllTimeCommonValues";
             grStatAllTimeCommonValues.Size = new Size(518, 129);
             grStatAllTimeCommonValues.TabIndex = 1;
@@ -958,7 +1021,7 @@
             grStatAllTimeStatus.Controls.Add(txtStatAllTimeStatusRepeat);
             grStatAllTimeStatus.Controls.Add(txtStatAllTimeStatusNew);
             grStatAllTimeStatus.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            grStatAllTimeStatus.Location = new Point(21, 503);
+            grStatAllTimeStatus.Location = new Point(21, 492);
             grStatAllTimeStatus.Name = "grStatAllTimeStatus";
             grStatAllTimeStatus.Size = new Size(518, 97);
             grStatAllTimeStatus.TabIndex = 6;
@@ -995,7 +1058,7 @@
             grStatAllTimeSource.Controls.Add(txtStatAllTimeSourceTelegram);
             grStatAllTimeSource.Controls.Add(txtStatAllTimeSourceInstagram);
             grStatAllTimeSource.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            grStatAllTimeSource.Location = new Point(21, 366);
+            grStatAllTimeSource.Location = new Point(21, 355);
             grStatAllTimeSource.Name = "grStatAllTimeSource";
             grStatAllTimeSource.Size = new Size(518, 131);
             grStatAllTimeSource.TabIndex = 5;
@@ -1044,7 +1107,7 @@
             grStatAllTimeAvgValues.Controls.Add(txtStatAllTimeClientAvrCheque);
             grStatAllTimeAvgValues.Controls.Add(txtStatAllTimeClientAvrDaylyCheque);
             grStatAllTimeAvgValues.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            grStatAllTimeAvgValues.Location = new Point(21, 231);
+            grStatAllTimeAvgValues.Location = new Point(21, 220);
             grStatAllTimeAvgValues.Name = "grStatAllTimeAvgValues";
             grStatAllTimeAvgValues.Size = new Size(518, 129);
             grStatAllTimeAvgValues.TabIndex = 1;
@@ -1097,6 +1160,17 @@
             tabOptions.TabIndex = 2;
             tabOptions.Text = "Настройки";
             // 
+            // grBackup
+            // 
+            grBackup.Controls.Add(btnBackUp);
+            grBackup.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            grBackup.Location = new Point(32, 38);
+            grBackup.Name = "grBackup";
+            grBackup.Size = new Size(331, 170);
+            grBackup.TabIndex = 1;
+            grBackup.TabStop = false;
+            grBackup.Text = "Back up";
+            // 
             // btnBackUp
             // 
             btnBackUp.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
@@ -1107,17 +1181,6 @@
             btnBackUp.Text = "Сделать BackUp базы данных";
             btnBackUp.UseVisualStyleBackColor = true;
             btnBackUp.Click += btnBackUp_Click;
-            // 
-            // grBackup
-            // 
-            grBackup.Controls.Add(btnBackUp);
-            grBackup.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            grBackup.Location = new Point(32, 38);
-            grBackup.Name = "grBackup";
-            grBackup.Size = new Size(331, 170);
-            grBackup.TabIndex = 1;
-            grBackup.TabStop = false;
-            grBackup.Text = "Back up";
             // 
             // FormPlanner
             // 
@@ -1151,6 +1214,9 @@
             ((System.ComponentModel.ISupportInitialize)plannerTable).EndInit();
             tabPageStatistic.ResumeLayout(false);
             grStatMonth.ResumeLayout(false);
+            grStatMonth.PerformLayout();
+            grBestDay.ResumeLayout(false);
+            grBestDay.PerformLayout();
             groupBox6.ResumeLayout(false);
             groupBox6.PerformLayout();
             groupBox7.ResumeLayout(false);
@@ -1160,6 +1226,8 @@
             groupBox9.ResumeLayout(false);
             groupBox9.PerformLayout();
             grStatYear.ResumeLayout(false);
+            grBestMonth.ResumeLayout(false);
+            grBestMonth.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)yearChoose).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
@@ -1266,5 +1334,10 @@
         private TabPage tabOptions;
         private Button btnBackUp;
         private GroupBox grBackup;
+        private GroupBox grBestDay;
+        private TextBox txtBestDay;
+        private GroupBox grBestMonth;
+        private TextBox txtBestMonth;
+        private Label lblCurrentYear;
     }
 }

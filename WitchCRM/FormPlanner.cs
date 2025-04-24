@@ -15,6 +15,7 @@ namespace WitchCRM
 
         private int selectedMonthNumber;
         private int selectedYear;
+        private int selectedYearForStatYear;
 
         private string? exMonthClientsPrise;
         private string? exMonthClientsCount;
@@ -95,6 +96,8 @@ namespace WitchCRM
             LoadStatYear();//обновляет статистику "ЗА ГОД" при записи нового клиента
             LoadStatMonth();//обновляет статистику "ЗА МЕСЯЦ" при записи нового клиента
             dateTimePicker.Value = DateTime.Now;//после клика "Записать" возвращает в dateTimePicker текущую дату
+            allYears = String.Empty;//затирает данные всех годов работы
+            ShowAllYears();//метод, который показывает все года работы
         }
 
         //КНОПКА "Сделать BackUp базы данных"
@@ -162,7 +165,8 @@ namespace WitchCRM
             txtName.Focus();
             _context = new AppDbContext();
             _context.Database.EnsureCreated();
-            txtAllYears.Clear();
+            allYears = String.Empty;
+            lblCurrentYear.Text = DateTime.Now.Year.ToString();
 
 
             txtTelegram.Mask = "+79990000000";
@@ -391,12 +395,8 @@ namespace WitchCRM
                 txtStatAllTimeStatusNew.Text = $"Обращений новых клиентов: {_statistic.StatusNewClientCount}";
                 txtStatAllTimeStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic.StatusRepeatClientCount}";
 
+                ShowAllYears();
 
-                for (decimal i = yearChoose.Minimum; i <= yearChoose.Maximum; i++)
-                {
-                    allYears += $"{i}г., ";
-                }
-                txtAllYears.Text = allYears;
             }
             catch (Exception ex)
             {
@@ -404,15 +404,25 @@ namespace WitchCRM
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        //Метод, который показывает все года работы
+        private void ShowAllYears()
+        {
+            for (decimal i = yearChoose.Minimum; i <= yearChoose.Maximum; i++)
+            {
+                allYears += $"{i}г., ";
+            }
+            txtAllYears.Text = allYears;
+        }
+
         //----------------------------------------------------------------------------------------------------------
 
         //СТАТИСТИКА "ЗА ГОД"
         //Метод выгрузки и отрисовки статистики "ЗА ГОД"
         private void LoadStatYear()
         {
-            int selectedYear = (int)yearChoose.Value;
+            selectedYearForStatYear = (int)yearChoose.Value;
             var clientsInYear = _context?.Clients?
-                .Where(c => c.Date.Year == selectedYear)
+                .Where(c => c.Date.Year == selectedYearForStatYear)
                 .ToList();
             try
             {
@@ -472,6 +482,39 @@ namespace WitchCRM
 
                 txtStatYearStatusNew.Text = $"Обращений новых клиентов: {_statistic.StatusNewClientCount}";
                 txtStatYearStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic.StatusRepeatClientCount}";
+
+                bool hasDataForYear = _context?.Clients?.Any(c => c.Date.Year == selectedYearForStatYear) ?? false;
+
+                if (!hasDataForYear)
+                {
+                    txtBestMonth.Text = $"Нет данных за {selectedYearForStatYear} год.";
+                    return;
+                }
+
+                var productiveMonth = _context?.Clients
+                    .Where(c => c.Date.Year == selectedYearForStatYear)
+                    .AsEnumerable()
+                    .GroupBy(c => c.Date.Month)
+                    .Select(g => new
+                    {
+                        MonthNumber = g.Key,
+                        MonthName = new DateTime(selectedYearForStatYear, g.Key, 1).ToString("MMMM", new CultureInfo("ru-RU")),
+                        TotalPrise = g.Sum(c => (double)c.Prise!),
+                        Count = g.Count()
+                    })
+                    .OrderByDescending(x => x.TotalPrise)
+                    .FirstOrDefault();
+                if (productiveMonth != null)
+                {
+
+                    txtBestMonth.Text = $"Месяц: {productiveMonth.MonthName.ToUpper()} ({selectedYearForStatYear}){Environment.NewLine}" +
+                        $"Заработано: {productiveMonth.TotalPrise:F2} ₽{Environment.NewLine}" +
+                        $"Количество обращений: {productiveMonth.Count}";
+                }
+                else
+                {
+                    txtBestMonth.Text = "Нет данных за выбранный год...";
+                }
             }
             catch (Exception ex)
             {
@@ -484,8 +527,8 @@ namespace WitchCRM
         //Метод обновления свойств класса StatisticYear для статистики "ЗА ГОД"
         private void UpdateStatisticsYear()
         {
-            int selectedYear = (int)yearChoose.Value;
-            var clientsInYear = _context?.Clients?.Where(c => c.Date.Year == selectedYear).ToList();
+            selectedYearForStatYear = (int)yearChoose.Value;
+            var clientsInYear = _context?.Clients?.Where(c => c.Date.Year == selectedYearForStatYear).ToList();
 
             _statistic = new StatisticYear()
             {
@@ -543,6 +586,39 @@ namespace WitchCRM
             txtStatYearClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic?.AvgDaylyPrise:F2} ₽";
             txtStatYearClientAvrCheque.Text = $"Средний чек: {_statistic?.AvgPayCheque:F2} ₽";
             txtStatYearClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic?.AvgDailyLoad:F1}";
+
+            bool hasDataForYear = _context?.Clients?.Any(c => c.Date.Year == selectedYearForStatYear) ?? false;
+
+            if (!hasDataForYear)
+            {
+                txtBestMonth.Text = $"Нет данных за {selectedYearForStatYear} год.";
+                return;
+            }
+
+            var productiveMonth = _context?.Clients
+                .Where(c => c.Date.Year == selectedYearForStatYear)
+                .AsEnumerable()
+                .GroupBy(c => c.Date.Month)
+                .Select(g => new
+                {
+                    MonthNumber = g.Key,
+                    MonthName = new DateTime(selectedYearForStatYear, g.Key, 1).ToString("MMMM", new CultureInfo("ru-RU")),
+                    TotalPrise = g.Sum(c => (double)c.Prise!),
+                    Count = g.Count()
+                })
+                .OrderByDescending(x => x.TotalPrise)
+                .FirstOrDefault();
+            if (productiveMonth != null)
+            {
+
+                txtBestMonth.Text = $"Месяц: {productiveMonth.MonthName.ToUpper()} ({selectedYearForStatYear}){Environment.NewLine}" +
+                    $"Заработано: {productiveMonth.TotalPrise:F2} ₽{Environment.NewLine}" +
+                    $"Количество обращений: {productiveMonth.Count}";
+            }
+            else
+            {
+                txtBestMonth.Text = "Нет данных за выбранный год...";
+            }
         }
         //----------------------------------------------------------------------------------------------------------
 
@@ -611,6 +687,35 @@ namespace WitchCRM
 
                 txtStatMonthStatusNew.Text = $"Обращений новых клиентов: {_statistic.StatusNewClientCount}";
                 txtStatMonthStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic.StatusRepeatClientCount}";
+
+
+                var productiveDay = _context?.Clients
+                    .Where(c => c.Date.Year == selectedYear &&
+                        c.Date.Month == selectedMonthNumber)
+                    .GroupBy(c => c.Date.Date)
+                    .Select(g => new
+                    {
+                        Date = g.Key,
+                        TotalPrise = g.Sum(c => (double)c.Prise!),
+                        Count = g.Count(),
+                        DayOfWeek = g.Key.DayOfWeek
+                    })
+                    .OrderByDescending(x => x.TotalPrise)
+                    .FirstOrDefault();
+
+                if (productiveDay!=null)
+                {
+                    var russianCulture = new CultureInfo("ru-RU");
+                    string dayOfWeekName = russianCulture.DateTimeFormat.GetDayName(productiveDay.DayOfWeek);
+
+                    txtBestDay.Text = $"Дата: {productiveDay.Date.ToShortDateString()} ({dayOfWeekName.ToUpper()}){Environment.NewLine}" +
+                        $"Заработано: {productiveDay.TotalPrise:F2} ₽{Environment.NewLine}" +
+                        $"Количество обращений: {productiveDay.Count}";
+                }
+                else
+                {
+                    txtBestDay.Text = "Нет данных за выбранный месяц...";
+                }
             }
             catch (Exception ex)
             {
@@ -687,6 +792,34 @@ namespace WitchCRM
 
             txtStatMonthStatusNew.Text = $"Обращений новых клиентов: {_statistic?.StatusNewClientCount}";
             txtStatMonthStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic?.StatusRepeatClientCount}";
+
+            var productiveDay = _context?.Clients
+                    .Where(c => c.Date.Year == selectedYear &&
+                        c.Date.Month == selectedMonthNumber)
+                    .GroupBy(c => c.Date.Date)
+                    .Select(g => new
+                    {
+                        Date = g.Key,
+                        TotalPrise = g.Sum(c => (double)c.Prise!),
+                        Count = g.Count(),
+                        DayOfWeek = g.Key.DayOfWeek
+                    })
+                    .OrderByDescending(x => x.TotalPrise)
+                    .FirstOrDefault();
+
+            if (productiveDay != null)
+            {
+                var russianCulture = new CultureInfo("ru-RU");
+                string dayOfWeekName = russianCulture.DateTimeFormat.GetDayName(productiveDay.DayOfWeek);
+
+                txtBestDay.Text = $"Дата: {productiveDay.Date.ToShortDateString()} ({dayOfWeekName.ToUpper()}){Environment.NewLine}" +
+                    $"Заработано: {productiveDay.TotalPrise:F2} ₽{Environment.NewLine}" +
+                    $"Количество обращений: {productiveDay.Count}";
+            }
+            else
+            {
+                txtBestDay.Text = "Нет данных за выбранный месяц...";
+            }
         }
 
         //----------------------------------------------------------------------------------------------------------
