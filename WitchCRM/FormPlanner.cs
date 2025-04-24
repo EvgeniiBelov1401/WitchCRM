@@ -354,6 +354,7 @@ namespace WitchCRM
         {
             try
             {
+                ShowAllYears();
                 _statistic = new StatisticAllTime()
                 {
                     TotalClientsCount = _context?.Clients?.Count() ?? 0,
@@ -395,8 +396,28 @@ namespace WitchCRM
                 txtStatAllTimeStatusNew.Text = $"Обращений новых клиентов: {_statistic.StatusNewClientCount}";
                 txtStatAllTimeStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic.StatusRepeatClientCount}";
 
-                ShowAllYears();
+                var productiveYear = _context?.Clients
+                    .AsEnumerable()
+                    .GroupBy(c => c.Date.Year)
+                    .Select(g => new
+                    {
+                        Year = g.Key,
+                        TotalPrise = g.Sum(c => (double)c.Prise!),
+                        Count = g.Count()
+                    })
+                    .OrderByDescending(x => x.TotalPrise)
+                    .FirstOrDefault();
 
+                if (productiveYear!=null)
+                {
+                    txtBestYear.Text= $"Год: {productiveYear.Year}{Environment.NewLine}" +
+                        $"Заработано: {productiveYear.TotalPrise:F2} ₽{Environment.NewLine}" +
+                        $"Количество обращений: {productiveYear.Count}";
+                }
+                else
+                {
+                    txtBestYear.Text = "В базе данных нет записей о клиентах...";
+                }
             }
             catch (Exception ex)
             {
