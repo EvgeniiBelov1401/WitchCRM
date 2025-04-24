@@ -117,6 +117,7 @@
             txtStatAllTimeClientAvrDaylyCheque = new TextBox();
             tabOptions = new TabPage();
             grBackup = new GroupBox();
+            txtLastBackupDateTime = new TextBox();
             btnBackUp = new Button();
             grNewClient.SuspendLayout();
             grStatus.SuspendLayout();
@@ -1191,6 +1192,7 @@
             // 
             // grBackup
             // 
+            grBackup.Controls.Add(txtLastBackupDateTime);
             grBackup.Controls.Add(btnBackUp);
             grBackup.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             grBackup.Location = new Point(32, 38);
@@ -1200,10 +1202,22 @@
             grBackup.TabStop = false;
             grBackup.Text = "Back up";
             // 
+            // txtLastBackupDateTime
+            // 
+            txtLastBackupDateTime.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtLastBackupDateTime.BackColor = SystemColors.ControlLight;
+            txtLastBackupDateTime.Enabled = false;
+            txtLastBackupDateTime.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            txtLastBackupDateTime.Location = new Point(23, 38);
+            txtLastBackupDateTime.Name = "txtLastBackupDateTime";
+            txtLastBackupDateTime.Size = new Size(272, 26);
+            txtLastBackupDateTime.TabIndex = 1;
+            // 
             // btnBackUp
             // 
+            btnBackUp.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnBackUp.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            btnBackUp.Location = new Point(27, 57);
+            btnBackUp.Location = new Point(23, 91);
             btnBackUp.Name = "btnBackUp";
             btnBackUp.Size = new Size(272, 52);
             btnBackUp.TabIndex = 0;
@@ -1280,6 +1294,7 @@
             grStatAllTimeAvgValues.PerformLayout();
             tabOptions.ResumeLayout(false);
             grBackup.ResumeLayout(false);
+            grBackup.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -1372,5 +1387,6 @@
         private Label lblCurrentYear;
         private GroupBox grBestYear;
         private TextBox txtBestYear;
+        private TextBox txtLastBackupDateTime;
     }
 }

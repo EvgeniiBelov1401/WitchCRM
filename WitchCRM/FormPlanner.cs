@@ -1,6 +1,8 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics;
+using System.Globalization;
 using System.Windows.Forms;
 using WitchCRM.Modules;
+using WitchCRM.Properties;
 
 namespace WitchCRM
 {
@@ -46,6 +48,7 @@ namespace WitchCRM
             UpdateTextBoxesForStatisticYear();
             UpdateStatisticsMonth();
             UpdateTextBoxesForStatisticMonth();
+            UpdateLastBackupInfo();
 
             string[] months = new string[]
             {
@@ -104,6 +107,7 @@ namespace WitchCRM
         private void btnBackUp_Click(object sender, EventArgs e)
         {
             DoBackUpDB();
+            UpdateLastBackupInfo();
         }
 
         //ВЫБРАТЬ ИНСТАГРАМ
@@ -873,6 +877,8 @@ namespace WitchCRM
                     }
                 }
 
+                UpdateLastBackupInfo();
+
                 File.Copy(sourceDbPath, backupPath, overwrite: true);
                 MessageBox.Show($"Бэкап успешно создан: {backupPath}", "Успех",
                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -881,6 +887,51 @@ namespace WitchCRM
             {
                 MessageBox.Show($"Ошибка при создании Backup(а): {ex.Message}", "Ошибка",
                               MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        //Метод, обновляет данные о последнем бэкапе
+        private void UpdateLastBackupInfo()
+        {
+            string backupFolder = @"C:\Backup";
+
+            try
+            {
+                if (Directory.Exists(backupFolder))
+                {
+                    var backupFiles = Directory.GetFiles(backupFolder, "ClientsDB_*.db");
+                    if (backupFiles.Length > 0)
+                    {
+                        var lastBackupFile = backupFiles
+                            .Select(f => new FileInfo(f))
+                            .OrderByDescending(f => f.LastWriteTime)
+                            .First();
+
+                        txtLastBackupDateTime.Text = $"Последний бэкап: {lastBackupFile.LastWriteTime:dd.MM.yyyy HH:mm:ss}";
+
+                        Settings.Default.LastBackupDate = lastBackupFile.LastWriteTime;
+                        Settings.Default.Save();
+
+                        //txtLastBackupDateTime.Text = Settings.Default.LastBackupDate != DateTime.MinValue
+                        //    ? $"Последний бэкап: {Settings.Default.LastBackupDate:dd.MM.yyyy HH:mm:ss}"
+                        //    : "Бэкапы отсутствуют";
+
+                        txtLastBackupDateTime.Text = $"Последний бэкап: {Settings.Default.LastBackupDate}";
+                    }
+                    else
+                    {
+                        txtLastBackupDateTime.Text = "Бэкапы отсутствуют";
+                    }
+                }
+                else
+                {
+                    txtLastBackupDateTime.Text = "Папка бэкапов не существует";
+                }
+            }
+            catch (Exception ex)
+            {
+                txtLastBackupDateTime.Text = "Ошибка при проверке бэкапов";
+                Debug.WriteLine($"Ошибка при проверке бэкапов: {ex.Message}");
             }
         }
         //-------------------------------------------------------------------------------------------------------
