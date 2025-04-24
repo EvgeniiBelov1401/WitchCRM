@@ -26,7 +26,7 @@ namespace WitchCRM
         private string? exYearClientsCount;
 
         private string? allYears = String.Empty;
-        int daysInYear = DateTime.IsLeapYear(DateTime.Now.Year) ? 366 : 365;
+        private readonly int daysInYear = DateTime.IsLeapYear(DateTime.Now.Year) ? 366 : 365;
 
         public FormPlanner()
         {
@@ -35,9 +35,9 @@ namespace WitchCRM
             LoadClientsByDate();//отображает планировщик в зависимости от выбранной даты
 
             LoadStatAllTime();//загружает статистику "ЗА ВСЕ ВРЕМЯ" при загрузке формы
-            yearChoose.ValueChanged += yearChoose_ValueChanged!;//меняет статистику "ЗА ГОД" в зависимости от выбранного года
+            yearChoose.ValueChanged += YearChoose_ValueChanged!;//меняет статистику "ЗА ГОД" в зависимости от выбранного года
             LoadStatYear();//загружает статистику "ЗА ГОД" при загрузке формы
-            monthChoose.ValueMemberChanged += yearChoose_ValueChanged!;//меняет статистику "ЗА МЕСЯЦ" в зависимости от выбранного месяца
+            monthChoose.ValueMemberChanged += YearChoose_ValueChanged!;//меняет статистику "ЗА МЕСЯЦ" в зависимости от выбранного месяца
             LoadStatMonth();//загружает статистику "ЗА МЕСЯЦ" при загрузке формы
         }
 
@@ -50,22 +50,22 @@ namespace WitchCRM
             UpdateTextBoxesForStatisticMonth();
             UpdateLastBackupInfo();
 
-            string[] months = new string[]
-            {
+            string[] months =
+            [
                 "Январь", "Февраль", "Март",
                 "Апрель", "Май", "Июнь",
                 "Июль", "Август", "Сентябрь",
                 "Октябрь", "Ноябрь", "Декабрь"
-            };
+            ];
 
             monthChoose.Items.AddRange(months);
 
             monthChoose.SelectedIndex = DateTime.Now.Month - 1;//устанавливает значение по умочаниею - текущий месяц
-            monthChoose_SelectedIndexChanged(null!, EventArgs.Empty);// Можно сразу вызвать обработчик для первоначальной загрузки данных
+            MonthChoose_SelectedIndexChanged(null!, EventArgs.Empty);// Можно сразу вызвать обработчик для первоначальной загрузки данных
         }
 
         //Метод-событие обновления статистики "ЗА МЕСЯЦ" в зависимости от выбранного месяца
-        private void monthChoose_SelectedIndexChanged(object sender, EventArgs e)
+        private void MonthChoose_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (monthChoose.SelectedItem != null && monthChoose.SelectedIndex != -1)
             {
@@ -77,7 +77,7 @@ namespace WitchCRM
         }
 
         //Метод-событие обновления статистики "ЗА ГОД" в зависимости от выбранного года
-        private void yearChoose_ValueChanged(object sender, EventArgs e)
+        private void YearChoose_ValueChanged(object sender, EventArgs e)
         {
             UpdateStatisticsYear();
             UpdateTextBoxesForStatisticYear();
@@ -89,7 +89,7 @@ namespace WitchCRM
         ////
 
         //КНОПКА "ЗАПИСАТЬ"
-        private void btnSave_Click_1(object sender, EventArgs e)
+        private void BtnSave_Click_1(object sender, EventArgs e)
         {
             InputData();
             plannerDate.Value = dateTimePicker.Value;
@@ -104,14 +104,14 @@ namespace WitchCRM
         }
 
         //КНОПКА "Сделать BackUp базы данных"
-        private void btnBackUp_Click(object sender, EventArgs e)
+        private void BtnBackUp_Click(object sender, EventArgs e)
         {
             DoBackUpDB();
             UpdateLastBackupInfo();
         }
 
         //ВЫБРАТЬ ИНСТАГРАМ
-        private void rbInstagram_CheckedChanged_1(object sender, EventArgs e)
+        private void RbInstagram_CheckedChanged_1(object sender, EventArgs e)
         {
             if (rbInstagram.Checked)
             {
@@ -123,7 +123,7 @@ namespace WitchCRM
             }
         }
         //ВЫБРАТЬ ТЕЛЕГРАМ
-        private void rbTelegram_CheckedChanged_1(object sender, EventArgs e)
+        private void RbTelegram_CheckedChanged_1(object sender, EventArgs e)
         {
             if (rbTelegram.Checked)
             {
@@ -135,7 +135,7 @@ namespace WitchCRM
             }
         }
         //ВЫБРАТЬ WHATSAPP
-        private void rbWhatsApp_CheckedChanged_1(object sender, EventArgs e)
+        private void RbWhatsApp_CheckedChanged_1(object sender, EventArgs e)
         {
             if (rbWhatsApp.Checked)
             {
@@ -147,7 +147,7 @@ namespace WitchCRM
             }
         }
         //УСТАНОВИТЬ СТАТУС ПОВТОРНЫЙ КЛИЕНТ
-        private void cbRepeatClient_CheckedChanged_1(object sender, EventArgs e)
+        private void CbRepeatClient_CheckedChanged_1(object sender, EventArgs e)
         {
             if (cbRepeatClient.Checked)
             {
@@ -313,35 +313,33 @@ namespace WitchCRM
         {
             try
             {
-                using (var db = new AppDbContext())
+                using var db = new AppDbContext();
+                var clients = db.Clients
+                    .Where(c => c.Date.Date == plannerDate.Value.Date)
+                    .ToList();
+                if (clients.Count != 0)
                 {
-                    var clients = db.Clients
-                        .Where(c => c.Date.Date == plannerDate.Value.Date)
-                        .ToList();
-                    if (clients.Count != 0)
-                    {
-                        lblPlannerClientCount.Text = $"Клиентов: {clients.Count}";
-                        plannerTable.Visible = true;
-                    }
-                    else
-                    {
-                        lblPlannerClientCount.Text = $"Нет записи";
-                        plannerTable.Visible = false;
-                    }
-                    var displayData = clients
-                        .Select((c, index) => new
-                        {
-                            Дата = c.Date.ToShortDateString(),
-                            Имя = c.Name,
-                            Статус = c.Status,
-                            Источник = c.SourceName,
-                            Контакты = c.SourceData,
-                            Оплачено = c.Prise,
-                            Дополнительно = c.Description
-                        })
-                        .ToList();
-                    plannerTable.DataSource = displayData;
+                    lblPlannerClientCount.Text = $"Клиентов: {clients.Count}";
+                    plannerTable.Visible = true;
                 }
+                else
+                {
+                    lblPlannerClientCount.Text = $"Нет записи";
+                    plannerTable.Visible = false;
+                }
+                var displayData = clients
+                    .Select((c, index) => new
+                    {
+                        Дата = c.Date.ToShortDateString(),
+                        Имя = c.Name,
+                        Статус = c.Status,
+                        Источник = c.SourceName,
+                        Контакты = c.SourceData,
+                        Оплачено = c.Prise,
+                        Дополнительно = c.Description
+                    })
+                    .ToList();
+                plannerTable.DataSource = displayData;
             }
             catch (Exception ex)
             {
@@ -723,7 +721,7 @@ namespace WitchCRM
                         Date = g.Key,
                         TotalPrise = g.Sum(c => (double)c.Prise!),
                         Count = g.Count(),
-                        DayOfWeek = g.Key.DayOfWeek
+                        g.Key.DayOfWeek
                     })
                     .OrderByDescending(x => x.TotalPrise)
                     .FirstOrDefault();
@@ -827,7 +825,7 @@ namespace WitchCRM
                         Date = g.Key,
                         TotalPrise = g.Sum(c => (double)c.Prise!),
                         Count = g.Count(),
-                        DayOfWeek = g.Key.DayOfWeek
+                        g.Key.DayOfWeek
                     })
                     .OrderByDescending(x => x.TotalPrise)
                     .FirstOrDefault();

@@ -164,10 +164,10 @@
             grNewClient.Controls.Add(grSource);
             grNewClient.Controls.Add(grDate);
             grNewClient.Controls.Add(grName);
-            grNewClient.Font = new Font("Segoe UI Black", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            grNewClient.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             grNewClient.Location = new Point(3, 6);
             grNewClient.Name = "grNewClient";
-            grNewClient.Size = new Size(1661, 261);
+            grNewClient.Size = new Size(1681, 261);
             grNewClient.TabIndex = 15;
             grNewClient.TabStop = false;
             grNewClient.Text = "Новый клиент";
@@ -193,7 +193,7 @@
             cbRepeatClient.TabIndex = 0;
             cbRepeatClient.Text = "Повторный/Постоянный клиент";
             cbRepeatClient.UseVisualStyleBackColor = true;
-            cbRepeatClient.CheckedChanged += cbRepeatClient_CheckedChanged_1;
+            cbRepeatClient.CheckedChanged += CbRepeatClient_CheckedChanged_1;
             // 
             // grDesсription
             // 
@@ -202,7 +202,7 @@
             grDesсription.Font = new Font("Times New Roman", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 204);
             grDesсription.Location = new Point(1346, 48);
             grDesсription.Name = "grDesсription";
-            grDesсription.Size = new Size(309, 190);
+            grDesсription.Size = new Size(329, 190);
             grDesсription.TabIndex = 4;
             grDesсription.TabStop = false;
             grDesсription.Text = "Особые отметки";
@@ -214,7 +214,7 @@
             txtDescription.Location = new Point(19, 32);
             txtDescription.Multiline = true;
             txtDescription.Name = "txtDescription";
-            txtDescription.Size = new Size(274, 137);
+            txtDescription.Size = new Size(294, 137);
             txtDescription.TabIndex = 0;
             // 
             // btnSave
@@ -228,7 +228,7 @@
             btnSave.TabIndex = 2;
             btnSave.Text = "Записать";
             btnSave.UseVisualStyleBackColor = true;
-            btnSave.Click += btnSave_Click_1;
+            btnSave.Click += BtnSave_Click_1;
             // 
             // grPrise
             // 
@@ -318,7 +318,7 @@
             rbInstagram.TabStop = true;
             rbInstagram.Text = "        ";
             rbInstagram.UseVisualStyleBackColor = true;
-            rbInstagram.CheckedChanged += rbInstagram_CheckedChanged_1;
+            rbInstagram.CheckedChanged += RbInstagram_CheckedChanged_1;
             // 
             // rbTelegram
             // 
@@ -332,7 +332,7 @@
             rbTelegram.TabStop = true;
             rbTelegram.Text = "        ";
             rbTelegram.UseVisualStyleBackColor = true;
-            rbTelegram.CheckedChanged += rbTelegram_CheckedChanged_1;
+            rbTelegram.CheckedChanged += RbTelegram_CheckedChanged_1;
             // 
             // rbWhatsApp
             // 
@@ -348,7 +348,7 @@
             rbWhatsApp.Text = "        ";
             rbWhatsApp.TextAlign = ContentAlignment.MiddleCenter;
             rbWhatsApp.UseVisualStyleBackColor = true;
-            rbWhatsApp.CheckedChanged += rbWhatsApp_CheckedChanged_1;
+            rbWhatsApp.CheckedChanged += RbWhatsApp_CheckedChanged_1;
             // 
             // grDate
             // 
@@ -394,10 +394,13 @@
             tabControl1.Controls.Add(tabPagePlan);
             tabControl1.Controls.Add(tabPageStatistic);
             tabControl1.Controls.Add(tabOptions);
-            tabControl1.Location = new Point(8, 12);
+            tabControl1.Font = new Font("Times New Roman", 18F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tabControl1.HotTrack = true;
+            tabControl1.Location = new Point(0, 0);
+            tabControl1.Multiline = true;
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1675, 805);
+            tabControl1.Size = new Size(1695, 805);
             tabControl1.TabIndex = 17;
             // 
             // tabPagePlan
@@ -406,10 +409,11 @@
             tabPagePlan.Controls.Add(grPlanner);
             tabPagePlan.Controls.Add(grNewClient);
             tabPagePlan.Font = new Font("Times New Roman", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            tabPagePlan.Location = new Point(4, 24);
+            tabPagePlan.ImeMode = ImeMode.NoControl;
+            tabPagePlan.Location = new Point(4, 36);
             tabPagePlan.Name = "tabPagePlan";
             tabPagePlan.Padding = new Padding(3);
-            tabPagePlan.Size = new Size(1667, 777);
+            tabPagePlan.Size = new Size(1687, 765);
             tabPagePlan.TabIndex = 0;
             tabPagePlan.Text = "Планирование";
             // 
@@ -422,7 +426,7 @@
             grPlanner.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             grPlanner.Location = new Point(3, 273);
             grPlanner.Name = "grPlanner";
-            grPlanner.Size = new Size(1661, 490);
+            grPlanner.Size = new Size(1681, 478);
             grPlanner.TabIndex = 17;
             grPlanner.TabStop = false;
             grPlanner.Text = "Планировщик";
@@ -437,7 +441,7 @@
             plannerTable.RowHeadersWidth = 51;
             dataGridViewCellStyle1.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
             plannerTable.RowsDefaultCellStyle = dataGridViewCellStyle1;
-            plannerTable.Size = new Size(1636, 414);
+            plannerTable.Size = new Size(1656, 402);
             plannerTable.TabIndex = 8;
             // 
             // lblPlannerClientCount
@@ -464,10 +468,10 @@
             tabPageStatistic.Controls.Add(grStatYear);
             tabPageStatistic.Controls.Add(grStatAllTime);
             tabPageStatistic.Font = new Font("Times New Roman", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            tabPageStatistic.Location = new Point(4, 24);
+            tabPageStatistic.Location = new Point(4, 36);
             tabPageStatistic.Name = "tabPageStatistic";
             tabPageStatistic.Padding = new Padding(3);
-            tabPageStatistic.Size = new Size(1667, 777);
+            tabPageStatistic.Size = new Size(1687, 765);
             tabPageStatistic.TabIndex = 1;
             tabPageStatistic.Text = "Статистика";
             // 
@@ -528,7 +532,7 @@
             monthChoose.Name = "monthChoose";
             monthChoose.Size = new Size(190, 39);
             monthChoose.TabIndex = 7;
-            monthChoose.SelectedIndexChanged += monthChoose_SelectedIndexChanged;
+            monthChoose.SelectedIndexChanged += MonthChoose_SelectedIndexChanged;
             // 
             // groupBox6
             // 
@@ -724,7 +728,7 @@
             grStatYear.Controls.Add(groupBox3);
             grStatYear.Controls.Add(groupBox4);
             grStatYear.Controls.Add(groupBox5);
-            grStatYear.Location = new Point(559, 56);
+            grStatYear.Location = new Point(569, 56);
             grStatYear.Name = "grStatYear";
             grStatYear.Size = new Size(545, 700);
             grStatYear.TabIndex = 1;
@@ -957,7 +961,7 @@
             grStatAllTime.Controls.Add(grStatAllTimeStatus);
             grStatAllTime.Controls.Add(grStatAllTimeSource);
             grStatAllTime.Controls.Add(grStatAllTimeAvgValues);
-            grStatAllTime.Location = new Point(1110, 56);
+            grStatAllTime.Location = new Point(1130, 56);
             grStatAllTime.Name = "grStatAllTime";
             grStatAllTime.Size = new Size(545, 700);
             grStatAllTime.TabIndex = 0;
@@ -1184,9 +1188,10 @@
             // 
             tabOptions.BackColor = Color.WhiteSmoke;
             tabOptions.Controls.Add(grBackup);
-            tabOptions.Location = new Point(4, 24);
+            tabOptions.Font = new Font("Times New Roman", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            tabOptions.Location = new Point(4, 36);
             tabOptions.Name = "tabOptions";
-            tabOptions.Size = new Size(1667, 777);
+            tabOptions.Size = new Size(1687, 765);
             tabOptions.TabIndex = 2;
             tabOptions.Text = "Настройки";
             // 
@@ -1223,7 +1228,7 @@
             btnBackUp.TabIndex = 0;
             btnBackUp.Text = "Сделать BackUp базы данных";
             btnBackUp.UseVisualStyleBackColor = true;
-            btnBackUp.Click += btnBackUp_Click;
+            btnBackUp.Click += BtnBackUp_Click;
             // 
             // FormPlanner
             // 
