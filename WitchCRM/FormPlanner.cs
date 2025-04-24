@@ -1,4 +1,4 @@
-using System.Globalization;
+п»їusing System.Globalization;
 using System.Windows.Forms;
 using WitchCRM.Modules;
 
@@ -7,7 +7,7 @@ namespace WitchCRM
     public partial class FormPlanner : Form
     {
         private AppDbContext? _context;
-        private string? _clientStatus = "Новый";
+        private string? _clientStatus = "РќРѕРІС‹Р№";
         private string _sourceName = String.Empty;
         private string _sourceData = String.Empty;
 
@@ -28,17 +28,17 @@ namespace WitchCRM
         public FormPlanner()
         {
             InitializeComponent();
-            LoadOptions();//устанавливает начальные настройки при загрузке формы
-            LoadClientsByDate();//отображает планировщик в зависимости от выбранной даты
+            LoadOptions();//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ РЅР°С‡Р°Р»СЊРЅС‹Рµ РЅР°СЃС‚СЂРѕР№РєРё РїСЂРё Р·Р°РіСЂСѓР·РєРµ С„РѕСЂРјС‹
+            LoadClientsByDate();//РѕС‚РѕР±СЂР°Р¶Р°РµС‚ РїР»Р°РЅРёСЂРѕРІС‰РёРє РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РІС‹Р±СЂР°РЅРЅРѕР№ РґР°С‚С‹
 
-            LoadStatAllTime();//загружает статистику "ЗА ВСЕ ВРЕМЯ" при загрузке формы
-            yearChoose.ValueChanged += yearChoose_ValueChanged!;//меняет статистику "ЗА ГОД" в зависимости от выбранного года
-            LoadStatYear();//загружает статистику "ЗА ГОД" при загрузке формы
-            monthChoose.ValueMemberChanged += yearChoose_ValueChanged!;//меняет статистику "ЗА МЕСЯЦ" в зависимости от выбранного месяца
-            LoadStatMonth();//загружает статистику "ЗА МЕСЯЦ" при загрузке формы
+            LoadStatAllTime();//Р·Р°РіСЂСѓР¶Р°РµС‚ СЃС‚Р°С‚РёСЃС‚РёРєСѓ "Р—Рђ Р’РЎР• Р’Р Р•РњРЇ" РїСЂРё Р·Р°РіСЂСѓР·РєРµ С„РѕСЂРјС‹
+            yearChoose.ValueChanged += yearChoose_ValueChanged!;//РјРµРЅСЏРµС‚ СЃС‚Р°С‚РёСЃС‚РёРєСѓ "Р—Рђ Р“РћР”" РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РІС‹Р±СЂР°РЅРЅРѕРіРѕ РіРѕРґР°
+            LoadStatYear();//Р·Р°РіСЂСѓР¶Р°РµС‚ СЃС‚Р°С‚РёСЃС‚РёРєСѓ "Р—Рђ Р“РћР”" РїСЂРё Р·Р°РіСЂСѓР·РєРµ С„РѕСЂРјС‹
+            monthChoose.ValueMemberChanged += yearChoose_ValueChanged!;//РјРµРЅСЏРµС‚ СЃС‚Р°С‚РёСЃС‚РёРєСѓ "Р—Рђ РњР•РЎРЇР¦" РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РІС‹Р±СЂР°РЅРЅРѕРіРѕ РјРµСЃСЏС†Р°
+            LoadStatMonth();//Р·Р°РіСЂСѓР¶Р°РµС‚ СЃС‚Р°С‚РёСЃС‚РёРєСѓ "Р—Рђ РњР•РЎРЇР¦" РїСЂРё Р·Р°РіСЂСѓР·РєРµ С„РѕСЂРјС‹
         }
 
-        //Метод-событие обновления формы
+        //РњРµС‚РѕРґ-СЃРѕР±С‹С‚РёРµ РѕР±РЅРѕРІР»РµРЅРёСЏ С„РѕСЂРјС‹
         private void FormPlanner_Load(object sender, EventArgs e)
         {
             UpdateStatisticsYear();
@@ -48,19 +48,19 @@ namespace WitchCRM
 
             string[] months = new string[]
             {
-                "Январь", "Февраль", "Март",
-                "Апрель", "Май", "Июнь",
-                "Июль", "Август", "Сентябрь",
-                "Октябрь", "Ноябрь", "Декабрь"
+                "РЇРЅРІР°СЂСЊ", "Р¤РµРІСЂР°Р»СЊ", "РњР°СЂС‚",
+                "РђРїСЂРµР»СЊ", "РњР°Р№", "РСЋРЅСЊ",
+                "РСЋР»СЊ", "РђРІРіСѓСЃС‚", "РЎРµРЅС‚СЏР±СЂСЊ",
+                "РћРєС‚СЏР±СЂСЊ", "РќРѕСЏР±СЂСЊ", "Р”РµРєР°Р±СЂСЊ"
             };
 
             monthChoose.Items.AddRange(months);
 
-            monthChoose.SelectedIndex = DateTime.Now.Month - 1;//устанавливает значение по умочаниею - текущий месяц
-            monthChoose_SelectedIndexChanged(null!, EventArgs.Empty);// Можно сразу вызвать обработчик для первоначальной загрузки данных
+            monthChoose.SelectedIndex = DateTime.Now.Month - 1;//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ РїРѕ СѓРјРѕС‡Р°РЅРёРµСЋ - С‚РµРєСѓС‰РёР№ РјРµСЃСЏС†
+            monthChoose_SelectedIndexChanged(null!, EventArgs.Empty);// РњРѕР¶РЅРѕ СЃСЂР°Р·Сѓ РІС‹Р·РІР°С‚СЊ РѕР±СЂР°Р±РѕС‚С‡РёРє РґР»СЏ РїРµСЂРІРѕРЅР°С‡Р°Р»СЊРЅРѕР№ Р·Р°РіСЂСѓР·РєРё РґР°РЅРЅС‹С…
         }
 
-        //Метод-событие обновления статистики "ЗА МЕСЯЦ" в зависимости от выбранного месяца
+        //РњРµС‚РѕРґ-СЃРѕР±С‹С‚РёРµ РѕР±РЅРѕРІР»РµРЅРёСЏ СЃС‚Р°С‚РёСЃС‚РёРєРё "Р—Рђ РњР•РЎРЇР¦" РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РІС‹Р±СЂР°РЅРЅРѕРіРѕ РјРµСЃСЏС†Р°
         private void monthChoose_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (monthChoose.SelectedItem != null && monthChoose.SelectedIndex != -1)
@@ -72,7 +72,7 @@ namespace WitchCRM
             UpdateTextBoxesForStatisticMonth();
         }
 
-        //Метод-событие обновления статистики "ЗА ГОД" в зависимости от выбранного года
+        //РњРµС‚РѕРґ-СЃРѕР±С‹С‚РёРµ РѕР±РЅРѕРІР»РµРЅРёСЏ СЃС‚Р°С‚РёСЃС‚РёРєРё "Р—Рђ Р“РћР”" РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РІС‹Р±СЂР°РЅРЅРѕРіРѕ РіРѕРґР°
         private void yearChoose_ValueChanged(object sender, EventArgs e)
         {
             UpdateStatisticsYear();
@@ -81,23 +81,23 @@ namespace WitchCRM
 
 
         ////
-        //Органы управления
+        //РћСЂРіР°РЅС‹ СѓРїСЂР°РІР»РµРЅРёСЏ
         ////
 
-        //КНОПКА "ЗАПИСАТЬ"
+        //РљРќРћРџРљРђ "Р—РђРџРРЎРђРўР¬"
         private void btnSave_Click_1(object sender, EventArgs e)
         {
             InputData();
             plannerDate.Value = dateTimePicker.Value;
-            LoadClientsByDate();//обновляет планировщик в зависимости от выбранной даты при записи нового клиента
+            LoadClientsByDate();//РѕР±РЅРѕРІР»СЏРµС‚ РїР»Р°РЅРёСЂРѕРІС‰РёРє РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РІС‹Р±СЂР°РЅРЅРѕР№ РґР°С‚С‹ РїСЂРё Р·Р°РїРёСЃРё РЅРѕРІРѕРіРѕ РєР»РёРµРЅС‚Р°
 
-            LoadStatAllTime();//обновляет статистику "ЗА ВСЕ ВРЕМЯ" при записи нового клиента
-            LoadStatYear();//обновляет статистику "ЗА ГОД" при записи нового клиента
-            LoadStatMonth();//обновляет статистику "ЗА МЕСЯЦ" при записи нового клиента
-            dateTimePicker.Value = DateTime.Now;//после клика "Записать" возвращает в dateTimePicker текущую дату
+            LoadStatAllTime();//РѕР±РЅРѕРІР»СЏРµС‚ СЃС‚Р°С‚РёСЃС‚РёРєСѓ "Р—Рђ Р’РЎР• Р’Р Р•РњРЇ" РїСЂРё Р·Р°РїРёСЃРё РЅРѕРІРѕРіРѕ РєР»РёРµРЅС‚Р°
+            LoadStatYear();//РѕР±РЅРѕРІР»СЏРµС‚ СЃС‚Р°С‚РёСЃС‚РёРєСѓ "Р—Рђ Р“РћР”" РїСЂРё Р·Р°РїРёСЃРё РЅРѕРІРѕРіРѕ РєР»РёРµРЅС‚Р°
+            LoadStatMonth();//РѕР±РЅРѕРІР»СЏРµС‚ СЃС‚Р°С‚РёСЃС‚РёРєСѓ "Р—Рђ РњР•РЎРЇР¦" РїСЂРё Р·Р°РїРёСЃРё РЅРѕРІРѕРіРѕ РєР»РёРµРЅС‚Р°
+            dateTimePicker.Value = DateTime.Now;//РїРѕСЃР»Рµ РєР»РёРєР° "Р—Р°РїРёСЃР°С‚СЊ" РІРѕР·РІСЂР°С‰Р°РµС‚ РІ dateTimePicker С‚РµРєСѓС‰СѓСЋ РґР°С‚Сѓ
         }
 
-        //ВЫБРАТЬ ИНСТАГРАМ
+        //Р’Р«Р‘Р РђРўР¬ РРќРЎРўРђР“Р РђРњ
         private void rbInstagram_CheckedChanged_1(object sender, EventArgs e)
         {
             if (rbInstagram.Checked)
@@ -109,7 +109,7 @@ namespace WitchCRM
                 txtWhatsApp.Visible = false;
             }
         }
-        //ВЫБРАТЬ ТЕЛЕГРАМ
+        //Р’Р«Р‘Р РђРўР¬ РўР•Р›Р•Р“Р РђРњ
         private void rbTelegram_CheckedChanged_1(object sender, EventArgs e)
         {
             if (rbTelegram.Checked)
@@ -121,7 +121,7 @@ namespace WitchCRM
                 txtInstagram.Visible = false;
             }
         }
-        //ВЫБРАТЬ WHATSAPP
+        //Р’Р«Р‘Р РђРўР¬ WHATSAPP
         private void rbWhatsApp_CheckedChanged_1(object sender, EventArgs e)
         {
             if (rbWhatsApp.Checked)
@@ -133,12 +133,12 @@ namespace WitchCRM
                 txtInstagram.Visible = false;
             }
         }
-        //УСТАНОВИТЬ СТАТУС ПОВТОРНЫЙ КЛИЕНТ
+        //РЈРЎРўРђРќРћР’РРўР¬ РЎРўРђРўРЈРЎ РџРћР’РўРћР РќР«Р™ РљР›РР•РќРў
         private void cbRepeatClient_CheckedChanged_1(object sender, EventArgs e)
         {
             if (cbRepeatClient.Checked)
             {
-                _clientStatus = "Повторный";
+                _clientStatus = "РџРѕРІС‚РѕСЂРЅС‹Р№";
             }
         }
 
@@ -147,15 +147,16 @@ namespace WitchCRM
         //-------------------------------------------------------------------------------------------------------
 
         ////
-        //Методы
+        //РњРµС‚РѕРґС‹
         ////
 
-        //Метод первоначальных настроек элементов при загрузке формы
+        //РњРµС‚РѕРґ РїРµСЂРІРѕРЅР°С‡Р°Р»СЊРЅС‹С… РЅР°СЃС‚СЂРѕРµРє СЌР»РµРјРµРЅС‚РѕРІ РїСЂРё Р·Р°РіСЂСѓР·РєРµ С„РѕСЂРјС‹
         private void LoadOptions()
         {
             txtName.Focus();
             _context = new AppDbContext();
             _context.Database.EnsureCreated();
+            txtAllYears.Clear();
 
 
             txtTelegram.Mask = "+79990000000";
@@ -164,30 +165,30 @@ namespace WitchCRM
 
             plannerDate.Format = DateTimePickerFormat.Long;
             plannerDate.Value = DateTime.Today;
-            plannerDate.ValueChanged += (s, e) => LoadClientsByDate();//обновляет планировщик во время смены даты
+            plannerDate.ValueChanged += (s, e) => LoadClientsByDate();//РѕР±РЅРѕРІР»СЏРµС‚ РїР»Р°РЅРёСЂРѕРІС‰РёРє РІРѕ РІСЂРµРјСЏ СЃРјРµРЅС‹ РґР°С‚С‹
 
             plannerTable.AutoSizeColumnsMode = (DataGridViewAutoSizeColumnsMode)DataGridViewAutoSizeColumnMode.Fill;
             plannerTable.AllowUserToAddRows = false;
 
-            if (DateTime.Now.Year > (int)yearChoose.Maximum)//ПРОВЕРИТЬ ЭТОТ МОМЕНТ!!!!!!!!!!!!!!
+            if (DateTime.Now.Year > (int)yearChoose.Maximum)//РџР РћР’Р•Р РРўР¬ Р­РўРћРў РњРћРњР•РќРў!!!!!!!!!!!!!!
             {
                 yearChoose.Maximum = DateTime.Now.Year;
             }
-            yearChoose.Value = DateTime.Now.Year;//устанавливает значение текущего года как значение по умолчанию для статистики "ЗА ГОД"
+            yearChoose.Value = DateTime.Now.Year;//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёРµ С‚РµРєСѓС‰РµРіРѕ РіРѕРґР° РєР°Рє Р·РЅР°С‡РµРЅРёРµ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РґР»СЏ СЃС‚Р°С‚РёСЃС‚РёРєРё "Р—Рђ Р“РћР”"
         }
 
-        //Метод ввода данных
+        //РњРµС‚РѕРґ РІРІРѕРґР° РґР°РЅРЅС‹С…
         private void InputData()
         {
             if (string.IsNullOrWhiteSpace(txtName.Text))
             {
-                MessageBox.Show("Поле 'Имя' не может быть пустым!", "Ошибка",
+                MessageBox.Show("РџРѕР»Рµ 'РРјСЏ' РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РїСѓСЃС‚С‹Рј!", "РћС€РёР±РєР°",
                               MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (!rbInstagram.Checked && !rbTelegram.Checked && !rbWhatsApp.Checked)
             {
-                MessageBox.Show("Не выбран 'Источник'", "Ошибка",
+                MessageBox.Show("РќРµ РІС‹Р±СЂР°РЅ 'РСЃС‚РѕС‡РЅРёРє'", "РћС€РёР±РєР°",
                               MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -197,7 +198,7 @@ namespace WitchCRM
 
             if (String.IsNullOrWhiteSpace(txtPrise.Text))
             {
-                MessageBox.Show("Поле 'К оплате' не может быть пустым!", "Ошибка",
+                MessageBox.Show("РџРѕР»Рµ 'Рљ РѕРїР»Р°С‚Рµ' РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РїСѓСЃС‚С‹Рј!", "РћС€РёР±РєР°",
                               MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -223,7 +224,7 @@ namespace WitchCRM
                     }
 
 
-                    MessageBox.Show("Клиент успешно сохранен!", "Успех",
+                    MessageBox.Show("РљР»РёРµРЅС‚ СѓСЃРїРµС€РЅРѕ СЃРѕС…СЂР°РЅРµРЅ!", "РЈСЃРїРµС…",
                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     ClearInputtedData();
@@ -235,19 +236,19 @@ namespace WitchCRM
             }
             catch (FormatException)
             {
-                MessageBox.Show("В поле 'К оплате' необходимо ввести корректные данные!", "Ошибка",
+                MessageBox.Show("Р’ РїРѕР»Рµ 'Рљ РѕРїР»Р°С‚Рµ' РЅРµРѕР±С…РѕРґРёРјРѕ РІРІРµСЃС‚Рё РєРѕСЂСЂРµРєС‚РЅС‹Рµ РґР°РЅРЅС‹Рµ!", "РћС€РёР±РєР°",
                               MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtPrise.Clear();
                 return;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при сохранении: {ex.Message}", "Ошибка",
+                MessageBox.Show($"РћС€РёР±РєР° РїСЂРё СЃРѕС…СЂР°РЅРµРЅРёРё: {ex.Message}", "РћС€РёР±РєР°",
                               MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        //Метод ввода данных для источника
+        //РњРµС‚РѕРґ РІРІРѕРґР° РґР°РЅРЅС‹С… РґР»СЏ РёСЃС‚РѕС‡РЅРёРєР°
         private void InputSourceData()
         {
             if (txtInstagram.Visible == true)
@@ -268,7 +269,7 @@ namespace WitchCRM
             }
         }
 
-        //Метод очистки органов ввода
+        //РњРµС‚РѕРґ РѕС‡РёСЃС‚РєРё РѕСЂРіР°РЅРѕРІ РІРІРѕРґР°
         private void ClearInputtedData()
         {
             txtName.Clear();
@@ -288,12 +289,12 @@ namespace WitchCRM
             txtInstagram.Visible = false;
             txtTelegram.Visible = false;
             txtWhatsApp.Visible = false;
-            _clientStatus = "Новый";
+            _clientStatus = "РќРѕРІС‹Р№";
 
             txtName.Focus();
         }
 
-        //Метод загрузки плана на выбранную дату
+        //РњРµС‚РѕРґ Р·Р°РіСЂСѓР·РєРё РїР»Р°РЅР° РЅР° РІС‹Р±СЂР°РЅРЅСѓСЋ РґР°С‚Сѓ
         private void LoadClientsByDate()
         {
             try
@@ -305,24 +306,24 @@ namespace WitchCRM
                         .ToList();
                     if (clients.Count != 0)
                     {
-                        lblPlannerClientCount.Text = $"Клиентов: {clients.Count}";
+                        lblPlannerClientCount.Text = $"РљР»РёРµРЅС‚РѕРІ: {clients.Count}";
                         plannerTable.Visible = true;
                     }
                     else
                     {
-                        lblPlannerClientCount.Text = $"Нет записи";
+                        lblPlannerClientCount.Text = $"РќРµС‚ Р·Р°РїРёСЃРё";
                         plannerTable.Visible = false;
                     }
                     var displayData = clients
                         .Select((c, index) => new
                         {
-                            Дата = c.Date.ToShortDateString(),
-                            Имя = c.Name,
-                            Статус = c.Status,
-                            Источник = c.SourceName,
-                            Контакты = c.SourceData,
-                            Оплачено = c.Prise,
-                            Дополнительно = c.Description
+                            Р”Р°С‚Р° = c.Date.ToShortDateString(),
+                            РРјСЏ = c.Name,
+                            РЎС‚Р°С‚СѓСЃ = c.Status,
+                            РСЃС‚РѕС‡РЅРёРє = c.SourceName,
+                            РљРѕРЅС‚Р°РєС‚С‹ = c.SourceData,
+                            РћРїР»Р°С‡РµРЅРѕ = c.Prise,
+                            Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅРѕ = c.Description
                         })
                         .ToList();
                     plannerTable.DataSource = displayData;
@@ -330,15 +331,15 @@ namespace WitchCRM
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка",
+                MessageBox.Show($"РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё РґР°РЅРЅС‹С…: {ex.Message}", "РћС€РёР±РєР°",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         //----------------------------------------------------------------------------------------------------------
 
 
-        //СТАТИСТИКА "ЗА ВСЕ ВРЕМЯ"
-        //Метод выгрузки и отрисовки статистики "ЗА ВСЕ ВРЕМЯ"
+        //РЎРўРђРўРРЎРўРРљРђ "Р—Рђ Р’РЎР• Р’Р Р•РњРЇ"
+        //РњРµС‚РѕРґ РІС‹РіСЂСѓР·РєРё Рё РѕС‚СЂРёСЃРѕРІРєРё СЃС‚Р°С‚РёСЃС‚РёРєРё "Р—Рђ Р’РЎР• Р’Р Р•РњРЇ"
         private void LoadStatAllTime()
         {
             try
@@ -351,8 +352,8 @@ namespace WitchCRM
                     SourceInstagramCount = _context?.Clients?.Where(c => c.SourceName == "Instagram").Count() ?? 0,
                     SourceTelegramCount = _context?.Clients?.Where(c => c.SourceName == "Telegram").Count() ?? 0,
                     SourceWhatsAppCount = _context?.Clients?.Where(c => c.SourceName == "WhatsApp").Count() ?? 0,
-                    StatusNewClientCount = _context?.Clients?.Where(c => c.Status == "Новый").Count() ?? 0,
-                    StatusRepeatClientCount = _context?.Clients?.Where(c => c.Status == "Повторный").Count() ?? 0
+                    StatusNewClientCount = _context?.Clients?.Where(c => c.Status == "РќРѕРІС‹Р№").Count() ?? 0,
+                    StatusRepeatClientCount = _context?.Clients?.Where(c => c.Status == "РџРѕРІС‚РѕСЂРЅС‹Р№").Count() ?? 0
                 };
 
 
@@ -369,38 +370,38 @@ namespace WitchCRM
                     : 0;
 
 
-                txtStatAllTimeClientCount.Text = $"Количество обращений: {_statistic.TotalClientsCount}";
-                txtStatAllTimeClientSumPrise.Text = $"Заработано: {_statistic.TotalClientsPrise:F2} руб.";
-                txtStatAllTimeClientWorkDays.Text = $"Количество рабочих дней: {_statistic.TotalWorkDays}";
+                txtStatAllTimeClientCount.Text = $"РљРѕР»РёС‡РµСЃС‚РІРѕ РѕР±СЂР°С‰РµРЅРёР№: {_statistic.TotalClientsCount}";
+                txtStatAllTimeClientSumPrise.Text = $"Р—Р°СЂР°Р±РѕС‚Р°РЅРѕ: {_statistic.TotalClientsPrise:F2} в‚Ѕ";
+                txtStatAllTimeClientWorkDays.Text = $"РљРѕР»РёС‡РµСЃС‚РІРѕ СЂР°Р±РѕС‡РёС… РґРЅРµР№: {_statistic.TotalWorkDays}";
 
-                txtStatAllTimeClientAvrCheque.Text = $"Средний чек: {_statistic.AvgPayCheque:F2} руб.";
-                txtStatAllTimeClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic.AvgDaylyPrise:F2} руб.";
-                txtStatAllTimeClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic.AvgDailyLoad:F1}";
+                txtStatAllTimeClientAvrCheque.Text = $"РЎСЂРµРґРЅРёР№ С‡РµРє: {_statistic.AvgPayCheque:F2} в‚Ѕ";
+                txtStatAllTimeClientAvrDaylyCheque.Text = $"РЎСЂРµРґРЅРёР№ РґРЅРµРІРЅРѕР№ Р·Р°СЂР°Р±РѕС‚РѕРє: {_statistic.AvgDaylyPrise:F2} в‚Ѕ";
+                txtStatAllTimeClientAvrCountDayly.Text = $"РЎСЂРµРґРЅСЏСЏ РґРЅРµРІРЅР°СЏ Р·Р°РіСЂСѓР·РєР°: {_statistic.AvgDailyLoad:F1}";
 
                 txtStatAllTimeSourceInstagram.Text = $"Instagram: {_statistic.SourceInstagramCount}";
                 txtStatAllTimeSourceTelegram.Text = $"Telegram: {_statistic.SourceTelegramCount}";
                 txtStatAllTimeSourceWhatsApp.Text = $"WhatsApp: {_statistic.SourceWhatsAppCount}";
 
-                txtStatAllTimeStatusNew.Text = $"Обращений новых клиентов: {_statistic.StatusNewClientCount}";
-                txtStatAllTimeStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic.StatusRepeatClientCount}";
+                txtStatAllTimeStatusNew.Text = $"РћР±СЂР°С‰РµРЅРёР№ РЅРѕРІС‹С… РєР»РёРµРЅС‚РѕРІ: {_statistic.StatusNewClientCount}";
+                txtStatAllTimeStatusRepeat.Text = $"РџРѕРІС‚РѕСЂРЅС‹С… РѕР±СЂР°С‰РµРЅРёР№ РєР»РёРµРЅС‚РѕРІ: {_statistic.StatusRepeatClientCount}";
 
 
                 for (decimal i=yearChoose.Minimum;i<=yearChoose.Maximum;i++)
                 {
-                    allYears += $"{i}г., ";
+                    allYears += $"{i}Рі., ";
                 }
                 txtAllYears.Text = allYears;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка загрузки статистики: {ex.Message}", "Ошибка",
+                MessageBox.Show($"РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё СЃС‚Р°С‚РёСЃС‚РёРєРё: {ex.Message}", "РћС€РёР±РєР°",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         //----------------------------------------------------------------------------------------------------------
 
-        //СТАТИСТИКА "ЗА ГОД"
-        //Метод выгрузки и отрисовки статистики "ЗА ГОД"
+        //РЎРўРђРўРРЎРўРРљРђ "Р—Рђ Р“РћР”"
+        //РњРµС‚РѕРґ РІС‹РіСЂСѓР·РєРё Рё РѕС‚СЂРёСЃРѕРІРєРё СЃС‚Р°С‚РёСЃС‚РёРєРё "Р—Рђ Р“РћР”"
         private void LoadStatYear()
         {
             int selectedYear = (int)yearChoose.Value;
@@ -417,8 +418,8 @@ namespace WitchCRM
                     SourceInstagramCount = clientsInYear?.Count(c => c.SourceName == "Instagram") ?? 0,
                     SourceTelegramCount = clientsInYear?.Count(c => c.SourceName == "Telegram") ?? 0,
                     SourceWhatsAppCount = clientsInYear?.Count(c => c.SourceName == "WhatsApp") ?? 0,
-                    StatusNewClientCount = clientsInYear?.Count(c => c.Status == "Новый") ?? 0,
-                    StatusRepeatClientCount = clientsInYear?.Count(c => c.Status == "Повторный") ?? 0
+                    StatusNewClientCount = clientsInYear?.Count(c => c.Status == "РќРѕРІС‹Р№") ?? 0,
+                    StatusRepeatClientCount = clientsInYear?.Count(c => c.Status == "РџРѕРІС‚РѕСЂРЅС‹Р№") ?? 0
                 };
 
 
@@ -434,14 +435,14 @@ namespace WitchCRM
                     ? (decimal)_statistic.TotalClientsCount / _statistic.TotalWorkDays
                     : 0;
 
-                //для отображения информации "Ожидание"
+                //РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РёРЅС„РѕСЂРјР°С†РёРё "РћР¶РёРґР°РЅРёРµ"
                 if ((int)yearChoose.Value==DateTime.Now.Year)
                 {
                     _statistic.ExTotalClientsPrise = _statistic.AvgDaylyPrise * daysInYear;
                     _statistic.ExTotalClientsCount = _statistic.AvgDailyLoad * daysInYear;
 
-                    exYearClientsPrise = $"(Ожидание: {_statistic.ExTotalClientsPrise:F2} руб.)";
-                    exYearClientsCount = $"(Ожидание: {_statistic.ExTotalClientsCount:F0})";
+                    exYearClientsPrise = $"(РћР¶РёРґР°РЅРёРµ: {_statistic.ExTotalClientsPrise:F2} в‚Ѕ)";
+                    exYearClientsCount = $"(РћР¶РёРґР°РЅРёРµ: {_statistic.ExTotalClientsCount:F0})";
                 }
                 else
                 {
@@ -451,30 +452,30 @@ namespace WitchCRM
                     exYearClientsCount = String.Empty;
                 }
 
-                txtStatYearClientCount.Text = $"Количество обращений: {_statistic.TotalClientsCount} " + exYearClientsCount;
-                txtStatYearClientSumPrise.Text = $"Заработано: {_statistic.TotalClientsPrise:F2} руб. " + exYearClientsPrise;
-                txtStatYearClientWorkDays.Text = $"Количество рабочих дней: {_statistic.TotalWorkDays}";
+                txtStatYearClientCount.Text = $"РљРѕР»РёС‡РµСЃС‚РІРѕ РѕР±СЂР°С‰РµРЅРёР№: {_statistic.TotalClientsCount} " + exYearClientsCount;
+                txtStatYearClientSumPrise.Text = $"Р—Р°СЂР°Р±РѕС‚Р°РЅРѕ: {_statistic.TotalClientsPrise:F2} в‚Ѕ " + exYearClientsPrise;
+                txtStatYearClientWorkDays.Text = $"РљРѕР»РёС‡РµСЃС‚РІРѕ СЂР°Р±РѕС‡РёС… РґРЅРµР№: {_statistic.TotalWorkDays}";
 
-                txtStatYearClientAvrCheque.Text = $"Средний чек: {_statistic.AvgPayCheque:F2} руб.";
-                txtStatYearClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic.AvgDaylyPrise:F2} руб.";
-                txtStatYearClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic.AvgDailyLoad:F1}";
+                txtStatYearClientAvrCheque.Text = $"РЎСЂРµРґРЅРёР№ С‡РµРє: {_statistic.AvgPayCheque:F2} в‚Ѕ";
+                txtStatYearClientAvrDaylyCheque.Text = $"РЎСЂРµРґРЅРёР№ РґРЅРµРІРЅРѕР№ Р·Р°СЂР°Р±РѕС‚РѕРє: {_statistic.AvgDaylyPrise:F2} в‚Ѕ";
+                txtStatYearClientAvrCountDayly.Text = $"РЎСЂРµРґРЅСЏСЏ РґРЅРµРІРЅР°СЏ Р·Р°РіСЂСѓР·РєР°: {_statistic.AvgDailyLoad:F1}";
 
                 txtStatYearSourceInstagram.Text = $"Instagram: {_statistic.SourceInstagramCount}";
                 txtStatYearSourceTelegram.Text = $"Telegram: {_statistic.SourceTelegramCount}";
                 txtStatYearSourceWhatsApp.Text = $"WhatsApp: {_statistic.SourceWhatsAppCount}";
 
-                txtStatYearStatusNew.Text = $"Обращений новых клиентов: {_statistic.StatusNewClientCount}";
-                txtStatYearStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic.StatusRepeatClientCount}";
+                txtStatYearStatusNew.Text = $"РћР±СЂР°С‰РµРЅРёР№ РЅРѕРІС‹С… РєР»РёРµРЅС‚РѕРІ: {_statistic.StatusNewClientCount}";
+                txtStatYearStatusRepeat.Text = $"РџРѕРІС‚РѕСЂРЅС‹С… РѕР±СЂР°С‰РµРЅРёР№ РєР»РёРµРЅС‚РѕРІ: {_statistic.StatusRepeatClientCount}";
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка загрузки статистики: {ex.Message}", "Ошибка",
+                MessageBox.Show($"РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё СЃС‚Р°С‚РёСЃС‚РёРєРё: {ex.Message}", "РћС€РёР±РєР°",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
 
-        //Метод обновления свойств класса StatisticYear для статистики "ЗА ГОД"
+        //РњРµС‚РѕРґ РѕР±РЅРѕРІР»РµРЅРёСЏ СЃРІРѕР№СЃС‚РІ РєР»Р°СЃСЃР° StatisticYear РґР»СЏ СЃС‚Р°С‚РёСЃС‚РёРєРё "Р—Рђ Р“РћР”"
         private void UpdateStatisticsYear()
         {
             int selectedYear = (int)yearChoose.Value;
@@ -488,8 +489,8 @@ namespace WitchCRM
                 SourceInstagramCount = clientsInYear?.Count(c => c.SourceName == "Instagram") ?? 0,
                 SourceTelegramCount = clientsInYear?.Count(c => c.SourceName == "Telegram") ?? 0,
                 SourceWhatsAppCount = clientsInYear?.Count(c => c.SourceName == "WhatsApp") ?? 0,
-                StatusNewClientCount = clientsInYear?.Count(c => c.Status == "Новый") ?? 0,
-                StatusRepeatClientCount = clientsInYear?.Count(c => c.Status == "Повторный") ?? 0
+                StatusNewClientCount = clientsInYear?.Count(c => c.Status == "РќРѕРІС‹Р№") ?? 0,
+                StatusRepeatClientCount = clientsInYear?.Count(c => c.Status == "РџРѕРІС‚РѕСЂРЅС‹Р№") ?? 0
             };
 
             _statistic.AvgDaylyPrise = _statistic.TotalWorkDays > 0
@@ -504,14 +505,14 @@ namespace WitchCRM
                 ? (decimal)_statistic.TotalClientsCount / _statistic.TotalWorkDays
                 : 0;
 
-            //для отображения информации "Ожидание"
+            //РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РёРЅС„РѕСЂРјР°С†РёРё "РћР¶РёРґР°РЅРёРµ"
             if ((int)yearChoose.Value == DateTime.Now.Year)
             {
                 _statistic.ExTotalClientsPrise = _statistic.AvgDaylyPrise * daysInYear;
                 _statistic.ExTotalClientsCount = _statistic.AvgDailyLoad * daysInYear;
 
-                exYearClientsPrise = $"(Ожидание: {_statistic.ExTotalClientsPrise:F2} руб.)";
-                exYearClientsCount = $"(Ожидание: {_statistic.ExTotalClientsCount:F0})";
+                exYearClientsPrise = $"(РћР¶РёРґР°РЅРёРµ: {_statistic.ExTotalClientsPrise:F2} в‚Ѕ)";
+                exYearClientsCount = $"(РћР¶РёРґР°РЅРёРµ: {_statistic.ExTotalClientsCount:F0})";
             }
             else
             {
@@ -522,25 +523,25 @@ namespace WitchCRM
             }
         }
 
-        //Метод обновления тектовых полей для статистики "ЗА ГОД"
+        //РњРµС‚РѕРґ РѕР±РЅРѕРІР»РµРЅРёСЏ С‚РµРєС‚РѕРІС‹С… РїРѕР»РµР№ РґР»СЏ СЃС‚Р°С‚РёСЃС‚РёРєРё "Р—Рђ Р“РћР”"
         private void UpdateTextBoxesForStatisticYear()
         {
-            txtStatYearClientCount.Text = $"Количество обращений: {_statistic?.TotalClientsCount} " + exYearClientsCount;
-            txtStatYearClientSumPrise.Text = $"Заработано: {_statistic?.TotalClientsPrise:F2} руб. " + exYearClientsPrise;
-            txtStatYearClientWorkDays.Text = $"Количество рабочих дней: {_statistic?.TotalWorkDays}";
+            txtStatYearClientCount.Text = $"РљРѕР»РёС‡РµСЃС‚РІРѕ РѕР±СЂР°С‰РµРЅРёР№: {_statistic?.TotalClientsCount} " + exYearClientsCount;
+            txtStatYearClientSumPrise.Text = $"Р—Р°СЂР°Р±РѕС‚Р°РЅРѕ: {_statistic?.TotalClientsPrise:F2} в‚Ѕ " + exYearClientsPrise;
+            txtStatYearClientWorkDays.Text = $"РљРѕР»РёС‡РµСЃС‚РІРѕ СЂР°Р±РѕС‡РёС… РґРЅРµР№: {_statistic?.TotalWorkDays}";
             txtStatYearSourceInstagram.Text = $"Instagram: {_statistic?.SourceInstagramCount}";
             txtStatYearSourceTelegram.Text = $"Telegram: {_statistic?.SourceTelegramCount}";
             txtStatYearSourceWhatsApp.Text = $"WhatsApp: {_statistic?.SourceWhatsAppCount}";
-            txtStatYearStatusNew.Text = $"Обращений новых клиентов: {_statistic?.StatusNewClientCount}";
-            txtStatYearStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic?.StatusRepeatClientCount}";
-            txtStatYearClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic?.AvgDaylyPrise:F2} руб.";
-            txtStatYearClientAvrCheque.Text = $"Средний чек: {_statistic?.AvgPayCheque:F2} руб.";
-            txtStatYearClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic?.AvgDailyLoad:F1}";
+            txtStatYearStatusNew.Text = $"РћР±СЂР°С‰РµРЅРёР№ РЅРѕРІС‹С… РєР»РёРµРЅС‚РѕРІ: {_statistic?.StatusNewClientCount}";
+            txtStatYearStatusRepeat.Text = $"РџРѕРІС‚РѕСЂРЅС‹С… РѕР±СЂР°С‰РµРЅРёР№ РєР»РёРµРЅС‚РѕРІ: {_statistic?.StatusRepeatClientCount}";
+            txtStatYearClientAvrDaylyCheque.Text = $"РЎСЂРµРґРЅРёР№ РґРЅРµРІРЅРѕР№ Р·Р°СЂР°Р±РѕС‚РѕРє: {_statistic?.AvgDaylyPrise:F2} в‚Ѕ";
+            txtStatYearClientAvrCheque.Text = $"РЎСЂРµРґРЅРёР№ С‡РµРє: {_statistic?.AvgPayCheque:F2} в‚Ѕ";
+            txtStatYearClientAvrCountDayly.Text = $"РЎСЂРµРґРЅСЏСЏ РґРЅРµРІРЅР°СЏ Р·Р°РіСЂСѓР·РєР°: {_statistic?.AvgDailyLoad:F1}";
         }
         //----------------------------------------------------------------------------------------------------------
 
-        //СТАТИСТИКА "ЗА МЕСЯЦ"
-        //Метод выгрузки и отрисовки статистики "ЗА МЕСЯЦ"
+        //РЎРўРђРўРРЎРўРРљРђ "Р—Рђ РњР•РЎРЇР¦"
+        //РњРµС‚РѕРґ РІС‹РіСЂСѓР·РєРё Рё РѕС‚СЂРёСЃРѕРІРєРё СЃС‚Р°С‚РёСЃС‚РёРєРё "Р—Рђ РњР•РЎРЇР¦"
         private void LoadStatMonth()
         {
             var clientsInMonth = _context?.Clients?
@@ -557,8 +558,8 @@ namespace WitchCRM
                     SourceInstagramCount = clientsInMonth?.Count(c => c.SourceName == "Instagram") ?? 0,
                     SourceTelegramCount = clientsInMonth?.Count(c => c.SourceName == "Telegram") ?? 0,
                     SourceWhatsAppCount = clientsInMonth?.Count(c => c.SourceName == "WhatsApp") ?? 0,
-                    StatusNewClientCount = clientsInMonth?.Count(c => c.Status == "Новый") ?? 0,
-                    StatusRepeatClientCount = clientsInMonth?.Count(c => c.Status == "Повторный") ?? 0
+                    StatusNewClientCount = clientsInMonth?.Count(c => c.Status == "РќРѕРІС‹Р№") ?? 0,
+                    StatusRepeatClientCount = clientsInMonth?.Count(c => c.Status == "РџРѕРІС‚РѕСЂРЅС‹Р№") ?? 0
                 };
 
                 _statistic.AvgDaylyPrise = _statistic.TotalWorkDays > 0
@@ -573,14 +574,14 @@ namespace WitchCRM
                     ? (decimal)_statistic.TotalClientsCount / _statistic.TotalWorkDays
                     : 0;
 
-                //для отображения информации "Ожидание"
+                //РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РёРЅС„РѕСЂРјР°С†РёРё "РћР¶РёРґР°РЅРёРµ"
                 if (selectedMonthNumber == DateTime.Now.Month)
                 {
                     _statistic.ExTotalClientsPrise = _statistic.AvgDaylyPrise * (DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
                     _statistic.ExTotalClientsCount = _statistic.AvgDailyLoad * (DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
 
-                    exMonthClientsPrise = $"(Ожидание: {_statistic.ExTotalClientsPrise:F2} руб.)";
-                    exMonthClientsCount = $"(Ожидание: {_statistic.ExTotalClientsCount:F0})";
+                    exMonthClientsPrise = $"(РћР¶РёРґР°РЅРёРµ: {_statistic.ExTotalClientsPrise:F2} в‚Ѕ)";
+                    exMonthClientsCount = $"(РћР¶РёРґР°РЅРёРµ: {_statistic.ExTotalClientsCount:F0})";
                 }
                 else
                 {
@@ -590,29 +591,29 @@ namespace WitchCRM
                     exMonthClientsCount = String.Empty;
                 }
 
-                txtStatMonthClientCount.Text = $"Количество обращений: {_statistic.TotalClientsCount} " + exMonthClientsCount;
-                txtStatMonthClientSumPrise.Text = $"Заработано: {_statistic.TotalClientsPrise:F2} руб. " + exMonthClientsPrise;
-                txtStatMonthClientWorkDays.Text = $"Количество рабочих дней: {_statistic.TotalWorkDays}";
+                txtStatMonthClientCount.Text = $"РљРѕР»РёС‡РµСЃС‚РІРѕ РѕР±СЂР°С‰РµРЅРёР№: {_statistic.TotalClientsCount} " + exMonthClientsCount;
+                txtStatMonthClientSumPrise.Text = $"Р—Р°СЂР°Р±РѕС‚Р°РЅРѕ: {_statistic.TotalClientsPrise:F2} в‚Ѕ " + exMonthClientsPrise;
+                txtStatMonthClientWorkDays.Text = $"РљРѕР»РёС‡РµСЃС‚РІРѕ СЂР°Р±РѕС‡РёС… РґРЅРµР№: {_statistic.TotalWorkDays}";
 
-                txtStatMonthClientAvrCheque.Text = $"Средний чек: {_statistic.AvgPayCheque:F2} руб.";
-                txtStatMonthClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic.AvgDaylyPrise:F2} руб.";
-                txtStatMonthClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic.AvgDailyLoad:F1}";
+                txtStatMonthClientAvrCheque.Text = $"РЎСЂРµРґРЅРёР№ С‡РµРє: {_statistic.AvgPayCheque:F2} в‚Ѕ";
+                txtStatMonthClientAvrDaylyCheque.Text = $"РЎСЂРµРґРЅРёР№ РґРЅРµРІРЅРѕР№ Р·Р°СЂР°Р±РѕС‚РѕРє: {_statistic.AvgDaylyPrise:F2} в‚Ѕ";
+                txtStatMonthClientAvrCountDayly.Text = $"РЎСЂРµРґРЅСЏСЏ РґРЅРµРІРЅР°СЏ Р·Р°РіСЂСѓР·РєР°: {_statistic.AvgDailyLoad:F1}";
 
                 txtStatMonthSourceInstagram.Text = $"Instagram: {_statistic.SourceInstagramCount}";
                 txtStatMonthSourceTelegram.Text = $"Telegram: {_statistic.SourceTelegramCount}";
                 txtStatMonthSourceWhatsApp.Text = $"WhatsApp: {_statistic.SourceWhatsAppCount}";
 
-                txtStatMonthStatusNew.Text = $"Обращений новых клиентов: {_statistic.StatusNewClientCount}";
-                txtStatMonthStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic.StatusRepeatClientCount}";
+                txtStatMonthStatusNew.Text = $"РћР±СЂР°С‰РµРЅРёР№ РЅРѕРІС‹С… РєР»РёРµРЅС‚РѕРІ: {_statistic.StatusNewClientCount}";
+                txtStatMonthStatusRepeat.Text = $"РџРѕРІС‚РѕСЂРЅС‹С… РѕР±СЂР°С‰РµРЅРёР№ РєР»РёРµРЅС‚РѕРІ: {_statistic.StatusRepeatClientCount}";
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка загрузки статистики: {ex.Message}", "Ошибка",
+                MessageBox.Show($"РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё СЃС‚Р°С‚РёСЃС‚РёРєРё: {ex.Message}", "РћС€РёР±РєР°",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        //Метод обновления свойств класса StatisticMonth для статистики "ЗА МЕСЯЦ"
+        //РњРµС‚РѕРґ РѕР±РЅРѕРІР»РµРЅРёСЏ СЃРІРѕР№СЃС‚РІ РєР»Р°СЃСЃР° StatisticMonth РґР»СЏ СЃС‚Р°С‚РёСЃС‚РёРєРё "Р—Рђ РњР•РЎРЇР¦"
         private void UpdateStatisticsMonth()
         {
             var clientsInMonth = _context?.Clients?
@@ -628,8 +629,8 @@ namespace WitchCRM
                 SourceInstagramCount = clientsInMonth?.Count(c => c.SourceName == "Instagram") ?? 0,
                 SourceTelegramCount = clientsInMonth?.Count(c => c.SourceName == "Telegram") ?? 0,
                 SourceWhatsAppCount = clientsInMonth?.Count(c => c.SourceName == "WhatsApp") ?? 0,
-                StatusNewClientCount = clientsInMonth?.Count(c => c.Status == "Новый") ?? 0,
-                StatusRepeatClientCount = clientsInMonth?.Count(c => c.Status == "Повторный") ?? 0
+                StatusNewClientCount = clientsInMonth?.Count(c => c.Status == "РќРѕРІС‹Р№") ?? 0,
+                StatusRepeatClientCount = clientsInMonth?.Count(c => c.Status == "РџРѕРІС‚РѕСЂРЅС‹Р№") ?? 0
             };
 
 
@@ -645,14 +646,14 @@ namespace WitchCRM
                 ? (decimal)_statistic.TotalClientsCount / _statistic.TotalWorkDays
                 : 0;
 
-            //для отображения информации "Ожидание"
+            //РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РёРЅС„РѕСЂРјР°С†РёРё "РћР¶РёРґР°РЅРёРµ"
             if (selectedMonthNumber == DateTime.Now.Month)
             {
                 _statistic.ExTotalClientsPrise = _statistic.AvgDaylyPrise * (DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
                 _statistic.ExTotalClientsCount = _statistic.AvgDailyLoad * (DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
 
-                exMonthClientsPrise = $"(Ожидание: {_statistic.ExTotalClientsPrise:F2} руб.)";
-                exMonthClientsCount = $"(Ожидание: {_statistic.ExTotalClientsCount:F0})";
+                exMonthClientsPrise = $"(РћР¶РёРґР°РЅРёРµ: {_statistic.ExTotalClientsPrise:F2} в‚Ѕ)";
+                exMonthClientsCount = $"(РћР¶РёРґР°РЅРёРµ: {_statistic.ExTotalClientsCount:F0})";
             }
             else
             {
@@ -663,23 +664,23 @@ namespace WitchCRM
             }
         }
 
-        //Метод обновления тектовых полей для статистики "ЗА МЕСЯЦ"
+        //РњРµС‚РѕРґ РѕР±РЅРѕРІР»РµРЅРёСЏ С‚РµРєС‚РѕРІС‹С… РїРѕР»РµР№ РґР»СЏ СЃС‚Р°С‚РёСЃС‚РёРєРё "Р—Рђ РњР•РЎРЇР¦"
         private void UpdateTextBoxesForStatisticMonth()
         {
-            txtStatMonthClientCount.Text = $"Количество обращений: {_statistic?.TotalClientsCount} " + exMonthClientsCount;
-            txtStatMonthClientSumPrise.Text = $"Заработано: {_statistic?.TotalClientsPrise:F2} руб. " + exMonthClientsPrise;
-            txtStatMonthClientWorkDays.Text = $"Количество рабочих дней: {_statistic?.TotalWorkDays}";
+            txtStatMonthClientCount.Text = $"РљРѕР»РёС‡РµСЃС‚РІРѕ РѕР±СЂР°С‰РµРЅРёР№: {_statistic?.TotalClientsCount} " + exMonthClientsCount;
+            txtStatMonthClientSumPrise.Text = $"Р—Р°СЂР°Р±РѕС‚Р°РЅРѕ: {_statistic?.TotalClientsPrise:F2} в‚Ѕ " + exMonthClientsPrise;
+            txtStatMonthClientWorkDays.Text = $"РљРѕР»РёС‡РµСЃС‚РІРѕ СЂР°Р±РѕС‡РёС… РґРЅРµР№: {_statistic?.TotalWorkDays}";
 
-            txtStatMonthClientAvrCheque.Text = $"Средний чек: {_statistic?.AvgPayCheque:F2} руб.";
-            txtStatMonthClientAvrDaylyCheque.Text = $"Средний дневной заработок: {_statistic?.AvgDaylyPrise:F2} руб.";
-            txtStatMonthClientAvrCountDayly.Text = $"Средняя дневная загрузка: {_statistic?.AvgDailyLoad:F1}";
+            txtStatMonthClientAvrCheque.Text = $"РЎСЂРµРґРЅРёР№ С‡РµРє: {_statistic?.AvgPayCheque:F2} в‚Ѕ";
+            txtStatMonthClientAvrDaylyCheque.Text = $"РЎСЂРµРґРЅРёР№ РґРЅРµРІРЅРѕР№ Р·Р°СЂР°Р±РѕС‚РѕРє: {_statistic?.AvgDaylyPrise:F2} в‚Ѕ";
+            txtStatMonthClientAvrCountDayly.Text = $"РЎСЂРµРґРЅСЏСЏ РґРЅРµРІРЅР°СЏ Р·Р°РіСЂСѓР·РєР°: {_statistic?.AvgDailyLoad:F1}";
 
             txtStatMonthSourceInstagram.Text = $"Instagram: {_statistic?.SourceInstagramCount}";
             txtStatMonthSourceTelegram.Text = $"Telegram: {_statistic?.SourceTelegramCount}";
             txtStatMonthSourceWhatsApp.Text = $"WhatsApp: {_statistic?.SourceWhatsAppCount}";
 
-            txtStatMonthStatusNew.Text = $"Обращений новых клиентов: {_statistic?.StatusNewClientCount}";
-            txtStatMonthStatusRepeat.Text = $"Повторных обращений клиентов: {_statistic?.StatusRepeatClientCount}";
+            txtStatMonthStatusNew.Text = $"РћР±СЂР°С‰РµРЅРёР№ РЅРѕРІС‹С… РєР»РёРµРЅС‚РѕРІ: {_statistic?.StatusNewClientCount}";
+            txtStatMonthStatusRepeat.Text = $"РџРѕРІС‚РѕСЂРЅС‹С… РѕР±СЂР°С‰РµРЅРёР№ РєР»РёРµРЅС‚РѕРІ: {_statistic?.StatusRepeatClientCount}";
         }
 
 
