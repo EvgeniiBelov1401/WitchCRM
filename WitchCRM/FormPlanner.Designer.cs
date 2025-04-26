@@ -219,7 +219,7 @@
             // 
             // btnSave
             // 
-            btnSave.Anchor = AnchorStyles.Bottom;
+            btnSave.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnSave.Font = new Font("Segoe UI", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, 204);
             btnSave.Image = (Image)resources.GetObject("btnSave.Image");
             btnSave.ImageAlign = ContentAlignment.MiddleRight;
@@ -479,6 +479,7 @@
             // 
             // grStatMonth
             // 
+            grStatMonth.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             grStatMonth.Controls.Add(lblCurrentYear);
             grStatMonth.Controls.Add(grBestDay);
             grStatMonth.Controls.Add(monthChoose);
@@ -495,6 +496,7 @@
             // 
             // lblCurrentYear
             // 
+            lblCurrentYear.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             lblCurrentYear.AutoSize = true;
             lblCurrentYear.ImageAlign = ContentAlignment.BottomCenter;
             lblCurrentYear.Location = new Point(207, 45);
@@ -505,6 +507,7 @@
             // 
             // grBestDay
             // 
+            grBestDay.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             grBestDay.Controls.Add(txtBestDay);
             grBestDay.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             grBestDay.Location = new Point(6, 595);
@@ -528,6 +531,7 @@
             // 
             // monthChoose
             // 
+            monthChoose.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             monthChoose.DropDownStyle = ComboBoxStyle.DropDownList;
             monthChoose.FormattingEnabled = true;
             monthChoose.Location = new Point(12, 40);
@@ -538,6 +542,7 @@
             // 
             // groupBox6
             // 
+            groupBox6.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             groupBox6.Controls.Add(txtStatMonthClientSumPrise);
             groupBox6.Controls.Add(txtStatMonthClientWorkDays);
             groupBox6.Controls.Add(txtStatMonthClientCount);
@@ -589,6 +594,7 @@
             // 
             // groupBox7
             // 
+            groupBox7.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             groupBox7.Controls.Add(txtStatMonthStatusRepeat);
             groupBox7.Controls.Add(txtStatMonthStatusNew);
             groupBox7.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
@@ -625,6 +631,7 @@
             // 
             // groupBox8
             // 
+            groupBox8.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             groupBox8.Controls.Add(txtStatMonthSourceWhatsApp);
             groupBox8.Controls.Add(txtStatMonthSourceTelegram);
             groupBox8.Controls.Add(txtStatMonthSourceInstagram);
@@ -674,6 +681,7 @@
             // 
             // groupBox9
             // 
+            groupBox9.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             groupBox9.Controls.Add(txtStatMonthClientAvrCountDayly);
             groupBox9.Controls.Add(txtStatMonthClientAvrCheque);
             groupBox9.Controls.Add(txtStatMonthClientAvrDaylyCheque);
@@ -723,7 +731,7 @@
             // 
             // grStatYear
             // 
-            grStatYear.Anchor = AnchorStyles.Top;
+            grStatYear.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             grStatYear.Controls.Add(grBestMonth);
             grStatYear.Controls.Add(yearChoose);
             grStatYear.Controls.Add(groupBox2);
@@ -739,6 +747,7 @@
             // 
             // grBestMonth
             // 
+            grBestMonth.Anchor = AnchorStyles.Bottom;
             grBestMonth.Controls.Add(txtBestMonth);
             grBestMonth.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             grBestMonth.Location = new Point(6, 595);
@@ -762,6 +771,7 @@
             // 
             // yearChoose
             // 
+            yearChoose.Anchor = AnchorStyles.Bottom;
             yearChoose.Font = new Font("Times New Roman", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             yearChoose.Location = new Point(12, 38);
             yearChoose.Maximum = new decimal(new int[] { 2025, 0, 0, 0 });
@@ -773,6 +783,7 @@
             // 
             // groupBox2
             // 
+            groupBox2.Anchor = AnchorStyles.Bottom;
             groupBox2.Controls.Add(txtStatYearClientSumPrise);
             groupBox2.Controls.Add(txtStatYearClientWorkDays);
             groupBox2.Controls.Add(txtStatYearClientCount);
@@ -822,6 +833,7 @@
             // 
             // groupBox3
             // 
+            groupBox3.Anchor = AnchorStyles.Bottom;
             groupBox3.Controls.Add(txtStatYearStatusRepeat);
             groupBox3.Controls.Add(txtStatYearStatusNew);
             groupBox3.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
@@ -858,6 +870,7 @@
             // 
             // groupBox4
             // 
+            groupBox4.Anchor = AnchorStyles.Bottom;
             groupBox4.Controls.Add(txtStatYearSourceWhatsApp);
             groupBox4.Controls.Add(txtStatYearSourceTelegram);
             groupBox4.Controls.Add(txtStatYearSourceInstagram);
@@ -907,6 +920,7 @@
             // 
             // groupBox5
             // 
+            groupBox5.Anchor = AnchorStyles.Bottom;
             groupBox5.Controls.Add(txtStatYearClientAvrCountDayly);
             groupBox5.Controls.Add(txtStatYearClientAvrCheque);
             groupBox5.Controls.Add(txtStatYearClientAvrDaylyCheque);
@@ -956,7 +970,7 @@
             // 
             // grStatAllTime
             // 
-            grStatAllTime.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            grStatAllTime.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             grStatAllTime.Controls.Add(grBestYear);
             grStatAllTime.Controls.Add(txtAllYears);
             grStatAllTime.Controls.Add(grStatAllTimeCommonValues);
@@ -972,6 +986,7 @@
             // 
             // grBestYear
             // 
+            grBestYear.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             grBestYear.Controls.Add(txtBestYear);
             grBestYear.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             grBestYear.Location = new Point(6, 595);
@@ -995,6 +1010,7 @@
             // 
             // txtAllYears
             // 
+            txtAllYears.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             txtAllYears.Enabled = false;
             txtAllYears.Font = new Font("Times New Roman", 7.8F, FontStyle.Italic, GraphicsUnit.Point, 204);
             txtAllYears.Location = new Point(12, 37);
@@ -1005,6 +1021,7 @@
             // 
             // grStatAllTimeCommonValues
             // 
+            grStatAllTimeCommonValues.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             grStatAllTimeCommonValues.Controls.Add(txtStatAllTimeClientSumPrise);
             grStatAllTimeCommonValues.Controls.Add(txtStatAllTimeClientWorkDays);
             grStatAllTimeCommonValues.Controls.Add(txtStatAllTimeClientCount);
@@ -1054,6 +1071,7 @@
             // 
             // grStatAllTimeStatus
             // 
+            grStatAllTimeStatus.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             grStatAllTimeStatus.Controls.Add(txtStatAllTimeStatusRepeat);
             grStatAllTimeStatus.Controls.Add(txtStatAllTimeStatusNew);
             grStatAllTimeStatus.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
@@ -1090,6 +1108,7 @@
             // 
             // grStatAllTimeSource
             // 
+            grStatAllTimeSource.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             grStatAllTimeSource.Controls.Add(txtStatAllTimeSourceWhatsApp);
             grStatAllTimeSource.Controls.Add(txtStatAllTimeSourceTelegram);
             grStatAllTimeSource.Controls.Add(txtStatAllTimeSourceInstagram);
@@ -1139,6 +1158,7 @@
             // 
             // grStatAllTimeAvgValues
             // 
+            grStatAllTimeAvgValues.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             grStatAllTimeAvgValues.Controls.Add(txtStatAllTimeClientAvrCountDayly);
             grStatAllTimeAvgValues.Controls.Add(txtStatAllTimeClientAvrCheque);
             grStatAllTimeAvgValues.Controls.Add(txtStatAllTimeClientAvrDaylyCheque);
