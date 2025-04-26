@@ -1224,7 +1224,7 @@
             grBackup.Font = new Font("Times New Roman", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             grBackup.Location = new Point(32, 38);
             grBackup.Name = "grBackup";
-            grBackup.Size = new Size(331, 170);
+            grBackup.Size = new Size(488, 178);
             grBackup.TabIndex = 1;
             grBackup.TabStop = false;
             grBackup.Text = "Back up";
@@ -1235,21 +1235,21 @@
             txtLastBackupDateTime.BackColor = SystemColors.ControlLight;
             txtLastBackupDateTime.Enabled = false;
             txtLastBackupDateTime.Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txtLastBackupDateTime.Location = new Point(23, 38);
+            txtLastBackupDateTime.Location = new Point(8, 38);
             txtLastBackupDateTime.Name = "txtLastBackupDateTime";
-            txtLastBackupDateTime.Size = new Size(272, 30);
+            txtLastBackupDateTime.Size = new Size(469, 30);
             txtLastBackupDateTime.TabIndex = 1;
+            txtLastBackupDateTime.TextAlign = HorizontalAlignment.Center;
             // 
             // btnBackUp
             // 
             btnBackUp.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             btnBackUp.Font = new Font("Times New Roman", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            btnBackUp.Location = new Point(23, 91);
+            btnBackUp.Location = new Point(8, 82);
             btnBackUp.Name = "btnBackUp";
-            btnBackUp.Size = new Size(272, 52);
+            btnBackUp.Size = new Size(464, 82);
             btnBackUp.TabIndex = 0;
             btnBackUp.Text = "Сделать BackUp базы данных";
-            btnBackUp.TextAlign = ContentAlignment.BottomCenter;
             btnBackUp.UseVisualStyleBackColor = true;
             btnBackUp.Click += BtnBackUp_Click;
             // 
