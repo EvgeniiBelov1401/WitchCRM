@@ -410,9 +410,9 @@ namespace WitchCRM
                     .OrderByDescending(x => x.TotalPrise)
                     .FirstOrDefault();
 
-                if (productiveYear!=null)
+                if (productiveYear != null)
                 {
-                    txtBestYear.Text= $"Год: {productiveYear.Year}{Environment.NewLine}" +
+                    txtBestYear.Text = $"Год: {productiveYear.Year}{Environment.NewLine}" +
                         $"Заработано: {productiveYear.TotalPrise:F2} ₽{Environment.NewLine}" +
                         $"Количество обращений: {productiveYear.Count}";
                 }
@@ -726,7 +726,7 @@ namespace WitchCRM
                     .OrderByDescending(x => x.TotalPrise)
                     .FirstOrDefault();
 
-                if (productiveDay!=null)
+                if (productiveDay != null)
                 {
                     var russianCulture = new CultureInfo("ru-RU");
                     string dayOfWeekName = russianCulture.DateTimeFormat.GetDayName(productiveDay.DayOfWeek);
@@ -909,10 +909,6 @@ namespace WitchCRM
 
                         Settings.Default.LastBackupDate = lastBackupFile.LastWriteTime;
                         Settings.Default.Save();
-
-                        //txtLastBackupDateTime.Text = Settings.Default.LastBackupDate != DateTime.MinValue
-                        //    ? $"Последний бэкап: {Settings.Default.LastBackupDate:dd.MM.yyyy HH:mm:ss}"
-                        //    : "Бэкапы отсутствуют";
 
                         txtLastBackupDateTime.Text = $"Последний бэкап: {Settings.Default.LastBackupDate}";
                     }
